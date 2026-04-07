@@ -59,11 +59,11 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => (
     className="group cursor-pointer"
     onClick={() => onClick(project)}
   >
-    <div className="relative aspect-[16/10] overflow-hidden bg-gray-100 mb-4">
+    <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 mb-4">
       <img 
         src={project.image} 
         alt={project.title} 
-        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 ease-out"
+        className="w-full h-full object-contain group-hover:scale-105 transition-all duration-1000 ease-out"
         referrerPolicy="no-referrer"
       />
       {project.contribution && (
@@ -108,12 +108,12 @@ const ProjectModal = ({ project, onClose }: { project: Project | null; onClose: 
           </button>
 
           <div className="w-full md:w-3/5 h-64 md:h-auto bg-gray-100 overflow-hidden">
-            <img 
-              src={project.image} 
-              alt={project.title} 
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                className="w-full h-full object-contain"
+                referrerPolicy="no-referrer"
+              />
           </div>
 
           <div className="flex-1 p-8 md:p-12 lg:p-16 overflow-y-auto flex flex-col">
@@ -202,7 +202,7 @@ export default function App() {
       title: "WATERBOMB 2024 SEOUL",
       category: "Operation",
       year: "2024",
-      image: "https://picsum.photos/seed/waterbomb-seoul-2024-vibrant/1200/1600",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/781247ff2594806b906a3d1fa8c09dbfe5332341/2024waterbomb.jpg",
       contribution: "85%",
       description: "2024년 서울에서 개최된 대규모 워터 페스티벌의 통합 현장 운영 및 관리 시스템 구축.",
       details: [
@@ -215,7 +215,7 @@ export default function App() {
       title: "Busan Int'l Rock Festival",
       category: "Operation",
       year: "2024",
-      image: "https://picsum.photos/seed/rockfest/1200/800",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/fda72fbb2d42875095e5bb5785f86b0fcb36d131/2024%20BS%20ROCK.png",
       contribution: "90%",
       description: "부산국제록페스티벌의 공식 MD 및 아티스트 굿즈 판매 부스 운영 총괄.",
       details: [
