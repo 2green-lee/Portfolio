@@ -18,6 +18,7 @@ import {
   GraduationCap, 
   Wrench,
   ChevronRight,
+  Trophy,
   X
 } from "lucide-react";
 
@@ -32,7 +33,7 @@ interface Project {
 }
 
 const SectionTitle = ({ children, id, sideLabel }: { children: React.ReactNode; id?: string; sideLabel?: string }) => (
-  <div id={id} className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12 border-t border-gray-100 pt-12">
+  <div id={id} className="grid grid-cols-1 lg:grid-cols-12 gap-20 mb-12 border-t border-gray-100 pt-24">
     <div className="lg:col-span-3">
       <span className="text-[10px] font-mono text-gray-400 uppercase tracking-[0.2em]">
         {sideLabel || children}
@@ -59,11 +60,11 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => (
     className="group cursor-pointer"
     onClick={() => onClick(project)}
   >
-    <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 mb-4">
+    <div className="relative aspect-[3/2] overflow-hidden bg-gray-100 mb-8">
       <img 
         src={project.image} 
         alt={project.title} 
-        className="w-full h-full object-contain group-hover:scale-105 transition-all duration-1000 ease-out"
+        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out"
         referrerPolicy="no-referrer"
       />
       {project.contribution && (
@@ -116,7 +117,7 @@ const ProjectModal = ({ project, onClose }: { project: Project | null; onClose: 
               />
           </div>
 
-          <div className="flex-1 p-8 md:p-12 lg:p-16 overflow-y-auto flex flex-col">
+          <div className="flex-1 p-12 md:p-20 lg:p-32 overflow-y-auto flex flex-col">
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-[10px] font-mono bg-black text-white px-2 py-0.5">{project.year}</span>
@@ -202,7 +203,7 @@ export default function App() {
       title: "WATERBOMB 2024 SEOUL",
       category: "Operation",
       year: "2024",
-      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/781247ff2594806b906a3d1fa8c09dbfe5332341/2024waterbomb.jpg",
+      image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=1200&h=800",
       contribution: "85%",
       description: "2024년 서울에서 개최된 대규모 워터 페스티벌의 통합 현장 운영 및 관리 시스템 구축.",
       details: [
@@ -215,7 +216,7 @@ export default function App() {
       title: "Busan Int'l Rock Festival",
       category: "Operation",
       year: "2024",
-      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/fda72fbb2d42875095e5bb5785f86b0fcb36d131/2024%20BS%20ROCK.png",
+      image: "https://picsum.photos/seed/busanrock/1000/800",
       contribution: "90%",
       description: "부산국제록페스티벌의 공식 MD 및 아티스트 굿즈 판매 부스 운영 총괄.",
       details: [
@@ -304,13 +305,13 @@ export default function App() {
             <span className="text-2xl font-bold tracking-tighter">Lee Geun-il®</span>
           </div>
           
-          <nav className="hidden md:flex items-center gap-12 text-sm font-medium">
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
             <a href="#projects" className="hover:text-gray-500 transition-colors">Projects</a>
             <a href="#about" className="hover:text-gray-500 transition-colors">About</a>
             <a href="#contact" className="hover:text-gray-500 transition-colors">Contact</a>
           </nav>
 
-          <div className="hidden lg:flex items-center gap-12 text-[11px] font-mono text-gray-500 uppercase tracking-widest">
+          <div className="hidden lg:flex items-center gap-8 text-[11px] font-mono text-gray-500 uppercase tracking-widest">
             <div className="flex flex-col">
               <span>Instagram</span>
               <a href="#" className="text-black hover:underline">@leegreen</a>
@@ -327,21 +328,21 @@ export default function App() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 pt-40 pb-32">
+      <main className="max-w-7xl mx-auto px-6 pt-48 pb-48">
         {/* Hero Section */}
-        <section className="mb-32">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+        <section className="mb-40">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-end">
             <div className="lg:col-span-8">
               <motion.h1 
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-[0.95] mb-8"
+                className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-[1.05] mb-12"
               >
                 Lee Geun-il is a <span className="font-serif italic">Project Manager</span> & <span className="font-serif italic text-gray-400">Content Creator</span> bridging Engineering Logic and Creative Vision.
               </motion.h1>
             </div>
-            <div className="lg:col-span-4 flex flex-col gap-6">
+            <div className="lg:col-span-4 flex flex-col gap-4">
               <motion.p 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -350,7 +351,7 @@ export default function App() {
               >
                 항공우주공학의 논리와 예술문화영상의 감각을 결합하여 대규모 페스티벌 운영부터 창의적인 콘텐츠 기획까지, 효율적이고 감각적인 결과물을 만들어냅니다.
               </motion.p>
-              <div className="flex gap-4">
+              <div className="flex gap-8">
                 <a href="#projects" className="flex items-center gap-2 text-sm font-medium hover:underline group">
                   Check all projects <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
@@ -363,7 +364,7 @@ export default function App() {
         </section>
 
         {/* Projects Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-32">
+        <div id="projects" className="grid grid-cols-1 lg:grid-cols-12 gap-20 mb-40">
           <div className="lg:col-span-3">
             <div className="sticky top-32 space-y-4">
               <span className="text-[10px] font-mono text-gray-400 uppercase tracking-[0.2em]">
@@ -379,11 +380,11 @@ export default function App() {
           <div className="lg:col-span-9">
             {/* Featured Projects */}
             <div id="featured" className="mb-24">
-              <div className="flex justify-between items-end mb-12 border-b border-gray-100 pb-4">
+              <div className="flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
                 <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-gray-400">01. Featured Projects</h2>
                 <span className="text-[10px] font-mono text-gray-400">Festival Operation</span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-32">
                 {featuredProjects.map((project, idx) => (
                   <ProjectCard 
                     key={idx}
@@ -396,11 +397,11 @@ export default function App() {
 
             {/* Personal Projects */}
             <div id="personal">
-              <div className="flex justify-between items-end mb-12 border-b border-gray-100 pb-4">
+              <div className="flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
                 <h2 className="text-sm font-mono uppercase tracking-[0.2em] text-gray-400">02. Personal Projects</h2>
                 <span className="text-[10px] font-mono text-gray-400">Creative & Music</span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-32">
                 {personalProjects.map((project, idx) => (
                   <ProjectCard 
                     key={idx}
@@ -413,207 +414,302 @@ export default function App() {
           </div>
         </div>
 
-        {/* About Section */}
-        <SectionTitle id="about" sideLabel="About me">Lee Geun-il</SectionTitle>
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-32">
-          <div className="lg:col-span-7">
-            <h2 className="text-3xl md:text-4xl font-medium leading-tight mb-12 text-balance">
-              I care about building seamless operational experiences and creative narratives that resonate. Whether it's a 30,000-person festival or a personal music project, my approach is guided by logic, curiosity, and a constant search for efficiency.
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div>
-                <h4 className="text-xs font-mono uppercase tracking-widest text-gray-400 mb-6 flex items-center gap-2">
-                  <Briefcase className="w-3 h-3" /> Professional Experience
-                </h4>
-                <div className="space-y-8">
-                  <div>
-                    <h5 className="font-medium">㈜ 퀸즈스마일</h5>
-                    <p className="text-sm text-gray-500 mb-2">Project Manager (PM) / 2024.05 – 2024.10</p>
-                    <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside">
-                      <li>대형 페스티벌 통합 운영 프로세스 설계</li>
-                      <li>IT 솔루션 연계 온-오프라인 결제 시스템 관리</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h5 className="font-medium">드림씨어터</h5>
-                    <p className="text-sm text-gray-500 mb-2">House Attendant / 2019.10 – 2021.12</p>
-                    <p className="text-sm text-gray-600">뮤지컬 전용 극장 관객 서비스 및 운영 지원</p>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-xs font-mono uppercase tracking-widest text-gray-400 mb-6 flex items-center gap-2">
-                  <GraduationCap className="w-3 h-3" /> Education
-                </h4>
-                <div className="space-y-8">
-                  <div>
-                    <h5 className="font-medium">부산대학교</h5>
-                    <p className="text-sm text-gray-500">항공우주공학 & 예술문화영상학 (복수전공)</p>
-                    <p className="text-xs text-gray-400">2013 – 2021</p>
-                  </div>
-                  <div>
-                    <h5 className="font-medium">부산 중앙고등학교</h5>
-                    <p className="text-sm text-gray-500">졸업</p>
-                    <p className="text-xs text-gray-400">2010 – 2012</p>
+        {/* Professional Profile Section */}
+        <section className="mb-40">
+          <SectionTitle id="about" sideLabel="Profile">Professional Profile</SectionTitle>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+            {/* Left: Display Intro */}
+            <div className="lg:col-span-6">
+              <div className="sticky top-32">
+                <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight mb-6">
+                  Engineering logic meets <br />
+                  <span className="text-gray-400 italic font-serif">creative vision.</span>
+                </h2>
+                <div className="space-y-8 max-w-lg">
+                  <p className="text-xl text-gray-600 leading-relaxed">
+                    항공우주공학의 <span className="text-black font-medium">논리적 설계</span>와 예술문화영상의 <span className="text-black font-medium">감각적 기획</span>을 결합합니다. 대규모 페스티벌 운영부터 창의적인 콘텐츠 제작까지, 효율과 감각의 균형을 추구합니다.
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {["Project Management", "Content Creation", "Operation Design", "Sound Engineering"].map(tag => (
+                      <span key={tag} className="text-[10px] font-mono border border-gray-200 px-3 py-1 uppercase tracking-widest text-gray-400">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="lg:col-span-5 space-y-12">
-            <div>
-              <h4 className="text-xs font-mono uppercase tracking-widest text-gray-400 mb-6">Core Competencies</h4>
-              <div className="flex flex-wrap gap-2">
-                {["Project Management", "Content Creation", "Global Communication", "Process Optimization"].map(skill => (
-                  <span key={skill} className="px-3 py-1 border border-gray-200 text-sm hover:bg-black hover:text-white transition-colors cursor-default">
-                    {skill}
-                  </span>
-                ))}
+            {/* Right: Experience Timeline */}
+            <div className="lg:col-span-6">
+              <div className="space-y-24">
+                <div>
+                  <h4 className="text-[10px] font-mono uppercase tracking-[0.4em] text-gray-300 mb-6 flex items-center gap-3">
+                    <div className="w-8 h-[1px] bg-gray-200" /> Professional Experience
+                  </h4>
+                  <div className="space-y-20">
+                    {[
+                      {
+                        company: "㈜ 퀸즈스마일",
+                        role: "기획/운영 PM",
+                        period: "2024.05 – 2024.11",
+                        desc: [
+                          "국내외 페스티벌 및 공연 기획·운영",
+                          "자사 플랫폼 관리 및 고객 응대",
+                          "UX/UI 개선 협업",
+                          "고객 서비스 채널 운영 및 대응 프로세스 관리"
+                        ]
+                      },
+                      {
+                        company: "㈜ 드림씨어터",
+                        role: "하우스 어텐던트",
+                        period: "2019.10 – 2022.05",
+                        desc: [
+                          "대형 라이선스 공연 관객 서비스 및 운영 지원",
+                          "좌석/티켓/지연 관객 등 현장 돌발 이슈 대응",
+                          "공연장 운영 프로세스 이행 및 관객 경험 관리",
+                          "공연 전/후 객석 및 시설 점검 등 현장 전반 지원"
+                        ]
+                      }
+                    ].map((exp, i) => (
+                      <div key={i} className="group relative">
+                        <div className="flex flex-col mb-6">
+                          <div className="flex justify-between items-baseline mb-2">
+                            <h5 className="text-2xl font-medium group-hover:text-gray-600 transition-colors">{exp.company}</h5>
+                            <span className="text-[10px] font-mono text-gray-400">{exp.period}</span>
+                          </div>
+                          <span className="text-[11px] font-mono text-gray-400 uppercase tracking-[0.2em]">{exp.role}</span>
+                        </div>
+                        <ul className="space-y-3">
+                          {exp.desc.map((item, j) => (
+                            <li key={j} className="text-sm text-gray-500 flex items-start gap-3">
+                              <span className="mt-2 w-1 h-1 rounded-full bg-gray-200 shrink-0 group-hover:bg-black transition-colors" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <div>
-              <h4 className="text-xs font-mono uppercase tracking-widest text-gray-400 mb-6 flex items-center gap-2">
-                <Wrench className="w-3 h-3" /> Technical Tools
-              </h4>
-              <div className="grid grid-cols-2 gap-y-10 gap-x-8">
-                <div>
-                  <p className="text-[10px] font-mono text-gray-400 uppercase mb-3">Design</p>
-                  <ul className="text-sm space-y-1">
-                    <li>Adobe Illustrator</li>
-                    <li>Adobe Photoshop</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="text-[10px] font-mono text-gray-400 uppercase mb-3">Video</p>
-                  <ul className="text-sm space-y-1">
-                    <li>Adobe Premiere Pro</li>
-                    <li>Capcut</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="text-[10px] font-mono text-gray-400 uppercase mb-3">Audio</p>
-                  <ul className="text-sm space-y-1">
-                    <li>Logic Pro</li>
-                    <li>Cubase</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="text-[10px] font-mono text-gray-400 uppercase mb-3">Collaboration</p>
-                  <ul className="text-sm space-y-1">
-                    <li>Notion</li>
-                    <li>Slack</li>
-                    <li>Flow</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gray-50 p-8">
-              <h4 className="text-xs font-mono uppercase tracking-widest text-gray-400 mb-6">Certificates</h4>
-              <ul className="space-y-3 text-sm">
-                <li className="flex justify-between">
-                  <span>일반기계기사</span>
-                  <span className="text-gray-400">2025</span>
-                </li>
-                <li className="flex justify-between">
-                  <span>워드프로세서 (단일등급)</span>
-                </li>
-                <li className="flex justify-between">
-                  <span>자동차운전면허 1종</span>
-                </li>
-                <li className="flex justify-between pt-4 border-t border-gray-200">
-                  <span className="font-medium">TOEIC Speaking AL</span>
-                  <span className="text-gray-400">English</span>
-                </li>
-              </ul>
             </div>
           </div>
         </section>
 
-        {/* Discography & Activities */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-32">
-          <section>
-            <SectionTitle>Discography / Artist 'Lee Green'</SectionTitle>
-            <div className="space-y-6">
-              {[
-                { type: "EP", title: "GREENERY", year: "2023" },
-                { type: "EP", title: "Color / Overcome", year: "2021" },
-                { type: "Single", title: "Here, we are", year: "2022" },
-                { type: "Single", title: "니가 떠난 순간", year: "2020" },
-                { type: "Comp", title: "CAMPUS", year: "2022" },
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between group cursor-default">
-                  <div className="flex items-center gap-4">
-                    <Music className="w-4 h-4 text-gray-300 group-hover:text-black transition-colors" />
-                    <div>
-                      <h5 className="font-medium">{item.title}</h5>
-                      <p className="text-xs text-gray-400 uppercase font-mono">{item.type}</p>
-                    </div>
+        {/* SUMMARY & SKILLS Section */}
+        <section className="mb-40">
+          <SectionTitle id="skills" sideLabel="Specifications">Summary & Skills</SectionTitle>
+          <div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 border border-gray-100">
+              {/* 01. Education & 02. Certificates Module */}
+              <div className="lg:col-span-4 flex flex-col border-b lg:border-b-0 lg:border-r border-gray-100">
+                {/* Education Sub-module */}
+                <div className="p-12 border-b border-gray-100 flex-1">
+                  <div className="flex items-center gap-3 mb-6">
+                    <GraduationCap className="w-3 h-3 text-gray-400" />
+                    <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-400">01. Education</span>
                   </div>
-                  <span className="text-sm font-mono text-gray-400">{item.year}</span>
+                  <div className="space-y-4">
+                    {[
+                      { school: "부산대학교", period: "2013 – 2021", major: "항공우주공학 & 예술문화영상학" },
+                      { school: "부산 중앙고등학교", period: "2010 – 2012", major: "졸업" }
+                    ].map((edu, i) => (
+                      <div key={i} className="flex justify-between items-start gap-4">
+                        <div>
+                          <h5 className="font-medium text-base mb-1">{edu.school}</h5>
+                          <p className="text-xs text-gray-500 font-mono uppercase tracking-tighter">{edu.major}</p>
+                        </div>
+                        <span className="text-[10px] font-mono text-gray-400 bg-gray-50 px-2 py-1">{edu.period}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <SectionTitle>Awards & Activities</SectionTitle>
-            <div className="space-y-8">
-              <div>
-                <h4 className="text-xs font-mono uppercase tracking-widest text-gray-400 mb-4">Awards</h4>
-                <ul className="space-y-4">
-                  <li className="flex items-start gap-3">
-                    <Award className="w-5 h-5 shrink-0 text-yellow-500" />
-                    <div>
-                      <p className="font-medium">대상 - 미쳐버린파닭 영상 공모전</p>
-                      <p className="text-xs text-gray-400">2019</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Award className="w-5 h-5 shrink-0 text-gray-400" />
-                    <div>
-                      <p className="font-medium">금상 - 내가 만난 도시재생 UCC 공모전</p>
-                      <p className="text-xs text-gray-400">2020</p>
-                    </div>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Award className="w-5 h-5 shrink-0 text-orange-400" />
-                    <div>
-                      <p className="font-medium">우수상 - HF 희망 캠페인 송 챌린지</p>
-                      <p className="text-xs text-gray-400">2020</p>
-                    </div>
-                  </li>
-                </ul>
+                {/* Certificates Sub-module */}
+                <div className="p-12 bg-gray-50/30">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Award className="w-3 h-3 text-gray-400" />
+                    <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-400">02. Certificates</span>
+                  </div>
+                  <div className="grid grid-cols-1 gap-8">
+                    {[
+                      { title: "TOEIC SPEAKING", sub: "Advanced Low (AL)", value: 9, max: 11, label: "Level 9 / 11" },
+                      { title: "TOEIC", sub: "830", value: 830, max: 990, label: "830 / 990" },
+                      { title: "워드프로세서", sub: "단일등급" },
+                      { title: "자동차운전면허", sub: "1종" }
+                    ].map((cert, i) => (
+                      <div key={i} className="group">
+                        <div className="flex justify-between items-end mb-2">
+                          <h5 className="text-xs font-medium group-hover:translate-x-1 transition-transform duration-300">{cert.title}</h5>
+                          <span className="text-[8px] font-mono text-gray-400 uppercase tracking-widest">{cert.sub}</span>
+                        </div>
+                        {cert.value ? (
+                          <div className="space-y-1.5">
+                            <div className="h-[1px] w-full bg-gray-100 overflow-hidden">
+                              <motion.div 
+                                initial={{ width: 0 }}
+                                whileInView={{ width: `${(cert.value / cert.max) * 100}%` }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1.5, ease: "circOut" }}
+                                className="h-full bg-gray-900"
+                              />
+                            </div>
+                            <div className="flex justify-end">
+                              <span className="text-[8px] font-mono text-gray-500 uppercase tracking-tighter">{cert.label}</span>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="h-[1px] w-full bg-gray-100" />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <h4 className="text-xs font-mono uppercase tracking-widest text-gray-400 mb-4">Key Activities</h4>
-                <div className="space-y-4 text-sm">
-                  <p className="flex items-center gap-2">
-                    <ChevronRight className="w-3 h-3 text-gray-300" />
-                    <span>복합문화공간 파나카노트 공연 기획 PD (2023)</span>
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <ChevronRight className="w-3 h-3 text-gray-300" />
-                    <span>예술경영지원센터 기자단 '아트모아' 2기 (2022-2023)</span>
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <ChevronRight className="w-3 h-3 text-gray-300" />
-                    <span>부산문화재단 청년예술가 창작활동지원 (2021-2023)</span>
-                  </p>
+              {/* 03. Technical Stack Module */}
+              <div className="lg:col-span-4 p-12 border-b lg:border-b-0 lg:border-r border-gray-100">
+                <div className="flex items-center gap-3 mb-6">
+                  <Wrench className="w-3 h-3 text-gray-400" />
+                  <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-400">03. Technical Stack</span>
+                </div>
+                <div className="space-y-6">
+                  {[
+                    { label: "Design & Creative", items: ["Illustrator", "Photoshop", "Premiere Pro"] },
+                    { label: "Audio Engineering", items: ["Logic Pro"] },
+                    { label: "Management", items: ["Notion", "Flow"] },
+                  ].map((group) => (
+                    <div key={group.label}>
+                      <p className="text-[9px] font-mono text-gray-300 uppercase mb-4 tracking-widest">{group.label}</p>
+                      <ul className="space-y-2">
+                        {group.items.map(item => (
+                          <li key={item} className="text-sm font-medium flex items-center gap-2 group/item cursor-default">
+                            <div className="w-1 h-1 bg-gray-200 rounded-full group-hover/item:bg-black group-hover/item:scale-150 transition-all duration-300" />
+                            <span className="group-hover/item:translate-x-1 transition-transform duration-300">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 04. Awards Module */}
+              <div className="lg:col-span-4 p-12 bg-white">
+                <div className="flex items-center gap-3 mb-10">
+                  <Trophy className="w-3 h-3 text-gray-400" />
+                  <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gray-400">04. Awards</span>
+                </div>
+                <div className="space-y-12">
+                  {[
+                    { title: "HF 희망 캠페인 송 챌린지 공모전", organizer: "주택금융공사", year: "2020", award: "우수상" },
+                    { title: "내가 만난 도시재생 UCC 공모전", organizer: "부산도시공사", year: "2020", award: "금상" },
+                    { title: "부산대학교 창의미래설계 디딤돌 사업", organizer: "부산대학교", year: "2020", award: "우수상" },
+                    { title: "제 1회 한국숲사랑청소년단 영상 공모전", organizer: "(사) 한국 숲사랑청소년단", year: "2019", award: "장려상" }
+                  ].map((item, i) => (
+                    <div key={i} className="group relative">
+                      <div className="flex justify-between items-start mb-3">
+                        <span className="text-[9px] font-mono text-gray-300 uppercase tracking-widest">{item.year}</span>
+                        <span className="text-[9px] font-mono border border-gray-100 px-2 py-0.5 text-gray-400 group-hover:border-black group-hover:text-black transition-colors">{item.award}</span>
+                      </div>
+                      <h5 className="text-sm font-medium leading-snug mb-1 group-hover:translate-x-1 transition-transform duration-300">{item.title}</h5>
+                      <p className="text-[10px] font-mono text-gray-400 uppercase tracking-tighter">{item.organizer}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
+
+        {/* Key Activities Section */}
+        <section className="mb-40">
+          <SectionTitle id="activities" sideLabel="Projects">Key Activities</SectionTitle>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-fr">
+            {/* 01. Panaka Note - Large Card */}
+            <div className="md:col-span-2 p-12 border border-gray-100 group hover:border-black transition-all duration-700 flex flex-col justify-between bg-white">
+              <div>
+                <div className="flex justify-between items-start mb-6">
+                  <span className="text-[10px] font-mono text-gray-400 uppercase tracking-[0.3em]">01 / 파나카노트</span>
+                  <span className="text-[10px] font-mono text-gray-400">2023</span>
+                </div>
+                <h5 className="text-4xl font-medium leading-[1.1] mb-4 group-hover:text-gray-600 transition-colors">
+                  복합문화공간 <span className="italic font-serif">&lt;파나카노트&gt;</span><br />
+                  공연 기획 PD & 음향감독
+                </h5>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-8 h-[1px] bg-gray-200 group-hover:w-16 group-hover:bg-black transition-all duration-500" />
+                <p className="text-sm text-gray-500 font-serif italic">공연 기획 및 운영 총괄</p>
+              </div>
+            </div>
+
+            {/* 02. University & Organism - Highlighted Black Card */}
+            <div className="md:col-span-1 p-12 bg-black text-white group transition-all duration-700 flex flex-col justify-between relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000" />
+              <div>
+                <div className="flex justify-between items-start mb-6 relative z-10">
+                  <span className="text-[10px] font-mono text-gray-500 uppercase tracking-[0.3em]">02 / 부산문화재단</span>
+                  <span className="text-[10px] font-mono text-gray-500">2021-2022</span>
+                </div>
+                <h5 className="text-2xl font-medium leading-tight mb-2 relative z-10">
+                  청년 UNIVERSITY <br />& 유기체
+                </h5>
+                <p className="text-xs text-gray-400 uppercase tracking-[0.2em] font-mono relative z-10">기획자 신규양성 프로그램</p>
+              </div>
+              <div className="w-full h-[1px] bg-white/10 relative z-10">
+                <div className="w-0 h-full bg-white group-hover:w-full transition-all duration-1000" />
+              </div>
+            </div>
+
+            {/* 03. Artmoa - Horizontal Card */}
+            <div className="md:col-span-1 p-12 border border-gray-100 group hover:border-black transition-all duration-700 flex flex-col justify-between bg-white">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="text-[10px] font-mono text-gray-400">2022-2023</span>
+                  <span className="w-1 h-1 rounded-full bg-gray-200" />
+                  <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">03 / 예술경영지원센터</span>
+                </div>
+                <h5 className="text-xl font-medium group-hover:translate-x-2 transition-transform duration-500 leading-snug">아트모아 기자단 2기</h5>
+                <p className="text-sm text-gray-500 leading-relaxed">예술 산업 인터뷰 및 콘텐츠 기획</p>
+              </div>
+            </div>
+
+            {/* 04. Japan-Korea Exchange - Minimal Card */}
+            <div className="md:col-span-1 p-12 border border-gray-100 group hover:border-black transition-all duration-700 flex flex-col justify-center text-center bg-gray-50/30">
+              <span className="text-[9px] font-mono text-gray-300 uppercase tracking-[0.5em] mb-4">04 / Global Network</span>
+              <h5 className="text-xl font-medium mb-2">부산 한일 청년 교류회</h5>
+              <p className="text-xs text-gray-400 mb-6">글로벌 문화 교류 및 네트워킹</p>
+              <div className="flex items-center justify-center gap-4 pt-4 border-t border-gray-100">
+                <span className="text-[10px] font-mono text-gray-400">2019-2020</span>
+                <span className="text-[10px] font-mono text-gray-200">/</span>
+                <span className="text-[10px] font-mono text-gray-400 uppercase tracking-tighter">부산한일문화교류협회</span>
+              </div>
+            </div>
+
+            {/* 05. Creator - New Card */}
+            <div className="md:col-span-1 p-12 border border-gray-100 group hover:border-black transition-all duration-700 flex flex-col justify-between bg-white relative overflow-hidden">
+              <div className="absolute bottom-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
+                <span className="text-7xl font-bold font-mono tracking-tighter">CREATIVE</span>
+              </div>
+              <div>
+                <div className="flex justify-between items-start mb-6">
+                  <span className="text-[10px] font-mono text-gray-400 uppercase tracking-[0.3em]">05 / 부산대학교 동아리</span>
+                  <span className="text-[10px] font-mono text-gray-400">2019-2021</span>
+                </div>
+                <h5 className="text-2xl font-medium leading-tight mb-2">CREATOR</h5>
+              </div>
+              <p className="text-sm text-gray-500 leading-relaxed border-l-2 border-gray-100 pl-6 group-hover:border-black transition-colors">
+                광고 콘텐츠 및 카피라이팅 기획·제작
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* Contact Section */}
         <SectionTitle id="contact">Get in touch</SectionTitle>
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-20">
           <div>
             <h2 className="text-4xl md:text-6xl font-medium tracking-tighter mb-8">
               Interested to work with me?
@@ -664,7 +760,7 @@ export default function App() {
       {/* Footer */}
       <footer className="border-t border-gray-100 pt-20 pb-12 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-20">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-12">
             <div className="text-[11px] font-mono text-gray-400 uppercase tracking-widest space-y-2">
               <p>Lee Geun-il ©2026</p>
               <p>All rights reserved</p>
