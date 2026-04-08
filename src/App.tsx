@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import React, { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 import { 
   ArrowUpRight, 
   Mail, 
@@ -30,6 +30,7 @@ interface Project {
   contribution?: string;
   description?: string;
   details?: string[];
+  objectPosition?: string;
 }
 
 const SectionTitle = ({ children, id, sideLabel }: { children: React.ReactNode; id?: string; sideLabel?: string }) => (
@@ -65,6 +66,7 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => (
         src={project.image} 
         alt={project.title} 
         className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out"
+        style={{ objectPosition: project.objectPosition || "center" }}
         referrerPolicy="no-referrer"
       />
       {project.contribution && (
@@ -213,11 +215,12 @@ export default function App() {
       ]
     },
     {
-      title: "Busan Int'l Rock Festival",
+      title: "BUSAN INT'L ROCK FESTIVAL 2024",
       category: "Operation",
       year: "2024",
-      image: "https://picsum.photos/seed/busanrock/1000/800",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024bsrock.png",
       contribution: "90%",
+      objectPosition: "top",
       description: "부산국제록페스티벌의 공식 MD 및 아티스트 굿즈 판매 부스 운영 총괄.",
       details: [
         "공식 MD 및 아티스트 굿즈 판매 부스 운영",
@@ -226,10 +229,10 @@ export default function App() {
       ]
     },
     {
-      title: "Incheon Pentaport Rock",
+      title: "INCHEON PENTAPORT ROCK FESTIVAL 2024",
       category: "Operation",
       year: "2024",
-      image: "https://picsum.photos/seed/penta/1200/800",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024incheonrock.png",
       contribution: "80%",
       description: "국내 최대 규모의 록 페스티벌 F&B 사전 예약 시스템 구축 및 운영.",
       details: [
@@ -239,16 +242,16 @@ export default function App() {
       ]
     },
     {
-      title: "Isul Live Festival",
+      title: "CHAM FESTIVAL 2024",
       category: "Operation",
       year: "2024",
-      image: "https://picsum.photos/seed/isul/1200/800",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024cham.jpg",
       contribution: "75%",
-      description: "하이트진로 클라이언트 대응 및 단일 일정 페스티벌 F&B 최적화 운영.",
+      description: "대규모 페스티벌의 현장 운영 최적화 및 관객 서비스 관리.",
       details: [
-        "하이트진로 클라이언트 대응 및 요구사항 반영",
-        "단일 일정 대규모 인파 대응을 위한 동선 설계",
-        "F&B 부스 운영 효율성 극대화"
+        "현장 운영 프로세스 최적화",
+        "관객 동선 및 안전 관리 시스템 구축",
+        "F&B 및 편의시설 통합 운영 관리"
       ]
     }
   ];
@@ -258,7 +261,7 @@ export default function App() {
       title: "GREENERY EP & Artbook",
       category: "Music",
       year: "2023",
-      image: "https://picsum.photos/seed/greenery/1200/800",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img5.png",
       contribution: "95%",
       description: "싱어송라이터 '이그린'의 EP 발매 및 작업기를 담은 아트북 형태의 앨범 제작.",
       details: [
@@ -271,8 +274,9 @@ export default function App() {
       title: "Flower Planet",
       category: "Concert",
       year: "2022",
-      image: "https://picsum.photos/seed/flower/1200/800",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg",
       contribution: "100%",
+      objectPosition: "top",
       description: "부산과 서울의 아티스트들이 협업하는 콜라보레이션 공연 기획 및 운영.",
       details: [
         "부산-서울 아티스트 콜라보레이션 공연 기획",
@@ -284,13 +288,41 @@ export default function App() {
       title: "Concept Performance Series",
       category: "Planning",
       year: "2021",
-      image: "https://picsum.photos/seed/concert/1200/800",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img3.jpg",
       contribution: "100%",
+      objectPosition: "top",
       description: "테마 중심의 인디 공연 시리즈 [열대야], [오후의 향기], [야간비행] 기획.",
       details: [
         "테마별 컨셉 설정 및 공간 연출 기획",
         "인디 아티스트 섭외 및 프로그램 구성",
         "공연 브랜딩 및 홍보 콘텐츠 제작"
+      ]
+    },
+    {
+      title: "Visual Content Archive",
+      category: "Creative",
+      year: "2021",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img2.jpg",
+      contribution: "100%",
+      objectPosition: "top",
+      description: "다양한 예술적 시각을 담은 개인 작업 및 콘텐츠 아카이빙.",
+      details: [
+        "시각적 스토리텔링을 위한 이미지 기획",
+        "브랜드 아이덴티티를 반영한 콘텐츠 제작",
+        "다양한 매체를 활용한 실험적 디자인"
+      ]
+    },
+    {
+      title: "Creative Direction Project",
+      category: "Direction",
+      year: "2020",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img1.jpg",
+      contribution: "100%",
+      description: "초기 기획부터 최종 결과물까지의 크리에이티브 디렉션 작업.",
+      details: [
+        "프로젝트 전반의 비주얼 디렉팅",
+        "컨셉 도출 및 전략적 기획 수립",
+        "최종 결과물의 품질 관리 및 배포"
       ]
     }
   ];
@@ -330,22 +362,22 @@ export default function App() {
 
       <main className="max-w-7xl mx-auto px-6 pt-48 pb-48">
         {/* Hero Section */}
-        <section className="mb-40">
+        <section className="mb-40 pt-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-end">
             <div className="lg:col-span-8">
               <motion.h1 
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-[1.05] mb-12"
               >
-                Lee Geun-il is a <span className="font-serif italic">Project Manager</span> & <span className="font-serif italic text-gray-400">Content Creator</span> bridging Engineering Logic and Creative Vision.
+                <span className="font-serif italic text-gray-400">Creative Strategist</span> & <span className="font-serif italic text-gray-400">Problem Solver</span>: Designing Solutions from Concept to Impact.
               </motion.h1>
             </div>
             <div className="lg:col-span-4 flex flex-col gap-4">
               <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
                 className="text-lg text-gray-600 leading-relaxed"
               >
