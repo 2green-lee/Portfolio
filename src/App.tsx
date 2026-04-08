@@ -108,16 +108,16 @@ const ProjectModal = ({ project, onClose }: { project: Project | null; onClose: 
             <X className="w-5 h-5" />
           </button>
 
-          <div className="w-full md:w-3/5 h-64 md:h-auto bg-gray-100 overflow-hidden">
+          <div className="w-full md:w-fit max-w-[45%] h-64 md:h-auto overflow-hidden flex items-center bg-white">
               <img 
                 src={project.image} 
                 alt={project.title} 
-                className="w-full h-full object-contain"
+                className="h-full w-auto object-contain"
                 referrerPolicy="no-referrer"
               />
           </div>
 
-          <div className="flex-1 p-12 md:p-20 lg:p-32 overflow-y-auto flex flex-col">
+          <div className="flex-1 p-10 md:p-16 lg:p-24 overflow-y-auto flex flex-col">
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-[10px] font-mono bg-black text-white px-2 py-0.5">{project.year}</span>
@@ -203,7 +203,7 @@ export default function App() {
       title: "WATERBOMB 2024 SEOUL",
       category: "Operation",
       year: "2024",
-      image: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&q=80&w=1200&h=800",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/9d41580d7739017f4b186f92faf6491a60264fd5/2024waterbomb.png",
       contribution: "85%",
       description: "2024년 서울에서 개최된 대규모 워터 페스티벌의 통합 현장 운영 및 관리 시스템 구축.",
       details: [
