@@ -1082,7 +1082,7 @@ export default function App() {
                         initial="hidden"
                         animate="show"
                         exit={{ opacity: 0 }}
-                        className={`h-full w-full overflow-y-auto px-8 md:px-20 py-12 md:py-24 ${SECTIONS[0].color}`}
+                        className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-12 md:pt-24 pb-40 md:pb-80 ${SECTIONS[0].color}`}
                       >
                         <div className="max-w-7xl w-full mx-auto h-full flex flex-col justify-start pt-4 lg:pt-8">
                           <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
@@ -1143,7 +1143,7 @@ export default function App() {
                         initial="hidden"
                         animate="show"
                         exit={{ opacity: 0 }}
-                        className={`h-full w-full overflow-y-auto px-8 md:px-20 py-24 ${SECTIONS[1].color}`}
+                        className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-24 pb-80 ${SECTIONS[1].color}`}
                       >
                         <div className="max-w-7xl mx-auto">
                           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
@@ -1173,7 +1173,7 @@ export default function App() {
                         initial="hidden"
                         animate="show"
                         exit={{ opacity: 0 }}
-                        className={`h-full w-full overflow-y-auto px-8 md:px-20 py-24 ${SECTIONS[2].color}`}
+                        className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-24 pb-80 ${SECTIONS[2].color}`}
                       >
                         <div className="max-w-7xl mx-auto">
                           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
@@ -1203,7 +1203,7 @@ export default function App() {
                         initial="hidden"
                         animate="show"
                         exit={{ opacity: 0 }}
-                        className={`h-full w-full overflow-y-auto px-8 md:px-20 py-24 ${SECTIONS[3].color}`}
+                        className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-24 pb-80 ${SECTIONS[3].color}`}
                       >
                         <div className="max-w-7xl w-full mx-auto">
                           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
@@ -1373,7 +1373,7 @@ export default function App() {
                         initial="hidden"
                         animate="show"
                         exit={{ opacity: 0 }}
-                        className={`h-full w-full overflow-hidden px-8 md:px-20 py-24 ${SECTIONS[4].color}`}
+                        className={`h-full w-full overflow-hidden px-8 md:px-20 pt-24 pb-80 ${SECTIONS[4].color}`}
                       >
                         <div className="max-w-7xl w-full mx-auto">
                           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start mb-32">
