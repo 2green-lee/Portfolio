@@ -1120,7 +1120,7 @@ export default function App() {
                                   variants={philosophyReveal}
                                   initial="hidden"
                                   animate="show"
-                                  className="mt-20 lg:mt-28 space-y-3 max-w-2xl"
+                                  className="mt-32 lg:mt-40 space-y-3 max-w-2xl"
                                 >
                                   <span className="text-[10px] font-mono uppercase tracking-[0.4em] opacity-30 block border-b border-white/10 pb-2 w-fit pr-8">Philosophy</span>
                                   <p className="text-lg md:text-xl lg:text-2xl font-serif italic text-white/80 leading-tight whitespace-nowrap">
