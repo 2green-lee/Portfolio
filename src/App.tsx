@@ -1482,17 +1482,7 @@ export default function App() {
                             </div>
                           </div>
 
-                          {/* Large Background Text Effect */}
-                          <div className="relative h-[40vh] flex items-end overflow-hidden">
-                            <motion.h2 
-                              initial={{ y: 100, opacity: 0 }}
-                              whileInView={{ y: 0, opacity: 1 }}
-                              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                              className="text-[22vw] font-bold leading-none tracking-tighter opacity-10 select-none whitespace-nowrap -mb-8"
-                            >
-                              Lee-Geunil
-                            </motion.h2>
-                          </div>
+                          {/* Background text removed */}
                         </div>
                       </motion.section>
                     )}
