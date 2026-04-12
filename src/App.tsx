@@ -296,13 +296,13 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
                           {project.images && (
                             <section>
                               <span className="text-[12px] font-mono uppercase tracking-[0.5em] opacity-60 block mb-8">05 / Gallery</span>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div className="columns-1 md:columns-2 gap-4 space-y-4">
                                 {project.images.map((img, i) => (
-                                  <div key={i} className="aspect-video bg-gray-100 overflow-hidden">
+                                  <div key={i} className="break-inside-avoid bg-gray-100 overflow-hidden">
                                     <img 
                                       src={img} 
                                       alt={`${project.title} gallery ${i}`} 
-                                      className="w-full h-full object-cover transition-all duration-700"
+                                      className="w-full h-auto block"
                                       referrerPolicy="no-referrer"
                                     />
                                   </div>
@@ -456,27 +456,28 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
                       </div>
                     </div>
 
-                    {/* Bento Gallery */}
+                    {/* Flexible Gallery */}
                     {project.images && (
                       <section className="mt-24">
                         <h3 className="text-xs font-mono uppercase tracking-[0.3em] opacity-40 mb-12">Visual Archive</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 h-[1000px]">
-                          <div className="md:col-span-8 h-full overflow-hidden">
-                            <img src={project.images[0]} className="w-full h-full object-cover transition-all duration-1000" referrerPolicy="no-referrer" />
-                          </div>
-                          <div className="md:col-span-4 grid grid-rows-2 gap-4 h-full">
-                            <div className="overflow-hidden">
-                              <img src={project.images[1]} className="w-full h-full object-cover transition-all duration-1000" referrerPolicy="no-referrer" />
-                            </div>
-                            <div className="grid grid-cols-2 gap-4">
-                              <div className="overflow-hidden">
-                                <img src={project.images[2]} className="w-full h-full object-cover transition-all duration-1000" referrerPolicy="no-referrer" />
-                              </div>
-                              <div className="overflow-hidden">
-                                <img src={project.images[3]} className="w-full h-full object-cover transition-all duration-1000" referrerPolicy="no-referrer" />
-                              </div>
-                            </div>
-                          </div>
+                        <div className="columns-1 md:columns-2 gap-4 space-y-4">
+                          {project.images.map((img, i) => (
+                            <motion.div 
+                              key={i}
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: i * 0.1 }}
+                              className="break-inside-avoid bg-gray-50 overflow-hidden"
+                            >
+                              <img 
+                                src={img} 
+                                alt={`${project.title} gallery ${i}`} 
+                                className="w-full h-auto block hover:scale-[1.02] transition-transform duration-700" 
+                                referrerPolicy="no-referrer" 
+                              />
+                            </motion.div>
+                          ))}
                         </div>
                       </section>
                     )}
@@ -511,6 +512,44 @@ const staggerItem = {
       duration: 0.8, 
       ease: [0.16, 1, 0.3, 1] 
     } 
+  }
+};
+
+const hanjaReveal = {
+  hidden: { opacity: 0, scale: 0.95, filter: "blur(20px)" },
+  show: { 
+    opacity: 1, 
+    scale: 1, 
+    filter: "blur(0px)",
+    transition: { 
+      duration: 1.5, 
+      ease: [0.16, 1, 0.3, 1],
+      delay: 1.2
+    } 
+  }
+};
+
+const philosophyReveal = {
+  hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)" },
+  show: { 
+    opacity: 1, 
+    clipPath: "inset(0 0% 0 0)",
+    transition: { 
+      duration: 1.5, 
+      ease: [0.16, 1, 0.3, 1],
+      delay: 2
+    } 
+  }
+};
+
+const floatingHanja = {
+  animate: {
+    y: [0, -10, 0],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
   }
 };
 
@@ -778,7 +817,7 @@ export default function App() {
       cast: "이그린 (Lee Green)",
       support: "텀블벅 크라우드 펀딩 프로젝트",
       description: "싱어송라이터 이그린 EP <GREENERY> 발매. 발매 작업기를 담은 책 형태의 새로운 앨범.",
-      fullDescription: "싱어송라이터 '이그린'의 첫 번째 EP [GREENERY] 발매와 함께, 창작의 과정과 영감을 기록한 아트북 형태의 피지컬 앨범을 제작했습니다.\n\n단순한 음반 발매를 넘어 시각적 경험을 공유하기 위해 아트북 패키지를 기획하였으며, 텀블벅 크라우드펀딩을 통해 목표 금액의 196%를 달성하며 성공적으로 런칭했습니다. 전곡 작사, 작곡, 프로듀싱부터 디자인 디렉팅, 유통, 쇼케이스 기획까지 프로젝트 전반을 주도했습니다.",
+      fullDescription: "싱어송라이터 ‘이그린’의 EP [GREENERY] 발매와 함께, 창작 과정과 영감을 기록한 아트북 형태의 피지컬 앨범을 기획·제작했습니다.\n\n효용성이 낮은 기존 플라스틱 CD의 한계를 문제로 정의하고, 이를 대체할 수 있는 새로운 형태의 앨범을 설계했습니다. 텀블벅 크라우드펀딩을 통해 목표 금액의 196%를 달성하며 프로젝트를 성공적으로 런칭했습니다.\n\n전곡 작사, 작곡, 프로듀싱은 물론, 디자인 디렉팅, 유통, 쇼케이스 기획까지 프로젝트 전반을 주도했습니다.",
       role: {
         title: "담당 업무",
         items: [
@@ -796,10 +835,18 @@ export default function App() {
         "앨범 발매를 알리는 오프라인 이벤트 기획 및 실행 -> 발매 쇼케이스 기획 및 진행"
       ],
       images: [
-        "https://picsum.photos/seed/green1/1200/800",
-        "https://picsum.photos/seed/green2/1200/800",
-        "https://picsum.photos/seed/green3/1200/800",
-        "https://picsum.photos/seed/green4/1200/800"
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2052.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/013cde7d59ad00b704b19423085d2b9bfc269884/img%2051.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2054.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2055.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2056.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2057.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2053.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2058.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2059.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2060.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2061.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2063.jpg"
       ]
     },
     {
@@ -830,16 +877,19 @@ export default function App() {
         "다채널 홍보를 통한 인지도 확산 -> SNS 영상 홍보물 배포\n티켓 2+1 프로모션 진행"
       ],
       images: [
-        "https://picsum.photos/seed/flower1/1200/800",
-        "https://picsum.photos/seed/flower2/1200/800",
-        "https://picsum.photos/seed/flower3/1200/800",
-        "https://picsum.photos/seed/flower4/1200/800"
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2041.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2042.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2043.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2044.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2045.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2046.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2047.jpg"
       ]
     },
     {
       title: "열대야",
       category: "Concert",
-      year: "2020",
+      year: "2022",
       image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img3.jpg",
       contribution: "70%",
       location: "KT&G 상상마당 부산 13F 루프탑",
@@ -864,10 +914,14 @@ export default function App() {
         "다채널 홍보를 통한 공연 인지도 확산 -> 상상마당 부산 및 HAO 공식 인스타그램을 활용한 온라인 홍보 진행 \n배너 및 공연 홍보 영상 제작·배포"
       ],
       images: [
-        "https://picsum.photos/seed/night1/1200/800",
-        "https://picsum.photos/seed/night2/1200/800",
-        "https://picsum.photos/seed/night3/1200/800",
-        "https://picsum.photos/seed/night4/1200/800"
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2031.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2032.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2033.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2034.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2035.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2036.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2037.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2038.jpg"
       ]
     },
     {
@@ -898,10 +952,14 @@ export default function App() {
         "다채널 홍보를 통한 공연 인지도 확대 및 관객 유입 -> 인스타그램 기반 온라인 홍보 운영\n현수막·포스터 등 오프라인 홍보물 제작·배포"
       ],
       images: [
-        "https://picsum.photos/seed/scent1/1200/800",
-        "https://picsum.photos/seed/scent2/1200/800",
-        "https://picsum.photos/seed/scent3/1200/800",
-        "https://picsum.photos/seed/scent4/1200/800"
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/363f29ea35ae49b89e8e7670969e860166d22fe8/img%2021.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/363f29ea35ae49b89e8e7670969e860166d22fe8/img%2022.JPG",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/363f29ea35ae49b89e8e7670969e860166d22fe8/img%2023.JPG",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/ab04817d40c06299b1492b3bc2a01bc0c5ed65ec/Img%2024.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/363f29ea35ae49b89e8e7670969e860166d22fe8/img%2025.JPG",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/ab04817d40c06299b1492b3bc2a01bc0c5ed65ec/img%2026.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/ab04817d40c06299b1492b3bc2a01bc0c5ed65ec/img%2027.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/ab04817d40c06299b1492b3bc2a01bc0c5ed65ec/img%2028.jpg"
       ]
     },
     {
@@ -931,10 +989,14 @@ export default function App() {
         "온라인 홍보 활성화 및 오프라인 홍보 -> 인스타그램 홍보\n현수막·포스터 등 오프라인 홍보물 제작 및 배포"
       ],
       images: [
-        "https://picsum.photos/seed/flight1/1200/800",
-        "https://picsum.photos/seed/flight2/1200/800",
-        "https://picsum.photos/seed/flight3/1200/800",
-        "https://picsum.photos/seed/flight4/1200/800"
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/e7d84bbdc228906326e2645347b5f44ad1a75293/img%2011.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/e7d84bbdc228906326e2645347b5f44ad1a75293/img%2012.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/e7d84bbdc228906326e2645347b5f44ad1a75293/img%2013.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/e7d84bbdc228906326e2645347b5f44ad1a75293/img%2014.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/2337ca8c54dd5f019a4869caceaea3d6036c6e12/img%2015.jpeg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/2337ca8c54dd5f019a4869caceaea3d6036c6e12/img%2016.jpeg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/2337ca8c54dd5f019a4869caceaea3d6036c6e12/img%2017.jpeg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/2337ca8c54dd5f019a4869caceaea3d6036c6e12/img%2018.JPG"
       ]
     }
   ];
@@ -961,11 +1023,11 @@ export default function App() {
             <button onClick={() => scrollTo("activities")} className="hover:opacity-40 transition-opacity text-left">Contact</button>
           </div>
           <div className="flex flex-col gap-1">
-            <a href="#" className="hover:opacity-40 transition-opacity">Instagram</a>
-            <a href="mailto:rtytgb123@gmail.com" className="hover:opacity-40 transition-opacity">Mail</a>
+            <a href="https://www.instagram.com/darkreen___n/" target="_blank" rel="noopener noreferrer" className="hover:opacity-40 transition-opacity">Instagram</a>
+            <a href="mailto:lgi12@naver.com" className="hover:opacity-40 transition-opacity">Mail</a>
           </div>
           <div className="hidden md:flex flex-col gap-1 items-end opacity-40">
-            <span>Seoul, KR</span>
+            <span>Busan, KR</span>
             <span>{formattedTime}</span>
           </div>
         </div>
@@ -1036,20 +1098,36 @@ export default function App() {
 
                             {/* Right: Hanja Title & Philosophy */}
                             <div className="lg:col-span-8 flex flex-col items-start lg:pl-12">
-                              <motion.div variants={staggerItem} className="w-full">
-                                {/* Hanja Title - Moved Up */}
-                                <div className="relative inline-block -mt-8 lg:-mt-16">
-                                  <h1 className="text-7xl md:text-[10rem] lg:text-[12rem] font-serif leading-none text-white tracking-[0.1em]">共生</h1>
-                                </div>
+                              <div className="w-full">
+                                {/* Hanja Title - Adjusted Position */}
+                                <motion.div 
+                                  variants={hanjaReveal}
+                                  initial="hidden"
+                                  animate="show"
+                                  className="relative inline-block mt-4 lg:mt-8"
+                                >
+                                  <motion.h1 
+                                    variants={floatingHanja}
+                                    animate="animate"
+                                    className="text-7xl md:text-[10rem] lg:text-[12rem] font-serif leading-none text-white tracking-[0.1em]"
+                                  >
+                                    共生
+                                  </motion.h1>
+                                </motion.div>
 
-                                {/* Philosophy - Moved Up */}
-                                <div className="mt-16 lg:mt-20 space-y-3 max-w-2xl">
+                                {/* Philosophy - Adjusted Position */}
+                                <motion.div 
+                                  variants={philosophyReveal}
+                                  initial="hidden"
+                                  animate="show"
+                                  className="mt-20 lg:mt-28 space-y-3 max-w-2xl"
+                                >
                                   <span className="text-[10px] font-mono uppercase tracking-[0.4em] opacity-30 block border-b border-white/10 pb-2 w-fit pr-8">Philosophy</span>
-                                  <p className="text-xl md:text-2xl lg:text-3xl font-serif italic text-white/80 leading-tight whitespace-nowrap">
+                                  <p className="text-lg md:text-xl lg:text-2xl font-serif italic text-white/80 leading-tight whitespace-nowrap">
                                     공생; 연결 속에서 만들어지는 가치
                                   </p>
-                                </div>
-                              </motion.div>
+                                </motion.div>
+                              </div>
                             </div>
                           </div>
 
@@ -1376,16 +1454,16 @@ export default function App() {
                                       <div className="space-y-6">
                                         <div>
                                           <p className="text-[8px] font-mono uppercase opacity-60 mb-1">Contact</p>
-                                          <p className="text-[11px] font-medium tracking-tight">rtytgb123@gmail.com</p>
+                                          <p className="text-[11px] font-medium tracking-tight">lgi12@naver.com</p>
                                           <p className="text-[11px] font-medium tracking-tight">010-9335-9620</p>
                                         </div>
                                         <div>
                                           <p className="text-[8px] font-mono uppercase opacity-60 mb-1">Location</p>
-                                          <p className="text-[11px] font-medium tracking-tight">Seoul, South Korea</p>
+                                          <p className="text-[11px] font-medium tracking-tight">Busan, South Korea</p>
                                         </div>
                                         <div>
                                           <p className="text-[8px] font-mono uppercase opacity-60 mb-1">Instagram</p>
-                                          <p className="text-[11px] font-medium tracking-tight">@2green_lee</p>
+                                          <a href="https://www.instagram.com/darkreen___n/" target="_blank" rel="noopener noreferrer" className="text-[11px] font-medium tracking-tight hover:opacity-40 transition-opacity block">@darkreen___n</a>
                                         </div>
                                       </div>
                                     </div>
