@@ -1027,7 +1027,7 @@ export default function App() {
             <a href="mailto:lgi12@naver.com" className="hover:opacity-40 transition-opacity">Mail</a>
           </div>
           <div className="hidden md:flex flex-col gap-1 items-end opacity-40">
-            <span>Busan, KR</span>
+            <span>Seoul, KR</span>
             <span>{formattedTime}</span>
           </div>
         </div>
@@ -1459,7 +1459,7 @@ export default function App() {
                                         </div>
                                         <div>
                                           <p className="text-[8px] font-mono uppercase opacity-60 mb-1">Location</p>
-                                          <p className="text-[11px] font-medium tracking-tight">Busan, South Korea</p>
+                                          <p className="text-[11px] font-medium tracking-tight">Seoul, South Korea</p>
                                         </div>
                                         <div>
                                           <p className="text-[8px] font-mono uppercase opacity-60 mb-1">Instagram</p>
