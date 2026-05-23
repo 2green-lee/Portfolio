@@ -4,8 +4,9 @@ import fs from "fs";
 import { createServer as createViteServer } from "vite";
 
 const PORT = 3000;
-const DB_PATH = path.join(process.cwd(), "data", "db.json");
-const UPLOADS_DIR = path.join(process.cwd(), "uploads");
+const DB_DIR_TMP = "/tmp/data";
+const DB_PATH = path.join(DB_DIR_TMP, "db.json");
+const UPLOADS_DIR = "/tmp/uploads";
 
 // Standard portfolio data schema
 const INITIAL_DATA = {
@@ -444,16 +445,32 @@ const INITIAL_DATA = {
   ]
 };
 
-// Help initialize database and folders
+// Help initialize database and folders in writable /tmp space
 function initializeEnvironment() {
-  const dbDir = path.dirname(DB_PATH);
-  if (!fs.existsSync(dbDir)) {
-    fs.mkdirSync(dbDir, { recursive: true });
-  }
-  if (!fs.existsSync(DB_PATH)) {
-    fs.writeFileSync(DB_PATH, JSON.stringify(INITIAL_DATA, null, 2), "utf-8");
+  const originalDbPath = path.join(process.cwd(), "data", "db.json");
+
+  // Create writable DB directory in /tmp
+  if (!fs.existsSync(DB_DIR_TMP)) {
+    fs.mkdirSync(DB_DIR_TMP, { recursive: true });
   }
 
+  // Seed DB with existing configuration from workspace or fallback to default
+  if (!fs.existsSync(DB_PATH)) {
+    if (fs.existsSync(originalDbPath)) {
+      try {
+        console.log(`Seeding DB from workspace source: ${originalDbPath}`);
+        fs.copyFileSync(originalDbPath, DB_PATH);
+      } catch (e: any) {
+        console.error(`Failed to copy existing database: ${e.message}`);
+        fs.writeFileSync(DB_PATH, JSON.stringify(INITIAL_DATA, null, 2), "utf-8");
+      }
+    } else {
+      console.log("Seeding DB with initial fallback data");
+      fs.writeFileSync(DB_PATH, JSON.stringify(INITIAL_DATA, null, 2), "utf-8");
+    }
+  }
+
+  // Ensure uploads directory exists in /tmp
   if (!fs.existsSync(UPLOADS_DIR)) {
     fs.mkdirSync(UPLOADS_DIR, { recursive: true });
   }
@@ -494,11 +511,27 @@ async function startServer() {
       if (!data || typeof data !== "object") {
         return res.status(400).json({ error: "Invalid data payload." });
       }
+      
+      // Always write to writable DB_PATH under /tmp
       fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), "utf-8");
+
+      // Try best-effort save to workspace/persistent path (if writable)
+      try {
+        const originalDbPath = path.join(process.cwd(), "data", "db.json");
+        const originalDbDir = path.dirname(originalDbPath);
+        if (!fs.existsSync(originalDbDir)) {
+          fs.mkdirSync(originalDbDir, { recursive: true });
+        }
+        fs.writeFileSync(originalDbPath, JSON.stringify(data, null, 2), "utf-8");
+        console.log("Successfully persisted save to workspace database destination.");
+      } catch (e: any) {
+        console.log(`Note: Best-effort workspace persistence skipped or failed (expected on read-only environments like Cloud Run): ${e.message}`);
+      }
+
       return res.json({ success: true, message: "Portfolio successfully updated!" });
     } catch (err: any) {
       console.error("Failed to save database:", err);
-      return res.status(500).json({ error: "Failed to persist changes." });
+      return res.status(500).json({ error: `Failed to persist changes: ${err.message || err}` });
     }
   });
 
