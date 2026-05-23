@@ -505,11 +505,15 @@ async function startServer() {
   // Base64 file uploader
   app.post("/api/upload", (req, res) => {
     try {
+      if (!req.body) {
+        return res.status(400).json({ error: "Request body is empty or not parsed. Make sure Content-Type is application/json." });
+      }
       const { fileName } = req.body;
       const fileData = req.body.fileData || req.body.fileContent;
       
       if (!fileName || !fileData) {
-        return res.status(400).json({ error: "fileName and fileData (base64) are required." });
+        const receivedKeys = req.body ? Object.keys(req.body).join(", ") : "none";
+        return res.status(400).json({ error: `fileName and fileData (base64) are required. Received keys: ${receivedKeys}` });
       }
 
       // Check for base64 structure headers
@@ -528,6 +532,10 @@ async function startServer() {
       const baseName = path.basename(fileName, ext).replace(/[^a-zA-Z0-9_\-]/g, "");
       const finalFileName = `${Date.now()}_${baseName}${ext}`;
 
+      // Ensure directory exists
+      if (!fs.existsSync(UPLOADS_DIR)) {
+        fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+      }
       const destination = path.join(UPLOADS_DIR, finalFileName);
       
       fs.writeFileSync(destination, buffer);
@@ -538,7 +546,10 @@ async function startServer() {
       return res.json({ success: true, url: fileUrl });
     } catch (err: any) {
       console.error("Failed to upload file:", err);
-      return res.status(500).json({ error: "Server failed to save the uploaded asset." });
+      try {
+        fs.appendFileSync(path.join(process.cwd(), "data", "error.log"), `[${new Date().toISOString()}] Upload Error: ${err.message}\n${err.stack}\n`);
+      } catch (logErr) {}
+      return res.status(500).json({ error: `Server failed to save the uploaded asset: ${err.message || err}` });
     }
   });
 
