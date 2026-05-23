@@ -505,7 +505,8 @@ async function startServer() {
   // Base64 file uploader
   app.post("/api/upload", (req, res) => {
     try {
-      const { fileName, fileData } = req.body;
+      const { fileName } = req.body;
+      const fileData = req.body.fileData || req.body.fileContent;
       
       if (!fileName || !fileData) {
         return res.status(400).json({ error: "fileName and fileData (base64) are required." });
