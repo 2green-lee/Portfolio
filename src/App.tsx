@@ -1607,17 +1607,21 @@ function AdminPanel({ dbData, onSave }: { dbData: any; onSave: (data: any) => Pr
             setUploadStatus("성공!");
             setTimeout(() => setUploadStatus(""), 3000);
           } else {
-            setUploadStatus("실패");
+            const errData = await res.json().catch(() => ({}));
+            setUploadStatus(`실패: ${errData.error || res.statusText || "서버 에러"}`);
+            setTimeout(() => setUploadStatus(""), 5000);
           }
-        } catch (err) {
+        } catch (err: any) {
           console.error(err);
-          setUploadStatus("서버 통신 오류");
+          setUploadStatus(`통신 오류: ${err.message || "오류"}`);
+          setTimeout(() => setUploadStatus(""), 5000);
         }
       };
       reader.readAsDataURL(file);
     } catch (err) {
       console.error(err);
       setUploadStatus("파일 파싱 오류");
+      setTimeout(() => setUploadStatus(""), 3000);
     }
   };
 
@@ -1645,13 +1649,14 @@ function AdminPanel({ dbData, onSave }: { dbData: any; onSave: (data: any) => Pr
             setProfileUploadStatus("성공!");
             setTimeout(() => setProfileUploadStatus(""), 3000);
           } else {
-            setProfileUploadStatus("실패");
-            setTimeout(() => setProfileUploadStatus(""), 3000);
+            const errData = await res.json().catch(() => ({}));
+            setProfileUploadStatus(`실패: ${errData.error || res.statusText || "서버 에러"}`);
+            setTimeout(() => setProfileUploadStatus(""), 5000);
           }
-        } catch (err) {
+        } catch (err: any) {
           console.error(err);
-          setProfileUploadStatus("서버 통신 오류");
-          setTimeout(() => setProfileUploadStatus(""), 3000);
+          setProfileUploadStatus(`통신 오류: ${err.message || "오류"}`);
+          setTimeout(() => setProfileUploadStatus(""), 5000);
         }
       };
       reader.readAsDataURL(file);
