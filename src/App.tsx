@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { DEFAULT_PORTFOLIO_DATA, PortfolioData } from "./default_data";
 import { 
   ArrowUpRight, 
   ChevronRight, 
@@ -14,10 +15,18 @@ import {
   GraduationCap,
   Award,
   Wrench,
-  Trophy
+  Trophy,
+  Plus,
+  Trash2,
+  Upload,
+  Check,
+  ArrowLeft,
+  Copy,
+  Save,
+  Image as ImageIcon
 } from "lucide-react";
 
-interface Project {
+export interface Project {
   title: string;
   category: string;
   year: string;
@@ -45,11 +54,10 @@ interface Project {
 }
 
 const SECTIONS = [
-  { id: "about", label: "ABOUT ME", color: "bg-black text-white" },
+  { id: "about", label: "ABOUT ME", color: "bg-white text-black" },
   { id: "project1", label: "PROJECT I", color: "bg-white text-black" },
   { id: "project2", label: "PROJECT II", color: "bg-white text-black" },
-  { id: "skills", label: "SUMMARY & SKILLS", color: "bg-white text-black" },
-  { id: "activities", label: "KEY ACTIVITIES", color: "bg-black text-white" },
+  { id: "activities", label: "KEY ACTIVITIES", color: "bg-white text-black" },
 ];
 
 const AutoFitTitle: React.FC<{ children: string; className?: string }> = ({ children, className }) => {
@@ -111,20 +119,20 @@ const AutoFitTitle: React.FC<{ children: string; className?: string }> = ({ chil
   );
 };
 
-const ProjectCard: React.FC<{ project: Project; onClick: (p: Project) => void }> = ({ project, onClick }) => (
+const ProjectCard: React.FC<{ project: Project; onClick: (p: Project) => void; imageAspect?: string }> = ({ project, onClick, imageAspect }) => (
   <motion.div 
     variants={staggerItem}
-    className="group cursor-pointer mb-16 last:mb-0 w-full"
+    className="group cursor-pointer w-full"
     onClick={() => onClick(project)}
   >
     <div className="flex justify-between items-center mb-4 border-b border-black/5 pb-2 h-10">
       <h3 className="text-base md:text-lg font-bold tracking-tight truncate flex-1">{project.title}</h3>
     </div>
-    <div className="relative overflow-hidden bg-gray-50 mb-3">
+    <div className={`relative overflow-hidden bg-gray-50 mb-3 ${imageAspect || ""}`}>
       <img 
         src={project.image} 
         alt={project.title} 
-        className="w-full h-auto transition-all duration-1000 group-hover:scale-105"
+        className={`${imageAspect ? "w-full h-full object-cover" : "w-full h-auto"} transition-all duration-1000 group-hover:scale-105`}
         style={{ objectPosition: project.objectPosition || "center" }}
         referrerPolicy="no-referrer"
       />
@@ -133,13 +141,12 @@ const ProjectCard: React.FC<{ project: Project; onClick: (p: Project) => void }>
     </div>
     <div className="flex justify-between items-center">
       <span className="text-[9px] font-mono uppercase tracking-widest opacity-40">{project.year}</span>
-      <span className="px-1.5 py-0.5 bg-black text-white text-[8px] font-mono uppercase tracking-wider">{project.category}</span>
     </div>
   </motion.div>
 );
 
 const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> = ({ project, onClose }) => {
-  const isPersonal = project?.category === "Concert" || project?.category === "Music" || project?.category === "Planning";
+  const isPersonal = false;
 
   return (
     <AnimatePresence>
@@ -150,68 +157,71 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/40 backdrop-blur-md z-[200] cursor-zoom-out"
+            className="fixed inset-0 bg-black/50 backdrop-blur-md z-[200] cursor-zoom-out"
           />
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-4 md:inset-12 bg-white z-[201] overflow-hidden flex flex-col shadow-2xl"
+            exit={{ opacity: 0, y: 40 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-4 md:inset-12 bg-white z-[201] overflow-hidden flex flex-col shadow-2xl rounded-xl border border-neutral-100"
           >
-            <button onClick={onClose} className="absolute top-8 right-8 z-[202] p-3 hover:bg-black hover:text-white transition-all rounded-full border border-black/5 bg-white/80 backdrop-blur-sm">
-              <X className="w-5 h-5" />
+            <button 
+              onClick={onClose} 
+              className="absolute top-6 right-6 z-[202] p-2.5 hover:bg-neutral-900 hover:text-white transition-all rounded-full border border-neutral-200 bg-white/90 backdrop-blur-sm shadow-sm"
+            >
+              <X className="w-4 h-4" />
             </button>
             
             <div className="flex-1 overflow-y-auto">
               {!isPersonal ? (
-                // Standard Layout (Project 1 Style)
-                <div className="max-w-7xl mx-auto px-8 md:px-16 py-20">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-                    {/* Left Label / Meta */}
-                    <div className="lg:col-span-3 space-y-12">
+                // Standard Layout (Project 1 Style) - Sleek & Ultra-Legible
+                <div className="max-w-6xl mx-auto px-6 md:px-12 py-16 md:py-24">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+                    {/* Left Meta Information Column */}
+                    <div className="lg:col-span-4 space-y-8 bg-neutral-50 p-6 md:p-8 rounded-lg border border-neutral-100">
                       <div>
-                        <span className="text-[12px] font-mono uppercase tracking-[0.5em] opacity-60 block mb-6">프로젝트 정보</span>
-                        <div className="space-y-8">
+                        <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block mb-6">프로젝트 정보</span>
+                        <div className="space-y-6">
                           <div>
-                            <p className="text-[11px] font-mono uppercase opacity-80 mb-2">연도</p>
-                            <p className="text-base font-bold">{project.year}</p>
+                            <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">연도</p>
+                            <p className="text-sm font-semibold text-neutral-850">{project.year}</p>
                           </div>
                           <div>
-                            <p className="text-[11px] font-mono uppercase opacity-80 mb-2">카테고리</p>
-                            <p className="text-base font-bold">{project.category}</p>
+                            <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">카테고리</p>
+                            <p className="text-sm font-semibold text-neutral-850">{project.category}</p>
                           </div>
                           {project.location && (
                             <div>
-                              <p className="text-[11px] font-mono uppercase opacity-80 mb-2">장소</p>
-                              <p className="text-base font-bold">{project.location}</p>
+                              <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">장소</p>
+                              <p className="text-sm font-semibold text-neutral-850">{project.location}</p>
                             </div>
                           )}
                           {project.support && (
                             <div>
-                              <p className="text-[11px] font-mono uppercase opacity-80 mb-2">제작지원</p>
-                              <p className="text-base font-bold">{project.support}</p>
+                              <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">제작지원</p>
+                              <p className="text-sm font-semibold text-neutral-850">{project.support}</p>
                             </div>
                           )}
                           {project.cast && (
                             <div>
-                              <p className="text-[11px] font-mono uppercase opacity-80 mb-2">출연진</p>
-                              <p className="text-base font-bold">{project.cast}</p>
+                              <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">출연진</p>
+                              <p className="text-sm font-semibold text-neutral-850 leading-snug">{project.cast}</p>
                             </div>
                           )}
                           {project.contribution && (
                             <div>
-                              <p className="text-[11px] font-mono uppercase opacity-80 mb-3">기여도</p>
-                              <div className="space-y-3">
-                                <div className="h-[3px] w-full bg-black/10 relative overflow-hidden">
+                              <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-2">기여도</p>
+                              <div className="space-y-2">
+                                <div className="h-[3px] w-full bg-neutral-200 relative overflow-hidden rounded-full">
                                   <motion.div 
                                     initial={{ width: 0 }}
                                     animate={{ width: project.contribution }}
-                                    transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                                    className="absolute inset-y-0 left-0 bg-black"
+                                    transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                                    className="absolute inset-y-0 left-0 bg-neutral-900 rounded-full"
                                   />
                                 </div>
-                                <p className="text-base font-bold font-mono">{project.contribution}</p>
+                                <p className="text-xs font-semibold font-mono text-neutral-800">{project.contribution}</p>
                               </div>
                             </div>
                           )}
@@ -219,37 +229,53 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
                       </div>
                     </div>
 
-                    {/* Right Content */}
-                    <div className="lg:col-span-9">
-                      <div className="mb-20">
-                        <AutoFitTitle className="font-bold tracking-tight leading-none">
+                    {/* Right Deep Content Column */}
+                    <div className="lg:col-span-8 space-y-12">
+                      <div>
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-sans font-extrabold tracking-tight text-neutral-900 leading-tight">
                           {project.title}
-                        </AutoFitTitle>
+                        </h2>
                       </div>
 
                       {project.fullDescription ? (
-                        <div className="space-y-24 mb-24">
+                        <div className="space-y-12">
                           {/* Project Description */}
-                          <section>
-                            <span className="text-[12px] font-mono uppercase tracking-[0.5em] opacity-60 block mb-8">01 / Project Description</span>
-                            <p className="text-base md:text-lg leading-relaxed text-black/80 max-w-4xl whitespace-pre-line">
+                          <section className="border-t border-neutral-100 pt-8">
+                            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block mb-4">01 / Project Description</span>
+                            <p className="text-sm md:text-base leading-relaxed text-neutral-700 whitespace-pre-line max-w-3xl">
                               {project.fullDescription}
                             </p>
                           </section>
 
                           {/* Role */}
                           {project.role && (
-                            <section>
-                              <span className="text-[12px] font-mono uppercase tracking-[0.5em] opacity-60 block mb-8">02 / Personal Role</span>
-                              <div className="bg-black text-white p-8 md:p-12">
-                                <h4 className="text-lg font-bold mb-8">{project.role.title}</h4>
-                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
-                                  {project.role.items.map((item, i) => (
-                                    <li key={i} className="text-sm opacity-70 flex items-start gap-3">
-                                      <span className="mt-1.5 w-1 h-1 bg-white/30 rounded-full shrink-0" />
-                                      {item}
-                                    </li>
-                                  ))}
+                            <section className="border-t border-neutral-100 pt-8">
+                              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block mb-6">02 / Personal Role</span>
+                              <div className="bg-neutral-950 text-white p-6 md:p-8 rounded-lg shadow-sm">
+                                <h4 className="text-sm md:text-base font-bold mb-4 tracking-tight flex items-center gap-2 text-white">
+                                  <span className="w-1.5 h-1.5 bg-neutral-300 rounded-full shrink-0" />
+                                  {project.role.title}
+                                </h4>
+                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+                                  {project.role.items.map((item, i) => {
+                                    const hasColon = item.includes(": ");
+                                    const [label, desc] = hasColon ? item.split(": ") : [null, item];
+                                    return (
+                                      <li key={i} className="text-xs md:text-sm text-neutral-300 leading-relaxed flex items-start gap-2.5">
+                                        <span className="mt-2 w-1 h-1 bg-white/40 rounded-full shrink-0" />
+                                        <span>
+                                          {label ? (
+                                            <>
+                                              <strong className="text-white font-semibold">{label}: </strong>
+                                              {desc}
+                                            </>
+                                          ) : (
+                                            desc
+                                          )}
+                                        </span>
+                                      </li>
+                                    );
+                                  })}
                                 </ul>
                               </div>
                             </section>
@@ -257,17 +283,20 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
 
                           {/* Process */}
                           {project.process && (
-                            <section>
-                              <span className="text-[12px] font-mono uppercase tracking-[0.5em] opacity-60 block mb-8">03 / Process</span>
-                              <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                            <section className="border-t border-neutral-100 pt-8">
+                              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block mb-6">03 / Process</span>
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {project.process.map((p, i) => (
-                                  <div key={i} className="space-y-6">
-                                    <h4 className="text-sm font-bold uppercase tracking-widest border-b border-black/10 pb-4">{p.phase}</h4>
-                                    <ul className="space-y-3">
+                                  <div key={i} className="space-y-4 p-5 rounded-lg border border-neutral-100 bg-neutral-50/50">
+                                    <h4 className="text-xs font-bold uppercase tracking-wider border-b border-neutral-200 pb-2 text-neutral-900 flex justify-between">
+                                      <span>{p.phase}</span>
+                                      <span className="text-[9px] font-mono text-neutral-400 font-normal">0{i+1}</span>
+                                    </h4>
+                                    <ul className="space-y-2">
                                       {p.items.map((item, j) => (
-                                        <li key={j} className="text-sm opacity-60 flex items-start gap-3">
-                                          <span className="mt-1.5 w-1 h-1 bg-black/20 rounded-full shrink-0" />
-                                          {item}
+                                        <li key={j} className="text-xs text-neutral-600 flex items-start gap-2 leading-relaxed">
+                                          <span className="mt-1.5 w-1 h-1 bg-neutral-300 rounded-full shrink-0" />
+                                          <span>{item}</span>
                                         </li>
                                       ))}
                                     </ul>
@@ -277,32 +306,49 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
                             </section>
                           )}
 
-                          {/* Results */}
+                           {/* Results */}
                           {project.results && (
-                            <section>
-                              <span className="text-[12px] font-mono uppercase tracking-[0.5em] opacity-60 block mb-8">04 / Key Results</span>
-                              <ul className="space-y-6">
-                                {project.results.map((result, i) => (
-                                  <li key={i} className="text-base md:text-lg font-normal flex items-start gap-8 group">
-                                    <span className="text-[10px] font-mono opacity-20 mt-2 group-hover:opacity-100 transition-opacity">RESULT_0{i+1}</span>
-                                    <span className="border-b border-black/5 pb-4 flex-1">{result}</span>
-                                  </li>
-                                ))}
-                              </ul>
+                            <section className="border-t border-neutral-100 pt-8">
+                              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block mb-4">04 / Key Results</span>
+                              <div className="space-y-4">
+                                {project.results.map((result, i) => {
+                                  const hasArrow = result.includes(" -> ");
+                                  if (hasArrow) {
+                                    const [goal, outcome] = result.split(" -> ");
+                                    return (
+                                      <div key={i} className="border-b border-neutral-100 pb-4 last:border-none">
+                                        <div className="flex items-center gap-3 mb-2">
+                                          <span className="text-[9px] font-mono text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded">RESULT_0{i+1}</span>
+                                          <p className="text-xs md:text-sm font-semibold text-neutral-900">{goal}</p>
+                                        </div>
+                                        <div className="ml-10 p-4 bg-neutral-50 rounded border-l-2 border-neutral-900">
+                                          <p className="text-xs text-neutral-600 leading-relaxed whitespace-pre-line">{outcome}</p>
+                                        </div>
+                                      </div>
+                                    );
+                                  }
+                                  return (
+                                    <div key={i} className="text-xs md:text-sm font-normal flex items-start gap-4 py-3 border-b border-neutral-100 last:border-none">
+                                      <span className="text-[9px] font-mono text-neutral-400 mt-0.5 bg-neutral-100 px-1.5 py-0.5 rounded">RESULT_0{i+1}</span>
+                                      <span className="flex-1 text-neutral-700 font-medium leading-relaxed">{result}</span>
+                                    </div>
+                                  );
+                                })}
+                              </div>
                             </section>
                           )}
 
                           {/* Gallery */}
                           {project.images && (
-                            <section>
-                              <span className="text-[12px] font-mono uppercase tracking-[0.5em] opacity-60 block mb-8">05 / Gallery</span>
+                            <section className="border-t border-neutral-100 pt-8">
+                              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block mb-6">05 / Gallery</span>
                               <div className="columns-1 md:columns-2 gap-4 space-y-4">
                                 {project.images.map((img, i) => (
-                                  <div key={i} className="break-inside-avoid bg-gray-100 overflow-hidden">
+                                  <div key={i} className="break-inside-avoid bg-neutral-50 overflow-hidden rounded-lg border border-neutral-100 shadow-sm">
                                     <img 
                                       src={img} 
                                       alt={`${project.title} gallery ${i}`} 
-                                      className="w-full h-auto block"
+                                      className="w-full h-auto block transition-transform hover:scale-[1.01] duration-500"
                                       referrerPolicy="no-referrer"
                                     />
                                   </div>
@@ -313,7 +359,7 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
                         </div>
                       ) : (
                         <>
-                          <div className="aspect-[16/9] bg-gray-50 mb-20 overflow-hidden">
+                          <div className="aspect-[16/9] bg-neutral-50 mb-8 overflow-hidden rounded-lg border border-neutral-100">
                             <img 
                               src={project.image} 
                               alt={project.title} 
@@ -323,16 +369,16 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
                           </div>
 
                           {project.details && (
-                            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 border-t border-black/5 pt-12">
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 border-t border-neutral-100 pt-8">
                               <div className="md:col-span-4">
-                                <span className="text-[10px] font-mono uppercase tracking-[0.5em] opacity-30 block">Key Achievements</span>
+                                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block">Key Achievements</span>
                               </div>
                               <div className="md:col-span-8">
-                                <ul className="space-y-6">
+                                <ul className="space-y-4">
                                   {project.details.map((detail, idx) => (
-                                    <li key={idx} className="text-lg md:text-xl text-black/80 flex items-start gap-6">
-                                      <span className="text-[10px] font-mono opacity-20 mt-2">0{idx + 1}</span>
-                                      <span>{detail}</span>
+                                    <li key={idx} className="text-xs md:text-sm text-neutral-700 flex items-start gap-3">
+                                      <span className="text-[9px] font-mono bg-neutral-100 text-neutral-400 px-1.5 py-0.5 rounded">0{idx + 1}</span>
+                                      <span className="leading-relaxed">{detail}</span>
                                     </li>
                                   ))}
                                 </ul>
@@ -345,84 +391,84 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
                   </div>
                 </div>
               ) : (
-                // Editorial Layout (Personal/Concert Style)
+                // Editorial Layout (Personal/Concert Style) - Refinement Portfolio Detail
                 <div className="w-full">
                   {/* Hero Section */}
-                  <div className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden bg-black">
+                  <div className="relative h-[45vh] md:h-[60vh] w-full overflow-hidden bg-neutral-950">
                     <motion.img 
-                      initial={{ scale: 1.1, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 0.6 }}
-                      transition={{ duration: 1.5, ease: "easeOut" }}
+                      initial={{ scale: 1.05, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 0.7 }}
+                      transition={{ duration: 1.2, ease: "easeOut" }}
                       src={project.image} 
                       alt={project.title} 
                       className="w-full h-full object-cover"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-20 bg-gradient-to-t from-black/80 to-transparent">
+                    <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent">
                       <motion.div
-                        initial={{ y: 30, opacity: 0 }}
+                        initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.5, duration: 0.8 }}
+                        transition={{ delay: 0.3, duration: 0.6 }}
                       >
-                        <span className="text-white/60 font-mono text-sm uppercase tracking-[0.3em] mb-4 block">{project.category} — {project.year}</span>
-                        <AutoFitTitle className="text-white font-bold tracking-tighter leading-none mb-8">
+                        <span className="text-white/60 font-mono text-xs uppercase tracking-[0.2em] mb-3 block">{project.category} — {project.year}</span>
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-sans font-extrabold tracking-tight text-white leading-tight mb-4">
                           {project.title}
-                        </AutoFitTitle>
+                        </h2>
                       </motion.div>
                     </div>
                   </div>
 
-                  <div className="max-w-7xl mx-auto px-8 md:px-16 py-20">
+                  <div className="max-w-6xl mx-auto px-6 md:px-12 py-12 md:py-16">
                     {/* Horizontal Meta Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-24 border-b border-black/10 pb-12">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 border-b border-neutral-100 pb-10">
                       <div>
-                        <p className="text-[10px] font-mono uppercase opacity-40 mb-2">Location</p>
-                        <p className="text-sm font-bold">{project.location || "N/A"}</p>
+                        <p className="text-[9px] font-mono uppercase tracking-wider text-neutral-400 mb-1">Location</p>
+                        <p className="text-xs md:text-sm font-bold text-neutral-800">{project.location || "N/A"}</p>
                       </div>
                       <div>
-                        <p className="text-[10px] font-mono uppercase opacity-40 mb-2">Cast</p>
-                        <p className="text-sm font-bold">{project.cast || "N/A"}</p>
+                        <p className="text-[9px] font-mono uppercase tracking-wider text-neutral-400 mb-1">Cast</p>
+                        <p className="text-xs md:text-sm font-bold text-neutral-800 leading-snug">{project.cast || "N/A"}</p>
                       </div>
                       <div>
-                        <p className="text-[10px] font-mono uppercase opacity-40 mb-2">Support</p>
-                        <p className="text-sm font-bold">{project.support || "N/A"}</p>
+                        <p className="text-[9px] font-mono uppercase tracking-wider text-neutral-400 mb-1">Support</p>
+                        <p className="text-xs md:text-sm font-bold text-neutral-800">{project.support || "N/A"}</p>
                       </div>
                       <div>
-                        <p className="text-[10px] font-mono uppercase opacity-40 mb-2">기여도</p>
-                        <div className="flex items-center gap-3">
-                          <div className="h-1 w-32 bg-black/10 overflow-hidden">
-                            <div className="h-full bg-black" style={{ width: project.contribution }} />
+                        <p className="text-[9px] font-mono uppercase tracking-wider text-neutral-400 mb-1">기여도</p>
+                        <div className="flex items-center gap-2">
+                          <div className="h-1 w-24 bg-neutral-200 overflow-hidden rounded-full">
+                            <div className="h-full bg-neutral-900 rounded-full" style={{ width: project.contribution }} />
                           </div>
-                          <p className="text-sm font-bold font-mono">{project.contribution}</p>
+                          <p className="text-xs font-bold font-mono text-neutral-700">{project.contribution}</p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                      {/* Main Content */}
-                      <div className="lg:col-span-7 space-y-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                      {/* Main Left Content */}
+                      <div className="lg:col-span-7 space-y-12">
                         <section>
-                          <h3 className="text-xl md:text-2xl font-bold mb-6 tracking-tight">프로젝트 설명</h3>
-                          <p className="text-base md:text-lg leading-relaxed text-black/70 whitespace-pre-line font-light">
+                          <h3 className="text-base md:text-lg font-bold mb-4 tracking-tight text-neutral-900">프로젝트 설명</h3>
+                          <p className="text-xs md:text-sm leading-relaxed text-neutral-600 whitespace-pre-line font-normal">
                             {project.fullDescription}
                           </p>
                         </section>
 
                         {project.results && (
-                          <section>
-                            <h3 className="text-sm font-bold mb-10 uppercase tracking-widest opacity-30">Key Results</h3>
-                            <div className="space-y-10">
+                          <section className="border-t border-neutral-100 pt-8">
+                            <h3 className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold mb-6">Key Results</h3>
+                            <div className="space-y-6">
                               {project.results.map((result, i) => {
                                 const [goal, outcome] = result.split(" -> ");
                                 return (
-                                  <div key={i} className="group">
-                                    <div className="flex items-baseline gap-6 mb-3">
-                                      <span className="text-3xl font-mono opacity-10 group-hover:opacity-100 transition-opacity duration-500">0{i+1}</span>
-                                      <p className="text-base font-medium">{goal}</p>
+                                  <div key={i} className="group border-b border-neutral-50 pb-5 last:border-b-0 last:pb-0">
+                                    <div className="flex items-center gap-3 mb-2">
+                                      <span className="text-xs font-mono text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded">0{i+1}</span>
+                                      <p className="text-xs md:text-sm font-semibold text-neutral-900">{goal}</p>
                                     </div>
                                     {outcome && (
-                                      <div className="ml-14 p-5 bg-gray-50 border-l-2 border-black">
-                                        <p className="text-sm md:text-base opacity-70 leading-relaxed whitespace-pre-line">{outcome}</p>
+                                      <div className="ml-10 p-4 bg-neutral-50 rounded border-l-2 border-neutral-900">
+                                        <p className="text-xs text-neutral-600 leading-relaxed whitespace-pre-line">{outcome}</p>
                                       </div>
                                     )}
                                   </div>
@@ -433,19 +479,19 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
                         )}
                       </div>
 
-                      {/* Sidebar Role */}
+                      {/* Right Sidebar Role */}
                       <div className="lg:col-span-5">
-                        <div className="sticky top-12 space-y-12">
+                        <div className="sticky top-12">
                           {project.role && (
-                            <div className="p-10 border-2 border-black/10 bg-gray-50/50">
-                              <h4 className="text-sm font-mono uppercase tracking-[0.3em] font-bold mb-10">{project.role.title}</h4>
-                              <ul className="space-y-8">
+                            <div className="p-6 md:p-8 border border-neutral-200 bg-neutral-50/50 rounded-lg">
+                              <h4 className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-neutral-900 mb-6 border-b border-neutral-200 pb-3">{project.role.title}</h4>
+                              <ul className="space-y-5">
                                 {project.role.items.map((item, i) => {
                                   const [label, desc] = item.split(": ");
                                   return (
-                                    <li key={i} className="space-y-2">
-                                      <p className="text-base font-bold tracking-tight">{label}</p>
-                                      {desc && <p className="text-sm opacity-60 leading-relaxed font-light whitespace-pre-line">{desc}</p>}
+                                    <li key={i} className="space-y-1">
+                                      <p className="text-xs font-bold text-neutral-900">{label}</p>
+                                      {desc && <p className="text-xs text-neutral-500 leading-relaxed whitespace-pre-line font-normal">{desc}</p>}
                                     </li>
                                   );
                                 })}
@@ -458,22 +504,22 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
 
                     {/* Flexible Gallery */}
                     {project.images && (
-                      <section className="mt-24">
-                        <h3 className="text-xs font-mono uppercase tracking-[0.3em] opacity-40 mb-12">Visual Archive</h3>
+                      <section className="mt-16 border-t border-neutral-100 pt-12">
+                        <h3 className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold mb-8">Visual Archive</h3>
                         <div className="columns-1 md:columns-2 gap-4 space-y-4">
                           {project.images.map((img, i) => (
                             <motion.div 
                               key={i}
-                              initial={{ opacity: 0, y: 20 }}
+                              initial={{ opacity: 0, y: 15 }}
                               whileInView={{ opacity: 1, y: 0 }}
                               viewport={{ once: true }}
-                              transition={{ delay: i * 0.1 }}
-                              className="break-inside-avoid bg-gray-50 overflow-hidden"
+                              transition={{ delay: i * 0.08 }}
+                              className="break-inside-avoid bg-neutral-50 overflow-hidden rounded-lg border border-neutral-100 shadow-sm"
                             >
                               <img 
                                 src={img} 
                                 alt={`${project.title} gallery ${i}`} 
-                                className="w-full h-auto block hover:scale-[1.02] transition-transform duration-700" 
+                                className="w-full h-auto block hover:scale-[1.01] transition-transform duration-500" 
                                 referrerPolicy="no-referrer" 
                               />
                             </motion.div>
@@ -557,6 +603,46 @@ export default function App() {
   const [time, setTime] = useState(new Date());
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeSection, setActiveSection] = useState("about");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [portfolioData, setPortfolioData] = useState<any>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsAdmin(window.location.pathname === "/admin");
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchPortfolio = async () => {
+      try {
+        const res = await fetch("/api/portfolio");
+        if (res.ok) {
+          const json = await res.json();
+          setPortfolioData(json);
+        }
+      } catch (err) {
+        console.error("Failed to fetch dynamic portfolio", err);
+      }
+    };
+    fetchPortfolio();
+  }, []);
+
+  const handleSavePortfolio = async (updatedData: any) => {
+    try {
+      const res = await fetch("/api/portfolio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedData)
+      });
+      if (res.ok) {
+        setPortfolioData(updatedData);
+        return true;
+      }
+    } catch (err) {
+      console.error("Failed to save portfolio state:", err);
+    }
+    return false;
+  };
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -596,10 +682,32 @@ export default function App() {
     hour12: false,
   });
 
-  const featuredProjects: Project[] = [
+  // Dynamic portfolio elements fallback to high-fidelity defaults
+  const featuredProjects: Project[] = portfolioData?.featuredProjects || DEFAULT_PORTFOLIO_DATA.featuredProjects;
+  const personalProjects: Project[] = portfolioData?.personalProjects || DEFAULT_PORTFOLIO_DATA.personalProjects;
+  const introductionText = portfolioData?.introduction || DEFAULT_PORTFOLIO_DATA.introduction;
+  const profileImage = portfolioData?.profileImage || DEFAULT_PORTFOLIO_DATA.profileImage;
+  const educationData = portfolioData?.education || DEFAULT_PORTFOLIO_DATA.education;
+  const certificatesData = portfolioData?.certificates || DEFAULT_PORTFOLIO_DATA.certificates;
+  const workExperienceData = portfolioData?.workExperience || DEFAULT_PORTFOLIO_DATA.workExperience;
+  const activitiesData = portfolioData?.activities || DEFAULT_PORTFOLIO_DATA.activities;
+  const contactData = portfolioData?.contact || DEFAULT_PORTFOLIO_DATA.contact;
+
+  if (isAdmin) {
+    return (
+      <AdminPanel 
+        dbData={portfolioData || DEFAULT_PORTFOLIO_DATA} 
+        onSave={handleSavePortfolio} 
+      />
+    );
+  }
+
+  const dummyProjects: any[] = [];
+  /* Legacy duplicate arrays commented out:
+  const dummyProjects_discard: any = [
     {
       title: "2024 WATERBOMB",
-      category: "Operation",
+      category: "운영",
       year: "2024",
       image: "https://raw.githubusercontent.com/2green-lee/Portfolio/9d41580d7739017f4b186f92faf6491a60264fd5/2024waterbomb.png",
       contribution: "25%",
@@ -657,7 +765,7 @@ export default function App() {
     },
     {
       title: "2024 부산국제록페스티벌",
-      category: "Operation",
+      category: "운영",
       year: "2024",
       image: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024bsrock.png",
       contribution: "25%",
@@ -716,7 +824,7 @@ export default function App() {
     },
     {
       title: "2024 인천펜타포트록페스티벌",
-      category: "Operation",
+      category: "운영",
       year: "2024",
       image: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024incheonrock.png",
       contribution: "25%",
@@ -749,7 +857,7 @@ export default function App() {
     },
     {
       title: "2024 이슬라이브페스티벌",
-      category: "Operation",
+      category: "운영",
       year: "2024",
       image: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024cham.jpg",
       contribution: "25%",
@@ -934,7 +1042,7 @@ export default function App() {
       support: "부산문화재단",
       cast: "모멘츠유미, 이공이공, 오느린윤혜린",
       objectPosition: "top",
-      description: "평화로운 일요일 오후, 차한잔과 함께 관람할 수 있는 힐링 공연. 아티스트가 직접 만든 향과 음악을 통해 공감각적 형태의 공연을 향유한다.",
+      description: "평화로운 일요일 오후, 차한잔과 함께 관람할 수 있는 힐링 공연. 아티스트가 직접 만든 향과 음악을 통해 공감각적 형태 공연을 향유한다.",
       fullDescription: "평화로운 일요일 오후, 차 한 잔과 함께 즐기는 힐링 공연 시리즈입니다. 아티스트가 직접 조향한 향기와 음악을 결합하여 관객들에게 공감각적인 경험을 선사하는 것을 목표로 했습니다.\n\n부산 지역의 소규모 편성 아티스트들에게 무대 기회를 제공하고, 아티스트의 정체성이 담긴 굿즈 제작을 통해 공연의 가치를 확장했습니다. 기획부터 제작, 홍보, 현장 운영까지 전 과정을 주도하며 따뜻한 감성의 브랜드 공연을 구축했습니다.",
       role: {
         title: "담당 업무",
@@ -942,49 +1050,11 @@ export default function App() {
           "Planning: 기획서 작성\n프로젝트 전체 콘셉트 수립",
           "Booking: 출연 아티스트 섭외\n공연 베뉴(공간) 섭외 및 일정 조율",
           "Promotion: 인스타그램 기반 홍보 기획 및 운영\n라이브 영상 촬영 및 콘텐츠 활용",
-          "Production: 메이킹·라이브 영상 제작\n포스터·향수·엽서 등 오프라인 홍보물 제작",
-          "Operation: 공연 현장 운영 및 진행 관리"
+          "Production: 메이킹·라이브 영상 제작 및 유통"
         ]
       },
       results: [
-        "소규모 편성 아티스트들이 무대 경험을 쌓을 수 있는 공연 기회 제공 -> 티켓 매진",
-        "아티스트 정체성을 반영한 굿즈 제작을 통해 공연 경험의 확장 및 콘텐츠 자산화 -> 아티스트 향수 및 굿즈 제작\n굿즈 메이킹 영상 제작 및 공개",
-        "다채널 홍보를 통한 공연 인지도 확대 및 관객 유입 -> 인스타그램 기반 온라인 홍보 운영\n현수막·포스터 등 오프라인 홍보물 제작·배포"
-      ],
-      images: [
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/363f29ea35ae49b89e8e7670969e860166d22fe8/img%2021.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/363f29ea35ae49b89e8e7670969e860166d22fe8/img%2022.JPG",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/363f29ea35ae49b89e8e7670969e860166d22fe8/img%2023.JPG",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/ab04817d40c06299b1492b3bc2a01bc0c5ed65ec/Img%2024.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/363f29ea35ae49b89e8e7670969e860166d22fe8/img%2025.JPG",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/ab04817d40c06299b1492b3bc2a01bc0c5ed65ec/img%2026.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/ab04817d40c06299b1492b3bc2a01bc0c5ed65ec/img%2027.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/ab04817d40c06299b1492b3bc2a01bc0c5ed65ec/img%2028.jpg"
-      ]
-    },
-    {
-      title: "야간비행",
-      category: "Concert",
-      year: "2020",
-      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img1.jpg",
-      contribution: "70%",
-      location: "김해 하라식당 루프탑",
-      support: "경남음악창작소",
-      cast: "이사흘, 온더그린, 반다, 밴드기린",
-      objectPosition: "center",
-      description: "어쿠스틱이라는 편안한 형태의 음악과 공연에 제공되는 체험 컨텐츠를 도구삼아 관객들은 각자의 고즈넉한 일상을 비행하고 탐험한다.",
-      fullDescription: "어쿠스틱 음악과 체험형 콘텐츠를 결합하여 관객들이 자신의 일상을 돌아보고 탐험할 수 있는 특별한 공연 시리즈입니다. 김해의 루프탑이라는 이색적인 공간에서 고즈넉한 분위기를 연출했습니다.\n\n부산과 경남 지역에서 활동하는 인디 아티스트들에게 완성도 높은 무대를 제공하고, 관객들에게는 잊지 못할 시각적, 청각적 경험을 선사했습니다. 기획부터 제작, 홍보, 현장 운영까지 전 과정을 주도하며 프로젝트의 완성도를 높였습니다.",
-      role: {
-        title: "담당 업무",
-        items: [
-          "Planning: 기획서 작성\n전체 컨셉 기획",
-          "Booking & Promotion: 아티스트 섭외\n베뉴 섭외\n인스타그램 홍보",
-          "Production: 홍보 영상 제작\n공연 소품 준비",
-          "Operation: 공연 운영 및 민원\n요청 사항 응대"
-        ]
-      },
-      results: [
-        "부산·경남 지역에서 활동하는 인디 아티스트들을 위한 완성도 있는 공연 무대 및 운영 환경 제공 -> 부산/경남 아티스트 섭외 및 공연 전석 매진",
+        "아티스트 섭외 및 공연 전석 매진",
         "콘텐츠 및 굿즈 제작 -> 티켓, 엽서, 우표 제작\n라이브 클립 영상 5편 제작·배포",
         "온라인 홍보 활성화 및 오프라인 홍보 -> 인스타그램 홍보\n현수막·포스터 등 오프라인 홍보물 제작 및 배포"
       ],
@@ -1000,6 +1070,7 @@ export default function App() {
       ]
     }
   ];
+  */
 
   const activeIndex = SECTIONS.findIndex(s => s.id === activeSection);
 
@@ -1008,7 +1079,7 @@ export default function App() {
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
 
       {/* Fixed Top Header */}
-      <header className="w-full bg-white text-black z-[110] px-8 md:px-12 py-8 flex justify-between items-start border-b border-black/5 shrink-0">
+      <header className="h-[90px] w-full bg-white text-black z-[110] px-8 md:px-12 flex justify-between items-center border-b border-black/5 shrink-0">
         <div className="flex flex-col">
           <h1 className="text-3xl md:text-4xl font-bold tracking-tighter leading-none mb-1">
             Lee-Geunil<span className="text-xs align-top ml-0.5">®</span>
@@ -1082,56 +1153,159 @@ export default function App() {
                         initial="hidden"
                         animate="show"
                         exit={{ opacity: 0 }}
-                        className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-12 md:pt-24 pb-40 md:pb-80 ${SECTIONS[0].color}`}
+                        className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-24 pb-80 ${SECTIONS[0].color}`}
                       >
-                        <div className="max-w-7xl w-full mx-auto h-full flex flex-col justify-start pt-4 lg:pt-8">
-                          <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16">
-                            {/* Left: Identity Label */}
-                            <div className="lg:col-span-4">
-                              <motion.div variants={staggerItem}>
-                                <div className="mb-8 -mt-4 lg:-mt-8">
-                                  <span className="text-[10px] font-mono uppercase tracking-[0.6em] opacity-40 block mb-1">Identity</span>
-                                  <span className="text-[10px] font-mono uppercase tracking-[0.6em] opacity-20 block">2018 - 2025</span>
+                        <div className="max-w-7xl w-full mx-auto">
+                              {/* Introduction Headline */}
+                              <motion.div 
+                                variants={staggerItem}
+                                className="mb-16 flex flex-col md:flex-row gap-8 md:gap-12 items-center md:items-start"
+                              >
+                                {profileImage && (
+                                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-neutral-100 border border-neutral-200 shadow-sm shrink-0">
+                                    <img 
+                                      src={profileImage} 
+                                      alt="Profile" 
+                                      className="w-full h-full object-cover"
+                                      referrerPolicy="no-referrer"
+                                    />
+                                  </div>
+                                )}
+                                <div className="flex-1">
+                                  <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-light tracking-tight text-neutral-800 leading-relaxed md:leading-snug">
+                                    "{introductionText}"
+                                  </h2>
                                 </div>
                               </motion.div>
-                            </div>
 
-                            {/* Right: Hanja Title & Philosophy */}
-                            <div className="lg:col-span-8 flex flex-col items-start lg:pl-12">
-                              <div className="w-full">
-                                {/* Hanja Title - Adjusted Position */}
-                                <motion.div 
-                                  variants={hanjaReveal}
-                                  initial="hidden"
-                                  animate="show"
-                                  className="relative inline-block mt-4 lg:mt-8"
-                                >
-                                  <motion.h1 
-                                    variants={floatingHanja}
-                                    animate="animate"
-                                    className="text-7xl md:text-[10rem] lg:text-[12rem] font-serif leading-none text-white tracking-[0.1em]"
-                                  >
-                                    共生
-                                  </motion.h1>
+                              {/* Section 1: Education */}
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mb-10">
+                                {/* Left Column: Education */}
+                                <motion.div variants={staggerItem}>
+                                  <div>
+                                    <p className="text-[11px] font-mono uppercase text-neutral-400 mb-3">Education</p>
+                                    <div className="flex justify-between items-baseline">
+                                      <h4 className="text-lg font-bold">{educationData?.school || "부산대학교"}</h4>
+                                      <span className="text-xs font-mono text-neutral-400">{educationData?.period || "2013 - 2021"}</span>
+                                    </div>
+                                    <p className="text-xs font-medium text-neutral-500 mt-1">{educationData?.major || "항공우주공학 & 예술문화영상학"}</p>
+                                  </div>
+                                </motion.div>
+                                <div className="hidden md:block" />
+                              </div>
+
+                              {/* Section 2: Certificates & Technical Stack */}
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+                                {/* Left Column: Certificates */}
+                                <motion.div variants={staggerItem}>
+                                  <div>
+                                    <p className="text-[11px] font-mono uppercase text-neutral-400 mb-6">Certificates</p>
+                                    <div className="space-y-8">
+                                      {(certificatesData || []).map((cert: any, idx: number) => {
+                                        const hasBar = cert.score && cert.maxScale;
+                                        if (hasBar) {
+                                          return (
+                                            <div key={idx} className="space-y-3">
+                                              <div className="flex justify-between items-end">
+                                                <div>
+                                                  <h5 className="text-[13px] font-bold tracking-tight">{cert.title}</h5>
+                                                  <p className="text-xs font-medium text-neutral-500">{cert.subtitle}</p>
+                                                </div>
+                                                <span className="text-[10px] font-mono opacity-30">{cert.score}/{cert.maxScale}</span>
+                                              </div>
+                                              <div className="h-1 w-full bg-black/5 overflow-hidden">
+                                                <motion.div 
+                                                  initial={{ width: 0 }}
+                                                  whileInView={{ width: `${(cert.score / cert.maxScale) * 100}%` }}
+                                                  transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                                                  className="h-full bg-black"
+                                                />
+                                              </div>
+                                            </div>
+                                          );
+                                        }
+                                        return null;
+                                      })}
+
+                                      <div className="pt-4 border-t border-black/5 space-y-6">
+                                        {(certificatesData || []).map((cert: any, idx: number) => {
+                                          const hasBar = cert.score && cert.maxScale;
+                                          if (!hasBar) {
+                                            return (
+                                              <div key={idx} className="flex justify-between items-center">
+                                                <h5 className="text-[13px] font-bold tracking-tight">{cert.title}</h5>
+                                                <p className="text-xs font-medium text-neutral-500">{cert.subtitle}</p>
+                                              </div>
+                                            );
+                                          }
+                                          return null;
+                                        })}
+                                      </div>
+                                    </div>
+                                  </div>
                                 </motion.div>
 
-                                {/* Philosophy - Adjusted Position */}
-                                <motion.div 
-                                  variants={philosophyReveal}
-                                  initial="hidden"
-                                  animate="show"
-                                  className="mt-32 lg:mt-40 space-y-3 max-w-2xl"
-                                >
-                                  <span className="text-[10px] font-mono uppercase tracking-[0.4em] opacity-30 block border-b border-white/10 pb-2 w-fit pr-8">Philosophy</span>
-                                  <p className="text-lg md:text-xl lg:text-2xl font-serif italic text-white/80 leading-tight whitespace-nowrap">
-                                    공생; 연결 속에서 만들어지는 가치
-                                  </p>
+                                {/* Right Column: Technical Stack */}
+                                <motion.div variants={staggerItem}>
+                                  <div className="space-y-12">
+                                    {(portfolioData?.techStack || DEFAULT_PORTFOLIO_DATA.techStack || []).map((group: any) => (
+                                      <div key={group.label} className="group">
+                                        <p className="text-[11px] font-mono uppercase mb-4 text-neutral-400">{group.label}</p>
+                                        <div className="flex flex-wrap gap-2">
+                                          {group.items.map(item => (
+                                            <span key={item} className="px-3 py-1.5 border border-black/10 text-[10px] font-mono uppercase hover:bg-black hover:text-white transition-all cursor-default">
+                                              {item}
+                                            </span>
+                                          ))}
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
                                 </motion.div>
                               </div>
-                            </div>
-                          </div>
 
-                          {/* Bottom: Action Footer Removed */}
+                              {/* Section 3: Work Experience */}
+                              <div className="mt-24 pt-16 border-t border-black/10">
+                                <p className="text-[11px] font-mono uppercase text-neutral-400 mb-8">Work Experience</p>
+                                <div className="divide-y divide-black/5">
+                                  {(workExperienceData || []).map((exp: any, i: number) => (
+                                    <motion.div 
+                                      key={i} 
+                                      variants={staggerItem}
+                                      className="flex flex-col md:flex-row items-start gap-y-4 gap-x-12 md:gap-x-16 py-8 md:py-10 first:pt-0 last:pb-0"
+                                    >
+                                      {/* Left Column: Timeline */}
+                                      <div className="w-full md:w-44 shrink-0">
+                                        <div className="text-sm md:text-base font-normal text-neutral-800 tracking-tight">
+                                          {exp.period}
+                                        </div>
+                                      </div>
+
+                                      {/* Right Column: Company, Role Tags & Bullets */}
+                                      <div className="flex-1 space-y-4">
+                                        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                                          <h3 className="text-base md:text-[17px] font-bold text-neutral-900">{exp.company}</h3>
+                                          <span className="text-[11px] md:text-xs text-[#55698b] font-normal opacity-90">
+                                            {exp.tags}
+                                          </span>
+                                        </div>
+
+                                        <ul className="space-y-2 md:space-y-2.5">
+                                          {(exp.desc || []).map((bullet: string, idx: number) => (
+                                            <li 
+                                              key={idx} 
+                                              className="text-[13px] md:text-sm text-neutral-700 leading-relaxed flex items-start"
+                                            >
+                                              <span className="mr-2 text-neutral-400 font-serif select-none">•</span>
+                                              <span>{bullet}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </div>
                         </div>
                       </motion.section>
                     )}
@@ -1146,20 +1320,10 @@ export default function App() {
                         className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-24 pb-80 ${SECTIONS[1].color}`}
                       >
                         <div className="max-w-7xl mx-auto">
-                          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-                            <div className="lg:col-span-3">
-                              <motion.div variants={staggerItem} className="sticky top-0">
-                                <span className="text-[10px] font-mono uppercase tracking-[0.6em] opacity-40 block mb-2">Featured Projects</span>
-                                <span className="text-[10px] font-mono uppercase tracking-[0.6em] opacity-20 block">2020 - 2024</span>
-                              </motion.div>
-                            </div>
-                            <div className="lg:col-span-9">
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
-                                {featuredProjects.map((project, idx) => (
-                                  <ProjectCard key={idx} project={project} onClick={setSelectedProject} />
-                                ))}
-                              </div>
-                            </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-[90px]">
+                            {featuredProjects.map((project, idx) => (
+                              <ProjectCard key={idx} project={project} onClick={setSelectedProject} imageAspect="aspect-[300/220]" />
+                            ))}
                           </div>
                           <div className="h-20" />
                         </div>
@@ -1176,192 +1340,12 @@ export default function App() {
                         className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-24 pb-80 ${SECTIONS[2].color}`}
                       >
                         <div className="max-w-7xl mx-auto">
-                          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-                            <div className="lg:col-span-3">
-                              <motion.div variants={staggerItem} className="sticky top-0">
-                                <span className="text-[10px] font-mono uppercase tracking-[0.6em] opacity-40 block mb-2">Personal Projects</span>
-                                <span className="text-[10px] font-mono uppercase tracking-[0.6em] opacity-20 block">Creative Archive</span>
-                              </motion.div>
-                            </div>
-                            <div className="lg:col-span-9">
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
-                                {personalProjects.map((project, idx) => (
-                                  <ProjectCard key={idx} project={project} onClick={setSelectedProject} />
-                                ))}
-                              </div>
-                            </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-[90px]">
+                            {personalProjects.map((project, idx) => (
+                              <ProjectCard key={idx} project={project} onClick={setSelectedProject} imageAspect="aspect-[300/220]" />
+                            ))}
                           </div>
                           <div className="h-20" />
-                        </div>
-                      </motion.section>
-                    )}
-
-                    {activeSection === "skills" && (
-                      <motion.section
-                        key="skills"
-                        variants={staggerContainer}
-                        initial="hidden"
-                        animate="show"
-                        exit={{ opacity: 0 }}
-                        className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-24 pb-80 ${SECTIONS[3].color}`}
-                      >
-                        <div className="max-w-7xl w-full mx-auto">
-                          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-                            {/* Left Label */}
-                            <div className="lg:col-span-3">
-                              <motion.div variants={staggerItem} className="sticky top-0">
-                                <span className="text-[10px] font-mono uppercase tracking-[0.6em] opacity-40 block mb-2">Expertise</span>
-                                <span className="text-[10px] font-mono uppercase tracking-[0.6em] opacity-20 block">Experience & Skills</span>
-                              </motion.div>
-                            </div>
-
-                            {/* Right Content */}
-                            <div className="lg:col-span-9">
-                              {/* Section 1: Experience */}
-                              <div className="mb-0">
-                                <motion.div variants={staggerItem} className="mb-12">
-                                  <span className="text-[10px] font-mono uppercase tracking-widest opacity-30 block mb-4">01 / Professional Experience</span>
-                                </motion.div>
-
-                                <div className="space-y-0">
-                                  {[
-                                    {
-                                      company: "㈜ 퀸즈스마일",
-                                      role: "프로젝트 매니저 (PM)",
-                                      period: "2024.05 – 2024.11",
-                                      desc: ["국내외 페스티벌 및 공연 기획·운영", "자사 플랫폼 관리 및 고객 응대", "UX/UI 개선 협업"]
-                                    },
-                                    {
-                                      company: "㈜ 드림씨어터",
-                                      role: "하우스 어텐던트",
-                                      period: "2019.10 – 2022.05",
-                                      desc: ["대형 라이선스 공연 관객 서비스 및 운영 지원", "현장 돌발 이슈 대응", "공연장 운영 프로세스 이행"]
-                                    }
-                                  ].map((exp, i) => (
-                                    <motion.div 
-                                      key={i} 
-                                      variants={staggerItem}
-                                      className="group grid grid-cols-1 md:grid-cols-12 gap-8 py-12 border-t border-black/10 hover:bg-black/[0.01] transition-colors"
-                                    >
-                                      <div className="md:col-span-4">
-                                        <span className="text-[8px] font-mono uppercase tracking-widest opacity-30 block mb-2">{exp.period}</span>
-                                        <h3 className="text-lg font-bold mb-3">{exp.company}</h3>
-                                        <span className="inline-block px-2 py-0.5 bg-black text-white text-[8px] font-mono uppercase tracking-wider">
-                                          {exp.role}
-                                        </span>
-                                      </div>
-                                      <div className="md:col-span-8">
-                                        <ul className="space-y-3">
-                                          {exp.desc.map((d, j) => (
-                                            <li key={j} className="text-sm opacity-50 flex items-start gap-3">
-                                              <span className="mt-2 w-1 h-1 bg-black/20 rounded-full shrink-0" />
-                                              {d}
-                                            </li>
-                                          ))}
-                                        </ul>
-                                      </div>
-                                    </motion.div>
-                                  ))}
-                                </div>
-                              </div>
-
-                              {/* Section 2: Education, Awards & Skills */}
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-20 border-t border-black/10 pt-12">
-                                {/* Left Column: Education & Awards */}
-                                <motion.div variants={staggerItem} className="space-y-20">
-                                  <div>
-                                    <span className="text-[10px] font-mono uppercase tracking-widest opacity-30 block mb-8">02 / Background</span>
-                                    <div className="space-y-12">
-                                      <div>
-                                        <p className="text-[9px] font-mono uppercase opacity-20 mb-3">Education</p>
-                                        <h4 className="text-lg font-bold">부산대학교</h4>
-                                        <p className="text-xs opacity-50 font-medium">항공우주공학 & 예술문화영상학</p>
-                                      </div>
-                                      
-                                      <div>
-                                        <p className="text-[9px] font-mono uppercase opacity-20 mb-6">Certificates</p>
-                                        <div className="space-y-8">
-                                          {/* TOEIC Speaking */}
-                                          <div className="space-y-3">
-                                            <div className="flex justify-between items-end">
-                                              <div>
-                                                <h5 className="text-[11px] font-bold tracking-tight">TOEIC SPEAKING</h5>
-                                                <p className="text-xs font-medium opacity-60">AL (Advanced Low)</p>
-                                              </div>
-                                              <span className="text-[10px] font-mono opacity-30">Level 9/11</span>
-                                            </div>
-                                            <div className="h-1 w-full bg-black/5 overflow-hidden">
-                                              <motion.div 
-                                                initial={{ width: 0 }}
-                                                whileInView={{ width: `${(9/11)*100}%` }}
-                                                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                                                className="h-full bg-black"
-                                              />
-                                            </div>
-                                          </div>
-
-                                          {/* TOEIC */}
-                                          <div className="space-y-3">
-                                            <div className="flex justify-between items-end">
-                                              <div>
-                                                <h5 className="text-[11px] font-bold tracking-tight">TOEIC</h5>
-                                                <p className="text-xs font-medium opacity-60">830</p>
-                                              </div>
-                                              <span className="text-[10px] font-mono opacity-30">830/990</span>
-                                            </div>
-                                            <div className="h-1 w-full bg-black/5 overflow-hidden">
-                                              <motion.div 
-                                                initial={{ width: 0 }}
-                                                whileInView={{ width: `${(830/990)*100}%` }}
-                                                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                                                className="h-full bg-black"
-                                              />
-                                            </div>
-                                          </div>
-
-                                          {/* Other Certificates */}
-                                          <div className="pt-4 border-t border-black/5 space-y-6">
-                                            <div>
-                                              <h5 className="text-[11px] font-bold tracking-tight">워드프로세서</h5>
-                                              <p className="text-xs font-medium opacity-60">단일 등급</p>
-                                            </div>
-                                            <div>
-                                              <h5 className="text-[11px] font-bold tracking-tight">운전면허증</h5>
-                                              <p className="text-xs font-medium opacity-60">1종보통</p>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-
-                                </motion.div>
-
-                                {/* Right Column: Technical Stack */}
-                                <motion.div variants={staggerItem}>
-                                  <span className="text-[10px] font-mono uppercase tracking-widest opacity-30 block mb-8">03 / Technical Stack</span>
-                                  <div className="space-y-12">
-                                    {[
-                                      { label: "Design Tools", items: ["Illustrator", "Photoshop", "Premiere Pro"] },
-                                      { label: "Audio Engineering", items: ["Logic Pro"] },
-                                      { label: "Project Management", items: ["Notion", "Flow", "Slack"] }
-                                    ].map(group => (
-                                      <div key={group.label} className="group">
-                                        <p className="text-[9px] font-mono uppercase mb-4 opacity-40 group-hover:opacity-100 transition-opacity">{group.label}</p>
-                                        <div className="flex flex-wrap gap-2">
-                                          {group.items.map(item => (
-                                            <span key={item} className="px-3 py-1.5 border border-black/10 text-[10px] font-mono uppercase hover:bg-black hover:text-white transition-all cursor-default">
-                                              {item}
-                                            </span>
-                                          ))}
-                                        </div>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </motion.div>
-                              </div>
-                            </div>
-                          </div>
                         </div>
                       </motion.section>
                     )}
@@ -1373,7 +1357,7 @@ export default function App() {
                         initial="hidden"
                         animate="show"
                         exit={{ opacity: 0 }}
-                        className={`h-full w-full overflow-hidden px-8 md:px-20 pt-24 pb-80 ${SECTIONS[4].color}`}
+                        className={`h-full w-full overflow-hidden px-8 md:px-20 pt-24 pb-80 ${SECTIONS[3].color}`}
                       >
                         <div className="max-w-7xl w-full mx-auto">
                           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start mb-32">
@@ -1386,39 +1370,8 @@ export default function App() {
                             <div className="lg:col-span-10">
                               <div className="grid grid-cols-1 md:grid-cols-[1.3fr_0.7fr] gap-16">
                                 <motion.div variants={staggerItem} className="space-y-12 max-h-[500px] overflow-y-auto pr-6 custom-scrollbar">
-                                  {[
-                                    { 
-                                      title: "광고·마케팅 동아리 CREATOR", 
-                                      period: "2019.03 ~ 2021.02", 
-                                      org: "부산대학교",
-                                      desc: ["영상 콘텐츠 및 카피라이팅 기획/제작", "마케팅 콘텐츠 기획 및 실행 경험", "공모전 수상"] 
-                                    },
-                                    { 
-                                      title: "청년 UNIVERSITY 기획자 양성 프로그램", 
-                                      period: "2021.06 ~ 2021.12", 
-                                      org: "부산문화재단",
-                                      desc: ["프로젝트 기획–운영–성과 분석 전 과정 수행", "결과 보고서 작성 및 발표"] 
-                                    },
-                                    { 
-                                      title: "아트모아 기자단 2기", 
-                                      period: "2022.09 ~ 2022.12", 
-                                      org: "예술경영지원센터",
-                                      desc: ["산업 리서치 및 전문가 인터뷰 기획/진행", "문화산업 관련 콘텐츠 작성 및 인사이트 도출"] 
-                                    },
-                                    { 
-                                      title: "파나카노트 공연 기획 PD", 
-                                      period: "2021", 
-                                      org: "복합문화공간",
-                                      desc: ["공연 기획 및 음향 총괄"] 
-                                    },
-                                    { 
-                                      title: "한일청년 교류회", 
-                                      period: "2019.03 ~ 2021.02", 
-                                      org: "부산 한일문화교류협회",
-                                      desc: ["한일 대학생 교류 프로그램 기획 및 운영 참여", "해외 프로그램 봉사활동"] 
-                                    }
-                                  ].map((act, i) => (
-                                    <div key={i} className="group border-b border-white/10 pb-8">
+                                  {(activitiesData || []).map((act: any, i: number) => (
+                                    <div key={i} className="group border-b border-black/10 pb-8">
                                       <div className="mb-2">
                                         <h3 className="text-xl font-bold group-hover:translate-x-2 transition-transform">{act.title}</h3>
                                       </div>
@@ -1427,9 +1380,9 @@ export default function App() {
                                         <span className="text-[10px] font-mono opacity-40">{act.period}</span>
                                       </div>
                                       <ul className="space-y-2">
-                                        {act.desc.map((d, j) => (
+                                        {(act.desc || []).map((d: string, j: number) => (
                                           <li key={j} className="text-sm opacity-60 flex items-start gap-3">
-                                            <span className="mt-2 w-1 h-1 bg-white/20 rounded-full shrink-0" />
+                                            <span className="mt-2 w-1 h-1 bg-black/20 rounded-full shrink-0" />
                                             {d}
                                           </li>
                                         ))}
@@ -1439,7 +1392,7 @@ export default function App() {
                                 </motion.div>
                                 <motion.div variants={staggerItem} className="flex justify-center md:justify-end">
                                   {/* Vertical Business Card */}
-                                  <div className="w-64 aspect-[4/7] bg-white text-black p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden group/card border border-black/5">
+                                  <div className="w-64 aspect-[4/7] bg-white text-black p-8 flex flex-col justify-between border border-black/15 relative overflow-hidden group/card">
                                     {/* Card Texture/Pattern */}
                                     <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
                                       <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, black 1px, transparent 0)', backgroundSize: '12px 12px' }} />
@@ -1447,23 +1400,28 @@ export default function App() {
 
                                     <div className="relative z-10">
                                       <div className="mb-16">
-                                        <h3 className="text-2xl font-bold tracking-tighter leading-none mb-2">LEE<br />GEUNIL</h3>
+                                        <h3 className="text-2xl font-bold tracking-tighter leading-none mb-2 uppercase">
+                                          {(contactData?.name || "LEE GEUNIL").split(" ")[0]}<br />
+                                          {(contactData?.name || "LEE GEUNIL").split(" ")[1] || ""}
+                                        </h3>
                                         <p className="text-[9px] font-mono uppercase tracking-[0.3em] opacity-40">Creative Strategist</p>
                                       </div>
                                       
                                       <div className="space-y-6">
                                         <div>
                                           <p className="text-[8px] font-mono uppercase opacity-60 mb-1">Contact</p>
-                                          <p className="text-[11px] font-medium tracking-tight">lgi12@naver.com</p>
-                                          <p className="text-[11px] font-medium tracking-tight">010-9335-9620</p>
+                                          <p className="text-[11px] font-medium tracking-tight">{contactData?.email || "lgi12@naver.com"}</p>
+                                          <p className="text-[11px] font-medium tracking-tight">{contactData?.phone || "010-9335-9620"}</p>
                                         </div>
                                         <div>
                                           <p className="text-[8px] font-mono uppercase opacity-60 mb-1">Location</p>
-                                          <p className="text-[11px] font-medium tracking-tight">Seoul, South Korea</p>
+                                          <p className="text-[11px] font-medium tracking-tight">{contactData?.location || "Seoul, South Korea"}</p>
                                         </div>
                                         <div>
                                           <p className="text-[8px] font-mono uppercase opacity-60 mb-1">Instagram</p>
-                                          <a href="https://www.instagram.com/darkreen___n/" target="_blank" rel="noopener noreferrer" className="text-[11px] font-medium tracking-tight hover:opacity-40 transition-opacity block">@darkreen___n</a>
+                                          <a href={`https://www.instagram.com/${(contactData?.instagram || "darkreen___n").replace("@", "")}/`} target="_blank" rel="noopener noreferrer" className="text-[11px] font-medium tracking-tight hover:opacity-40 transition-opacity block">
+                                            {contactData?.instagram || "@darkreen___n"}
+                                          </a>
                                         </div>
                                       </div>
                                     </div>
@@ -1492,6 +1450,1519 @@ export default function App() {
             </React.Fragment>
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
+// ADMIN PANEL (포트폴리오 관리 시스템)
+// ============================================================================
+function AdminPanel({ dbData, onSave }: { dbData: any; onSave: (data: any) => Promise<boolean> }) {
+  const [activeTab, setActiveTab] = useState("common");
+  const [formData, setFormData] = useState<any>(null);
+  const [uploadStatus, setUploadStatus] = useState("");
+  const [uploadedFiles, setUploadedFiles] = useState<{ name: string; url: string }[]>([]);
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "success" | "error">("idle");
+  const [profileUploadStatus, setProfileUploadStatus] = useState("");
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (dbData) {
+      setFormData(JSON.parse(JSON.stringify(dbData)));
+    }
+  }, [dbData]);
+
+  if (!formData) {
+    return (
+      <div className="min-h-screen bg-zinc-950 text-neutral-300 flex items-center justify-center font-mono p-6">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 border-4 border-t-white border-zinc-800 rounded-full animate-spin" />
+          <p className="text-sm">관리자 데이터 테이블 로딩 중...</p>
+        </div>
+      </div>
+    );
+  }
+
+  const handleSimpleFieldChange = (field: string, value: any) => {
+    setFormData((prev: any) => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleFieldChange = (section: string, field: string, value: any) => {
+    setFormData((prev: any) => ({
+      ...prev,
+      [section]: {
+        ...prev[section],
+        [field]: value
+      }
+    }));
+  };
+
+  const handleArrayChange = (section: string, index: number, field: string, value: any) => {
+    setFormData((prev: any) => {
+      const arr = [...(prev[section] || [])];
+      arr[index] = { ...arr[index], [field]: value };
+      return { ...prev, [section]: arr };
+    });
+  };
+
+  const handleArrayDelete = (section: string, index: number) => {
+    setFormData((prev: any) => {
+      const arr = [...(prev[section] || [])];
+      arr.splice(index, 1);
+      return { ...prev, [section]: arr };
+    });
+  };
+
+  const handleArrayAdd = (section: string, defaultValue: any) => {
+    setFormData((prev: any) => ({
+      ...prev,
+      [section]: [...(prev[section] || []), defaultValue]
+    }));
+  };
+
+  const handleArrayBulletAdd = (section: string, index: number, listField: string, defaultValue = "") => {
+    setFormData((prev: any) => {
+      const arr = [...(prev[section] || [])];
+      const item = { ...arr[index] };
+      item[listField] = [...(item[listField] || []), defaultValue];
+      arr[index] = item;
+      return { ...prev, [section]: arr };
+    });
+  };
+
+  const handleArrayBulletChange = (section: string, index: number, listField: string, bulletIndex: number, value: any) => {
+    setFormData((prev: any) => {
+      const arr = [...(prev[section] || [])];
+      const item = { ...arr[index] };
+      const bullets = [...(item[listField] || [])];
+      bullets[bulletIndex] = value;
+      item[listField] = bullets;
+      arr[index] = item;
+      return { ...prev, [section]: arr };
+    });
+  };
+
+  const handleArrayBulletDelete = (section: string, index: number, listField: string, bulletIndex: number) => {
+    setFormData((prev: any) => {
+      const arr = [...(prev[section] || [])];
+      const item = { ...arr[index] };
+      const bullets = [...(item[listField] || [])];
+      bullets.splice(bulletIndex, 1);
+      item[listField] = bullets;
+      arr[index] = item;
+      return { ...prev, [section]: arr };
+    });
+  };
+
+  const onDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
+  const onDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFileUpload(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleSave = async () => {
+    setSaveStatus("saving");
+    const success = await onSave(formData);
+    if (success) {
+      setSaveStatus("success");
+      setTimeout(() => setSaveStatus("idle"), 2500);
+    } else {
+      setSaveStatus("error");
+      setTimeout(() => setSaveStatus("idle"), 4000);
+    }
+  };
+
+  const handleFileUpload = async (file: File) => {
+    try {
+      setUploadStatus("업로드 중...");
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Content = reader.result as string;
+        try {
+          const res = await fetch("/api/upload", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              fileName: file.name,
+              fileContent: base64Content
+            })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            setUploadedFiles(prev => [
+              { name: file.name, url: data.url },
+              ...prev
+            ]);
+            setUploadStatus("성공!");
+            setTimeout(() => setUploadStatus(""), 3000);
+          } else {
+            setUploadStatus("실패");
+          }
+        } catch (err) {
+          console.error(err);
+          setUploadStatus("서버 통신 오류");
+        }
+      };
+      reader.readAsDataURL(file);
+    } catch (err) {
+      console.error(err);
+      setUploadStatus("파일 파싱 오류");
+    }
+  };
+
+  const handleProfileImageUpload = async (file: File) => {
+    try {
+      setProfileUploadStatus("업로드 중...");
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Content = reader.result as string;
+        try {
+          const res = await fetch("/api/upload", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              fileName: file.name,
+              fileContent: base64Content
+            })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            setFormData((prev: any) => ({
+              ...prev,
+              profileImage: data.url
+            }));
+            setProfileUploadStatus("성공!");
+            setTimeout(() => setProfileUploadStatus(""), 3000);
+          } else {
+            setProfileUploadStatus("실패");
+            setTimeout(() => setProfileUploadStatus(""), 3000);
+          }
+        } catch (err) {
+          console.error(err);
+          setProfileUploadStatus("서버 통신 오류");
+          setTimeout(() => setProfileUploadStatus(""), 3000);
+        }
+      };
+      reader.readAsDataURL(file);
+    } catch (err) {
+      console.error(err);
+      setProfileUploadStatus("파일 파싱 오류");
+      setTimeout(() => setProfileUploadStatus(""), 3000);
+    }
+  };
+
+  const copyUrl = (url: string, index: number) => {
+    navigator.clipboard.writeText(url);
+    setCopiedIndex(index);
+    setTimeout(() => setCopiedIndex(null), 1500);
+  };
+
+  return (
+    <div className="min-h-screen w-full bg-zinc-950 text-zinc-100 flex flex-col font-sans select-none antialiased selection:bg-neutral-200 selection:text-black">
+      {/* Top Admin Navigation Header */}
+      <header className="h-[76px] px-8 border-b border-zinc-900 bg-zinc-950 flex justify-between items-center shrink-0">
+        <div className="flex items-center gap-3">
+          <div className="w-3.5 h-3.5 bg-neutral-200 rounded-sm animate-pulse" />
+          <div>
+            <h1 className="text-lg font-bold tracking-tight">이근일 포트폴리오 관리자</h1>
+            <p className="text-[10px] font-mono opacity-40 uppercase tracking-widest">Dynamic Database Control Room</p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={() => window.location.href = "/"}
+            className="px-4 py-2 border border-zinc-800 rounded-sm text-xs hover:bg-zinc-900 hover:text-white transition-all font-medium"
+          >
+            ← 포트폴리오 홈
+          </button>
+          
+          <button
+            onClick={handleSave}
+            disabled={saveStatus === "saving"}
+            className={`px-5 py-2 rounded-sm text-xs font-bold font-mono tracking-tight flex items-center gap-2 transition-all ${
+              saveStatus === "saving" ? "bg-zinc-800 text-zinc-500 cursor-not-allowed" :
+              saveStatus === "success" ? "bg-emerald-600 text-white" :
+              saveStatus === "error" ? "bg-red-600 text-white" :
+              "bg-white text-black hover:bg-zinc-200"
+            }`}
+          >
+            <Save size={14} />
+            {saveStatus === "saving" ? "저장 중..." :
+             saveStatus === "success" ? "성공적으로 저장됨!" :
+             saveStatus === "error" ? "저장 실패" :
+             "저장 및 반영"}
+          </button>
+        </div>
+      </header>
+
+      {/* Main Panel layout wrapper */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Sidebar Nav */}
+        <aside className="w-64 border-r border-zinc-900 bg-zinc-950/80 p-6 flex flex-col gap-1 shrink-0">
+          <p className="text-[10px] font-mono uppercase opacity-35 tracking-wider mb-3 px-3">Category Tabs</p>
+          {[
+            { id: "common", label: "공통 설정 (소개 & 스택)", detail: "Introduction, core stack" },
+            { id: "career", label: "대외 활동 & 학력 & 경력", detail: "Timeline, certificates" },
+            { id: "projects1", label: "프로젝트 I (수행 실무)", detail: "Featured projects list" },
+            { id: "projects2", label: "프로젝트 II (개인 창작)", detail: "Personal artistic projects" },
+            { id: "media", label: "미디어 자료 업로드", detail: "Asset drag-drop upload" },
+          ].map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`p-3 text-left rounded-sm transition-all flex flex-col gap-0.5 group outline-none focus:ring-0 ${
+                activeTab === tab.id ? "bg-zinc-900 text-white border-l-2 border-white pl-4" : 
+                "text-zinc-400 hover:bg-zinc-900/30 hover:text-zinc-200 pl-3"
+              }`}
+            >
+              <span className="text-[13px] font-bold">{tab.label}</span>
+              <span className="text-[9px] font-mono opacity-40 group-hover:opacity-60 transition-opacity">{tab.detail}</span>
+            </button>
+          ))}
+        </aside>
+
+        {/* Workspace Form Frame */}
+        <main className="flex-1 overflow-y-auto bg-zinc-900/10 p-10">
+          <div className="max-w-4xl w-full mx-auto space-y-8 pb-32">
+            
+            {/* TAB 1: COMMON INFORMATION */}
+            {activeTab === "common" && (
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-xl font-bold tracking-tight mb-1">인사말 및 기본 연락처 설정</h2>
+                  <p className="text-xs text-neutral-400">네비게이션 탑 헤더, 자기소개 및 명함 영역에 동적으로 바인딩되는 텍스트 세트입니다.</p>
+                </div>
+
+                <div className="grid grid-cols-1 gap-6 p-6 border border-zinc-900 bg-zinc-950/45 rounded-sm">
+                  {/* Profile Image Section */}
+                  <div className="pb-6 border-b border-zinc-900 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                    <div className="md:col-span-1 space-y-2">
+                      <label className="text-xs font-mono uppercase text-zinc-400 block">프로필 이미지 (Profile Image)</label>
+                      <div className="relative group w-28 h-28 bg-zinc-900 border border-zinc-805 rounded-sm overflow-hidden flex items-center justify-center">
+                        {formData.profileImage ? (
+                          <>
+                            <img 
+                              src={formData.profileImage} 
+                              alt="Profile Preview" 
+                              className="w-full h-full object-cover"
+                              referrerPolicy="no-referrer"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => handleSimpleFieldChange("profileImage", "")}
+                              className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center text-xs text-red-400 font-medium font-mono"
+                            >
+                              제거하기
+                            </button>
+                          </>
+                        ) : (
+                          <div className="text-center p-3 text-zinc-600">
+                            <ImageIcon size={24} className="mx-auto mb-1 opacity-60" />
+                            <span className="text-[10px] font-mono">NO IMAGE</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="md:col-span-2 space-y-3">
+                      <span className="text-xs text-neutral-400 block leading-relaxed">
+                        소개글 옆에 표시될 프로필 사진을 업로드하거나 이미지 주소(URL)를 직접 입력할 수 있습니다.
+                      </span>
+                      
+                      <div className="flex flex-wrap items-center gap-3">
+                        <label className="cursor-pointer px-4 py-2 bg-zinc-850 hover:bg-zinc-800 text-white rounded-sm text-xs font-medium tracking-tight transition-all inline-flex items-center gap-2 border border-zinc-750">
+                          <ImageIcon size={14} />
+                          <span>이미지 업로드</span>
+                          <input 
+                            type="file" 
+                            accept="image/*" 
+                            className="hidden" 
+                            onChange={(e) => {
+                              if (e.target.files && e.target.files[0]) {
+                                handleProfileImageUpload(e.target.files[0]);
+                              }
+                            }}
+                          />
+                        </label>
+                        
+                        {profileUploadStatus && (
+                          <span className="text-xs font-mono text-neutral-300 animate-pulse">
+                            {profileUploadStatus}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="space-y-1">
+                        <span className="text-[10px] font-mono text-zinc-500 uppercase">또는 직접 이미지 주소(URL) 입력</span>
+                        <input 
+                          type="text" 
+                          value={formData.profileImage || ""} 
+                          onChange={e => handleSimpleFieldChange("profileImage", e.target.value)}
+                          placeholder="https://example.com/image.jpg"
+                          className="w-full bg-zinc-900/70 border border-zinc-800 rounded px-4 py-2 text-xs text-neutral-200 focus:outline-none focus:border-neutral-500 font-mono"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Introduction text */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-mono uppercase text-zinc-400">한줄 소개 문구 (About 헤드라인)</label>
+                    <textarea 
+                      value={formData.introduction || ""} 
+                      onChange={e => handleSimpleFieldChange("introduction", e.target.value)}
+                      rows={3}
+                      placeholder="기획자 소개 문구를 적어주세요."
+                      className="w-full bg-zinc-900/70 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-neutral-500 font-sans leading-relaxed"
+                    />
+                  </div>
+
+                  {/* Contact details */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-zinc-900">
+                    <div className="space-y-2">
+                      <label className="text-xs font-mono uppercase text-zinc-400">한글/영문 이름</label>
+                      <input 
+                        type="text" 
+                        value={formData.contact?.name || ""} 
+                        onChange={e => handleFieldChange("contact", "name", e.target.value)}
+                        className="w-full bg-zinc-900/70 border border-zinc-800 rounded px-4 py-2 text-sm focus:outline-none focus:border-neutral-500 font-mono"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-mono uppercase text-zinc-400">이메일 주소</label>
+                      <input 
+                        type="text" 
+                        value={formData.contact?.email || ""} 
+                        onChange={e => handleFieldChange("contact", "email", e.target.value)}
+                        className="w-full bg-zinc-900/70 border border-zinc-800 rounded px-4 py-2 text-sm focus:outline-none focus:border-neutral-500 font-mono"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-mono uppercase text-zinc-400">연락처</label>
+                      <input 
+                        type="text" 
+                        value={formData.contact?.phone || ""} 
+                        onChange={e => handleFieldChange("contact", "phone", e.target.value)}
+                        className="w-full bg-zinc-900/70 border border-zinc-800 rounded px-4 py-2 text-sm focus:outline-none focus:border-neutral-500 font-mono"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs font-mono uppercase text-zinc-400">활동 기지 (위치)</label>
+                      <input 
+                        type="text" 
+                        value={formData.contact?.location || ""} 
+                        onChange={e => handleFieldChange("contact", "location", e.target.value)}
+                        className="w-full bg-zinc-900/70 border border-zinc-800 rounded px-4 py-2 text-sm focus:outline-none focus:border-neutral-500"
+                      />
+                    </div>
+                    <div className="space-y-2 md:col-span-2">
+                      <label className="text-xs font-mono uppercase text-zinc-400">인스타그램 핸들 (@)</label>
+                      <input 
+                        type="text" 
+                        value={formData.contact?.instagram || ""} 
+                        onChange={e => handleFieldChange("contact", "instagram", e.target.value)}
+                        className="w-full bg-zinc-900/70 border border-zinc-850 rounded px-4 py-2 text-sm focus:outline-none focus:border-neutral-500 font-mono"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Tech Stacks section */}
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <h3 className="text-sm font-mono uppercase tracking-wider text-neutral-400">역량 및 전문성 분야 (Technical Stack)</h3>
+                    <button
+                      onClick={() => handleArrayAdd("techStack", { label: "새 카테고리", items: [] })}
+                      className="px-3 py-1.5 bg-zinc-800 text-white text-xs rounded-sm hover:bg-zinc-700 transition-all font-medium"
+                    >
+                      + 분야 추가
+                    </button>
+                  </div>
+
+                  <div className="space-y-4">
+                    {(formData.techStack || []).map((group: any, idx: number) => (
+                      <div key={idx} className="p-5 border border-zinc-900 bg-zinc-950/45 rounded-sm space-y-4 relative">
+                        <button
+                          onClick={() => handleArrayDelete("techStack", idx)}
+                          className="absolute right-4 top-4 text-zinc-500 hover:text-red-400 transition-all"
+                        >
+                          <Trash2 size={15} />
+                        </button>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                          <div className="space-y-1 md:col-span-1">
+                            <span className="text-[10px] font-mono text-zinc-500 uppercase">기술 카테고리 이름</span>
+                            <input
+                              type="text"
+                              value={group.label || ""}
+                              onChange={e => handleArrayChange("techStack", idx, "label", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-1.5 text-xs text-white"
+                            />
+                          </div>
+                          
+                          <div className="md:col-span-2 space-y-2">
+                            <div className="flex justify-between items-center text-[10px] font-mono text-zinc-500">
+                              <span>키워드 목록 (예: Illustrator, Photoshop, Slack)</span>
+                              <button
+                                onClick={() => {
+                                  const text = prompt("추가할 키워드를 입력하세요:");
+                                  if (text) {
+                                    const updated = [...(group.items || []), text];
+                                    handleArrayChange("techStack", idx, "items", updated);
+                                  }
+                                }}
+                                className="text-white hover:underline"
+                              >
+                                + 키워드 추가
+                              </button>
+                            </div>
+                            <div className="flex flex-wrap gap-1.5 p-2 bg-zinc-900/60 border border-zinc-800/80 rounded min-h-[36px]">
+                              {(group.items || []).map((tag: string, tagIdx: number) => (
+                                <span key={tagIdx} className="bg-zinc-800 text-neutral-300 px-2 py-0.5 rounded text-[10px] font-mono flex items-center gap-1.5">
+                                  {tag}
+                                  <button 
+                                    onClick={() => {
+                                      const updated = [...(group.items || [])];
+                                      updated.splice(tagIdx, 1);
+                                      handleArrayChange("techStack", idx, "items", updated);
+                                    }}
+                                    className="text-zinc-500 hover:text-white"
+                                  >
+                                    ×
+                                  </button>
+                                </span>
+                              ))}
+                              {(group.items || []).length === 0 && (
+                                <span className="text-zinc-600 text-[10px] font-mono italic self-center pl-2">등록된 키워드가 없습니다.</span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+            {/* TAB 2: EDUCATION, CERTIFICATES, EXPERIENCE */}
+            {activeTab === "career" && (
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-xl font-bold tracking-tight mb-1">학력, 이력, 자격증 및 대외활동 설계</h2>
+                  <p className="text-xs text-neutral-400">About 및 Activities 카드 구성에 노출되는 세부 테이블 목록을 실시간 변경할 수 있습니다.</p>
+                </div>
+
+                {/* Part 1: Education */}
+                <div className="p-6 border border-zinc-900 bg-zinc-950/45 rounded-sm space-y-4">
+                  <div className="flex items-center gap-2">
+                    <GraduationCap className="text-zinc-400 shrink-0" size={18} />
+                    <h3 className="text-sm font-mono uppercase tracking-wider text-neutral-200">학력 정보 (Education)</h3>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono text-zinc-500 uppercase">출신 학교</span>
+                      <input
+                        type="text"
+                        value={formData.education?.school || ""}
+                        onChange={e => handleFieldChange("education", "school", e.target.value)}
+                        className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono text-zinc-400 uppercase">취득 학위 및 학과</span>
+                      <input
+                        type="text"
+                        value={formData.education?.major || ""}
+                        onChange={e => handleFieldChange("education", "major", e.target.value)}
+                        className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-mono text-zinc-400 uppercase">재학 기간</span>
+                      <input
+                        type="text"
+                        value={formData.education?.period || ""}
+                        onChange={e => handleFieldChange("education", "period", e.target.value)}
+                        className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Part 2: Certificates list */}
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <Award className="text-zinc-400 shrink-0" size={18} />
+                      <h3 className="text-sm font-mono uppercase tracking-wider text-neutral-400">보유 자격증 (Certificates)</h3>
+                    </div>
+                    <button
+                      onClick={() => handleArrayAdd("certificates", { title: "새 자격증", subtitle: "점수/등급 정보" })}
+                      className="px-3 py-1 bg-zinc-800 text-white text-xs rounded-sm hover:bg-zinc-700 font-medium"
+                    >
+                      + 자격증 추가
+                    </button>
+                  </div>
+
+                  <div className="space-y-3">
+                    {(formData.certificates || []).map((cert: any, idx: number) => (
+                      <div key={idx} className="p-4 border border-zinc-900 bg-zinc-950/45 rounded-sm relative grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                        <button
+                          onClick={() => handleArrayDelete("certificates", idx)}
+                          className="absolute right-4 top-4 text-zinc-500 hover:text-red-400 transition-all font-mono"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+
+                        <div className="space-y-1 col-span-1">
+                          <span className="text-[9px] font-mono text-zinc-500">자격증 이름</span>
+                          <input
+                            type="text"
+                            value={cert.title || ""}
+                            onChange={e => handleArrayChange("certificates", idx, "title", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-1.5 text-xs font-bold"
+                          />
+                        </div>
+                        <div className="space-y-1 col-span-1">
+                          <span className="text-[9px] font-mono text-zinc-500">결과/점수 (subtitle)</span>
+                          <input
+                            type="text"
+                            value={cert.subtitle || ""}
+                            onChange={e => handleArrayChange("certificates", idx, "subtitle", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-1.5 text-xs text-neutral-300"
+                          />
+                        </div>
+                        <div className="space-y-1 col-span-1">
+                          <span className="text-[9px] font-mono text-zinc-500">획득 수치 (막대 그래프)</span>
+                          <input
+                            type="number"
+                            value={cert.score || ""}
+                            onChange={e => handleArrayChange("certificates", idx, "score", e.target.value ? Number(e.target.value) : undefined)}
+                            placeholder="없음"
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-1.5 text-xs font-mono"
+                          />
+                        </div>
+                        <div className="space-y-1 col-span-1 md:pr-8">
+                          <span className="text-[9px] font-mono text-zinc-500">그래프 만점 스케일</span>
+                          <input
+                            type="number"
+                            value={cert.maxScale || ""}
+                            onChange={e => handleArrayChange("certificates", idx, "maxScale", e.target.value ? Number(e.target.value) : undefined)}
+                            placeholder="없음"
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-1.5 text-xs font-mono"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Part 3: Work Experience list */}
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <h3 className="text-sm font-mono uppercase tracking-wider text-neutral-400">경력 사항 (Work Experience)</h3>
+                    <button
+                      onClick={() => handleArrayAdd("workExperience", { company: "회사명", tags: "직무 역할명", period: "YYYY.MM ~ YYYY.MM", desc: [] })}
+                      className="px-3 py-1 bg-zinc-800 text-white text-xs rounded-sm hover:bg-zinc-700 font-medium"
+                    >
+                      + 경력 추가
+                    </button>
+                  </div>
+
+                  <div className="space-y-4">
+                    {(formData.workExperience || []).map((exp: any, idx: number) => (
+                      <div key={idx} className="p-6 border border-zinc-900 bg-zinc-950/45 rounded-sm relative space-y-4">
+                        <button
+                          onClick={() => handleArrayDelete("workExperience", idx)}
+                          className="absolute right-4 top-4 text-zinc-500 hover:text-red-400 transition-all"
+                        >
+                          <Trash2 size={15} />
+                        </button>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div className="space-y-1">
+                            <span className="text-[9px] font-mono text-zinc-500 uppercase">회사/프로젝트 명</span>
+                            <input
+                              type="text"
+                              value={exp.company || ""}
+                              onChange={e => handleArrayChange("workExperience", idx, "company", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-bold"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <span className="text-[9px] font-mono text-zinc-500 uppercase">직무 태그 정보</span>
+                            <input
+                              type="text"
+                              value={exp.tags || ""}
+                              onChange={e => handleArrayChange("workExperience", idx, "tags", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs text-indigo-400"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <span className="text-[9px] font-mono text-zinc-500 uppercase">근무 기간</span>
+                            <input
+                              type="text"
+                              value={exp.period || ""}
+                              onChange={e => handleArrayChange("workExperience", idx, "period", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-mono"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Bullets subform */}
+                        <div className="space-y-2 border-t border-zinc-900 pt-4">
+                          <div className="flex justify-between items-center text-[10px] font-mono text-zinc-400 mb-1">
+                            <span>수행 세부 업무 (Bullets)</span>
+                            <button
+                              onClick={() => handleArrayBulletAdd("workExperience", idx, "desc")}
+                              className="text-white hover:underline"
+                            >
+                              + 항목 추가
+                            </button>
+                          </div>
+                          <div className="space-y-2">
+                            {(exp.desc || []).map((bullet: string, bulletIdx: number) => (
+                              <div key={bulletIdx} className="flex items-center gap-2">
+                                <span className="text-zinc-500 text-xs shrink-0 font-mono">•</span>
+                                <input
+                                  type="text"
+                                  value={bullet}
+                                  onChange={e => handleArrayBulletChange("workExperience", idx, "desc", bulletIdx, e.target.value)}
+                                  className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-1.5 text-xs text-neutral-300"
+                                />
+                                <button
+                                  onClick={() => handleArrayBulletDelete("workExperience", idx, "desc", bulletIdx)}
+                                  className="text-zinc-500 hover:text-red-400"
+                                >
+                                  ×
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Part 4: Activities Archive list */}
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <h3 className="text-sm font-mono uppercase tracking-wider text-neutral-400">대외 활동 아카이브 (Activities)</h3>
+                    <button
+                      onClick={() => handleArrayAdd("activities", { title: "새 활동 제목", org: "주최 단체명", period: "YYYY.MM ~ YYYY.MM", desc: [] })}
+                      className="px-3 py-1 bg-zinc-800 text-white text-xs rounded-sm hover:bg-zinc-700 font-medium"
+                    >
+                      + 활동 추가
+                    </button>
+                  </div>
+
+                  <div className="space-y-4">
+                    {(formData.activities || []).map((act: any, idx: number) => (
+                      <div key={idx} className="p-6 border border-zinc-900 bg-zinc-950/45 rounded-sm relative space-y-4">
+                        <button
+                          onClick={() => handleArrayDelete("activities", idx)}
+                          className="absolute right-4 top-4 text-zinc-500 hover:text-red-400 transition-all"
+                        >
+                          <Trash2 size={15} />
+                        </button>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div className="space-y-1">
+                            <span className="text-[9px] font-mono text-zinc-500 uppercase">활동 프로젝트 명</span>
+                            <input
+                              type="text"
+                              value={act.title || ""}
+                              onChange={e => handleArrayChange("activities", idx, "title", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-bold"
+                            />
+                          </div>
+                          <div className="space-y-1 flex flex-col">
+                            <span className="text-[9px] font-mono text-zinc-500 uppercase">주최 단체/소속</span>
+                            <input
+                              type="text"
+                              value={act.org || ""}
+                              onChange={e => handleArrayChange("activities", idx, "org", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs text-zinc-300"
+                            />
+                          </div>
+                          <div className="space-y-1">
+                            <span className="text-[9px] font-mono text-zinc-500 uppercase">활동 기간</span>
+                            <input
+                              type="text"
+                              value={act.period || ""}
+                              onChange={e => handleArrayChange("activities", idx, "period", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-mono"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Bullets subform */}
+                        <div className="space-y-2 border-t border-zinc-900 pt-4">
+                          <div className="flex justify-between items-center text-[10px] font-mono text-zinc-400 mb-1">
+                            <span>상세 설명 (Bullets)</span>
+                            <button
+                              onClick={() => handleArrayBulletAdd("activities", idx, "desc")}
+                              className="text-white hover:underline"
+                            >
+                              + 항목 추가
+                            </button>
+                          </div>
+                          <div className="space-y-2">
+                            {(act.desc || []).map((bullet: string, bulletIdx: number) => (
+                              <div key={bulletIdx} className="flex items-center gap-2">
+                                <span className="text-zinc-500 text-xs shrink-0 font-mono">•</span>
+                                <input
+                                  type="text"
+                                  value={bullet}
+                                  onChange={e => handleArrayBulletChange("activities", idx, "desc", bulletIdx, e.target.value)}
+                                  className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-1.5 text-xs text-neutral-300"
+                                />
+                                <button
+                                  onClick={() => handleArrayBulletDelete("activities", idx, "desc", bulletIdx)}
+                                  className="text-zinc-500 hover:text-red-400"
+                                >
+                                  ×
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+            {/* TAB 3: FEATURED PROJECTS */}
+            {activeTab === "projects1" && (
+              <div className="space-y-8">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h2 className="text-xl font-bold tracking-tight mb-1">프로젝트 I (수행 실무 목록)</h2>
+                    <p className="text-xs text-neutral-400">페스티벌, 콘서트, 브랜드 쇼케이스 등 메이드온 현장 총괄 및 PM 이력 프로젝트입니다.</p>
+                  </div>
+                  <button
+                    onClick={() => handleArrayAdd("featuredProjects", {
+                      title: "새 기획 페스티벌",
+                      category: "운영",
+                      year: "2024",
+                      image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819",
+                      contribution: "25%",
+                      description: "수행한 업무에 대한 간단요약 설명",
+                      fullDescription: "모달에 출력되는 긴 상세 문안",
+                      details: ["세부 사항 1", "세부 사항 2"],
+                      process: [],
+                      results: [],
+                      role: { title: "티켓 총괄 운영", items: [] }
+                    })}
+                    className="px-4 py-2 bg-neutral-100 text-black text-xs font-bold rounded-sm hover:bg-neutral-200 font-mono"
+                  >
+                    + 새 실무공연 추가
+                  </button>
+                </div>
+
+                <div className="space-y-8">
+                  {(formData.featuredProjects || []).map((project: any, idx: number) => (
+                    <div key={idx} className="p-6 border border-zinc-900 bg-zinc-950/45 rounded-sm relative space-y-6">
+                      <button
+                        onClick={() => handleArrayDelete("featuredProjects", idx)}
+                        className="absolute right-4 top-4 text-zinc-500 hover:text-red-400 transition-all font-mono text-xs flex items-center gap-1.5"
+                      >
+                        <Trash2 size={14} /> 제거
+                      </button>
+
+                      <div className="flex items-center gap-4 text-xs font-mono border-b border-zinc-900 pb-3">
+                        <span className="bg-neutral-200 text-black px-2 py-0.5 rounded uppercase font-bold text-[10px]">#{idx + 1}</span>
+                        <span className="opacity-40">프로젝트 코드 제어</span>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">공연/프로젝트 이름</span>
+                          <input 
+                            type="text"
+                            value={project.title || ""}
+                            onChange={e => handleArrayChange("featuredProjects", idx, "title", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-bold"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">개최 연도</span>
+                          <input 
+                            type="text"
+                            value={project.year || ""}
+                            onChange={e => handleArrayChange("featuredProjects", idx, "year", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-mono"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">카테고리 (분야) 슬라이드명</span>
+                          <input 
+                            type="text"
+                            value={project.category || ""}
+                            onChange={e => handleArrayChange("featuredProjects", idx, "category", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">참여도/기여도 (%)</span>
+                          <input 
+                            type="text"
+                            value={project.contribution || ""}
+                            onChange={e => handleArrayChange("featuredProjects", idx, "contribution", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-mono"
+                          />
+                        </div>
+                        <div className="space-y-1 md:col-span-2">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">대표 커버 이미지 주소 (URL)</span>
+                          <div className="flex gap-2">
+                            <input 
+                              type="text"
+                              value={project.image || ""}
+                              onChange={e => handleArrayChange("featuredProjects", idx, "image", e.target.value)}
+                              className="flex-1 bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-mono"
+                            />
+                            {project.image && (
+                              <img src={project.image} alt="preview" className="w-12 h-10 object-cover border border-zinc-800 rounded shrink-0" />
+                            )}
+                          </div>
+                          <p className="text-[10px] text-zinc-500 font-mono">※ 미디어 업로드 탭에서 올린 이미지 주소를 복사해 이곳에 입력하세요.</p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3 pt-4 border-t border-zinc-900">
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400">업무 요약 (About / Main List 카드용 설명)</span>
+                          <input 
+                            type="text"
+                            value={project.description || ""}
+                            onChange={e => handleArrayChange("featuredProjects", idx, "description", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400">긴 상세 설명 (상세 모달 내부)</span>
+                          <textarea 
+                            value={project.fullDescription || ""}
+                            onChange={e => handleArrayChange("featuredProjects", idx, "fullDescription", e.target.value)}
+                            rows={3}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-sans leading-relaxed"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Process Sections (Pre-event, On-site, CS) */}
+                      <div className="space-y-2 border-t border-zinc-900 pt-4">
+                        <div className="flex justify-between items-center text-[10px] font-mono text-zinc-400">
+                          <span>기획 및 실행 프로세스단계 (Process Stages)</span>
+                          <button
+                            onClick={() => {
+                              const updated = [...(project.process || []), { phase: "새 단계", items: [] }];
+                              handleArrayChange("featuredProjects", idx, "process", updated);
+                            }}
+                            className="text-white hover:underline"
+                          >
+                            + 단계 단락 추가
+                          </button>
+                        </div>
+                        
+                        {(project.process || []).map((p: any, pIdx: number) => (
+                          <div key={pIdx} className="p-3 border border-zinc-900 bg-zinc-900/50 rounded gap-2 space-y-2 relative">
+                            <button
+                              onClick={() => {
+                                const updated = [...(project.process || [])];
+                                updated.splice(pIdx, 1);
+                                handleArrayChange("featuredProjects", idx, "process", updated);
+                              }}
+                              className="absolute right-3 top-3 text-[10px] text-zinc-500 hover:text-red-400 font-mono"
+                            >
+                              삭제
+                            </button>
+                            <div className="w-1/2">
+                              <span className="text-[8px] font-mono text-zinc-500 pl-1 uppercase">단계명 (사전운영, 현장운영 등)</span>
+                              <input 
+                                type="text"
+                                value={p.phase || ""}
+                                onChange={e => {
+                                  const updated = [...(project.process || [])];
+                                  updated[pIdx] = { ...updated[pIdx], phase: e.target.value };
+                                  handleArrayChange("featuredProjects", idx, "process", updated);
+                                }}
+                                className="w-full bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs"
+                              />
+                            </div>
+                            <div className="space-y-1.5">
+                              <div className="flex justify-between items-center text-[8px] font-mono text-zinc-500">
+                                <span>상세 내용 불렛</span>
+                                <button
+                                  onClick={() => {
+                                    const updated = [...(project.process || [])];
+                                    updated[pIdx].items = [...(updated[pIdx].items || []), ""];
+                                    handleArrayChange("featuredProjects", idx, "process", updated);
+                                  }}
+                                  className="text-white hover:underline hover:text-neutral-300"
+                                >
+                                  + 불렛 추가
+                                </button>
+                              </div>
+                              {(p.items || []).map((bullet: string, bIdx: number) => (
+                                <div key={bIdx} className="flex items-center gap-2">
+                                  <span className="text-zinc-600 text-xs shrink-0 font-serif">-</span>
+                                  <input 
+                                    type="text"
+                                    value={bullet}
+                                    onChange={e => {
+                                      const updated = [...(project.process || [])];
+                                      const bullets = [...(updated[pIdx].items || [])];
+                                      bullets[bIdx] = e.target.value;
+                                      updated[pIdx].items = bullets;
+                                      handleArrayChange("featuredProjects", idx, "process", updated);
+                                    }}
+                                    className="w-full bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs text-neutral-300"
+                                  />
+                                  <button
+                                    onClick={() => {
+                                      const updated = [...(project.process || [])];
+                                      const bullets = [...(updated[pIdx].items || [])];
+                                      bullets.splice(bIdx, 1);
+                                      updated[pIdx].items = bullets;
+                                      handleArrayChange("featuredProjects", idx, "process", updated);
+                                    }}
+                                    className="text-zinc-600 hover:text-red-400"
+                                  >
+                                    ×
+                                  </button>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Primary Role (담당 업무 총괄) */}
+                      <div className="space-y-3 border-t border-zinc-900 pt-4">
+                        <span className="text-[10px] font-mono text-zinc-400 block uppercase">역할 및 총괄 내용 (Primary Role)</span>
+                        <div className="space-y-2 p-3 bg-zinc-900/60 rounded border border-zinc-900">
+                          <div className="w-1/2">
+                            <span className="text-[8px] font-mono text-zinc-500">역할 대표명 (예: 티켓 총괄 운영)</span>
+                            <input 
+                              type="text"
+                              value={project.role?.title || ""}
+                              onChange={e => {
+                                const role = { ...(project.role || {}), title: e.target.value };
+                                handleArrayChange("featuredProjects", idx, "role", role);
+                              }}
+                              className="w-full bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs font-bold text-neutral-200"
+                            />
+                          </div>
+
+                          <div className="space-y-1.5 pt-2">
+                            <div className="flex justify-between items-center text-[8px] font-mono text-zinc-500">
+                              <span>수행 역할 목록</span>
+                              <button
+                                onClick={() => {
+                                  const roleItems = [...(project.role?.items || []), ""];
+                                  const role = { ...(project.role || {}), items: roleItems };
+                                  handleArrayChange("featuredProjects", idx, "role", role);
+                                }}
+                                className="text-white hover:underline"
+                              >
+                                + 역할사항 추가
+                              </button>
+                            </div>
+                            {(project.role?.items || []).map((roleBullet: string, rIdx: number) => (
+                              <div key={rIdx} className="flex items-center gap-2">
+                                <span className="text-zinc-600 text-xs text-neutral-300">•</span>
+                                <input 
+                                  type="text"
+                                  value={roleBullet}
+                                  onChange={e => {
+                                    const roleItems = [...(project.role?.items || [])];
+                                    roleItems[rIdx] = e.target.value;
+                                    const role = { ...(project.role || {}), items: roleItems };
+                                    handleArrayChange("featuredProjects", idx, "role", role);
+                                  }}
+                                  className="w-full bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs"
+                                />
+                                <button
+                                  onClick={() => {
+                                    const roleItems = [...(project.role?.items || [])];
+                                    roleItems.splice(rIdx, 1);
+                                    const role = { ...(project.role || {}), items: roleItems };
+                                    handleArrayChange("featuredProjects", idx, "role", role);
+                                  }}
+                                  className="text-zinc-600 hover:text-red-400"
+                                >
+                                  ×
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Performance Achievements (수행 성과) */}
+                      <div className="space-y-2 border-t border-zinc-900 pt-4">
+                        <div className="flex justify-between items-center text-[10px] font-mono text-zinc-400">
+                          <span>수행 성과 대항목 (Results & Achievements)</span>
+                          <button
+                            onClick={() => {
+                              const updated = [...(project.results || []), ""];
+                              handleArrayChange("featuredProjects", idx, "results", updated);
+                            }}
+                            className="text-white hover:underline"
+                          >
+                            + 성과 항목 추가
+                          </button>
+                        </div>
+                        <div className="space-y-2">
+                          {(project.results || []).map((resBullet: string, rIdx: number) => (
+                            <div key={rIdx} className="flex items-center gap-2">
+                              <span className="text-zinc-500 font-mono text-xs">✓</span>
+                              <input 
+                                type="text"
+                                value={resBullet}
+                                onChange={e => {
+                                  const updated = [...(project.results || [])];
+                                  updated[rIdx] = e.target.value;
+                                  handleArrayChange("featuredProjects", idx, "results", updated);
+                                }}
+                                className="w-full bg-zinc-900 border border-zinc-800 rounded px-2 py-1.5 text-xs text-neutral-200 font-sans"
+                              />
+                              <button
+                                onClick={() => {
+                                  const updated = [...(project.results || [])];
+                                  updated.splice(rIdx, 1);
+                                  handleArrayChange("featuredProjects", idx, "results", updated);
+                                }}
+                                className="text-zinc-500 hover:text-red-400"
+                              >
+                                ×
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* TAB 4: PERSONAL PROJECTS (CREATIONS) */}
+            {activeTab === "projects2" && (
+              <div className="space-y-8">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h2 className="text-xl font-bold tracking-tight mb-1">프로젝트 II (개인 창작/공연)</h2>
+                    <p className="text-xs text-neutral-400">이그린(Lee Green) 인디음악 앨범 발매 크라우드 펀딩, 루프탑 및 콜라보 콘서트 관련 프로젝트입니다.</p>
+                  </div>
+                  <button
+                    onClick={() => handleArrayAdd("personalProjects", {
+                      title: "새 개인 아트 워크숍",
+                      category: "Concert",
+                      year: "2023",
+                      image: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b",
+                      contribution: "70%",
+                      location: "KT&G 상상마당",
+                      support: "자체 제작",
+                      cast: "이그린",
+                      description: "새 수록 앨범 및 특별 콘서트 런칭",
+                      fullDescription: "상세 모달 내부에서 지원하는 설명 데이터입니다.",
+                      images: [],
+                      role: { title: "담당 업무", items: [] },
+                      results: []
+                    })}
+                    className="px-4 py-2 bg-neutral-100 text-black text-xs font-bold rounded-sm hover:bg-neutral-200 font-mono"
+                  >
+                    + 새 창작기획 추가
+                  </button>
+                </div>
+
+                <div className="space-y-8">
+                  {(formData.personalProjects || []).map((project: any, idx: number) => (
+                    <div key={idx} className="p-6 border border-zinc-900 bg-zinc-950/45 rounded-sm relative space-y-6">
+                      <button
+                        onClick={() => handleArrayDelete("personalProjects", idx)}
+                        className="absolute right-4 top-4 text-zinc-500 hover:text-red-400 transition-all font-mono text-xs flex items-center gap-1.5"
+                      >
+                        <Trash2 size={14} /> 제거
+                      </button>
+
+                      <div className="flex items-center gap-4 text-xs font-mono border-b border-zinc-900 pb-3">
+                        <span className="bg-neutral-200 text-black px-2 py-0.5 rounded uppercase font-bold text-[10px]">#{idx + 1}</span>
+                        <span className="opacity-40">앨범 및 디자인 기획 제어</span>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">창작 프로젝트명/앨범명</span>
+                          <input 
+                            type="text"
+                            value={project.title || ""}
+                            onChange={e => handleArrayChange("personalProjects", idx, "title", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-bold"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">발표 연도</span>
+                          <input 
+                            type="text"
+                            value={project.year || ""}
+                            onChange={e => handleArrayChange("personalProjects", idx, "year", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-mono"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">음악/디자인 카테고리 (Category)</span>
+                          <input 
+                            type="text"
+                            value={project.category || ""}
+                            onChange={e => handleArrayChange("personalProjects", idx, "category", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">개인 지분 기여도 (%)</span>
+                          <input 
+                            type="text"
+                            value={project.contribution || ""}
+                            onChange={e => handleArrayChange("personalProjects", idx, "contribution", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-mono"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">개최 및 판매장소 (Location)</span>
+                          <input 
+                            type="text"
+                            value={project.location || ""}
+                            onChange={e => handleArrayChange("personalProjects", idx, "location", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">아티스트 라인업 (Cast)</span>
+                          <input 
+                            type="text"
+                            value={project.cast || ""}
+                            onChange={e => handleArrayChange("personalProjects", idx, "cast", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs"
+                          />
+                        </div>
+                        <div className="space-y-1 md:col-span-2">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">매체 크라우드펀딩/후원 (Support)</span>
+                          <input 
+                            type="text"
+                            value={project.support || ""}
+                            onChange={e => handleArrayChange("personalProjects", idx, "support", e.target.value)}
+                            placeholder="예: 텀블벅 크라우드 펀딩 프로젝트"
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs"
+                          />
+                        </div>
+                        <div className="space-y-1 md:col-span-2">
+                          <span className="text-[10px] font-mono text-zinc-400 uppercase">대표 커버 이미지 주소 (URL)</span>
+                          <div className="flex gap-2">
+                            <input 
+                              type="text"
+                              value={project.image || ""}
+                              onChange={e => handleArrayChange("personalProjects", idx, "image", e.target.value)}
+                              className="flex-1 bg-zinc-900 border border-zinc-850 rounded px-3 py-2 text-xs font-mono"
+                            />
+                            {project.image && (
+                              <img src={project.image} alt="preview" className="w-12 h-10 object-cover border border-zinc-800 rounded shrink-0" />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3 pt-4 border-t border-zinc-900">
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400">간단 기획 설명 (About / Main List 카드용)</span>
+                          <input 
+                            type="text"
+                            value={project.description || ""}
+                            onChange={e => handleArrayChange("personalProjects", idx, "description", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-mono text-zinc-400">긴 상세 설명 (상세 모달 내부)</span>
+                          <textarea 
+                            value={project.fullDescription || ""}
+                            onChange={e => handleArrayChange("personalProjects", idx, "fullDescription", e.target.value)}
+                            rows={3}
+                            className="w-full bg-zinc-900 border border-zinc-800 rounded px-3 py-2 text-xs font-sans leading-relaxed"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Detail Images slider list */}
+                      <div className="space-y-2 border-t border-zinc-900 pt-4">
+                        <div className="flex justify-between items-center text-[10px] font-mono text-zinc-400">
+                          <span>서브 아트북 자켓/현장 디자인 포토 목록 (Images Carousel Block)</span>
+                          <button
+                            onClick={() => {
+                              const updated = [...(project.images || []), ""];
+                              handleArrayChange("personalProjects", idx, "images", updated);
+                            }}
+                            className="text-white hover:underline"
+                          >
+                            + 서브 슬라이드 이미지 추가
+                          </button>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pl-3">
+                          {(project.images || []).map((imgUrl: string, iIdx: number) => (
+                            <div key={iIdx} className="space-y-1 relative bg-zinc-900/40 p-2.5 rounded border border-zinc-900">
+                              <span className="text-[8px] font-mono text-zinc-600 block pl-1 uppercase">슬라이드 포토 #{iIdx+1}</span>
+                              <div className="flex gap-2">
+                                <input 
+                                  type="text"
+                                  value={imgUrl}
+                                  onChange={e => {
+                                    const updated = [...(project.images || [])];
+                                    updated[iIdx] = e.target.value;
+                                    handleArrayChange("personalProjects", idx, "images", updated);
+                                  }}
+                                  className="flex-1 bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs font-mono"
+                                />
+                                <button
+                                  onClick={() => {
+                                    const updated = [...(project.images || [])];
+                                    updated.splice(iIdx, 1);
+                                    handleArrayChange("personalProjects", idx, "images", updated);
+                                  }}
+                                  className="text-[10px] text-zinc-500 hover:text-red-400 font-mono"
+                                >
+                                  ×
+                                </button>
+                              </div>
+                              {imgUrl && (
+                                <img src={imgUrl} alt="slide preview" className="w-full h-16 object-cover border border-zinc-800/80 rounded mt-1.5" />
+                              )}
+                            </div>
+                          ))}
+                          {(project.images || []).length === 0 && (
+                            <span className="text-zinc-600 text-[10px] font-mono italic pl-2">서브 슬라이드 사진이 지정되지 않았습니다.</span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Role subform */}
+                      <div className="space-y-3 border-t border-zinc-900 pt-4">
+                        <span className="text-[10px] font-mono text-zinc-400 block uppercase">역할 및 크레딧 (Primary Role)</span>
+                        <div className="space-y-2 p-3 bg-zinc-900/60 rounded border border-zinc-900">
+                          <div className="w-1/2">
+                            <span className="text-[8px] font-mono text-zinc-500">역할 대표명 (예: 담당 업무)</span>
+                            <input 
+                              type="text"
+                              value={project.role?.title || ""}
+                              onChange={e => {
+                                const role = { ...(project.role || {}), title: e.target.value };
+                                handleArrayChange("personalProjects", idx, "role", role);
+                              }}
+                              className="w-full bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs font-bold text-neutral-200"
+                            />
+                          </div>
+
+                          <div className="space-y-1.5 pt-2">
+                            <div className="flex justify-between items-center text-[8px] font-mono text-zinc-500">
+                              <span>세부 역할 기여항목</span>
+                              <button
+                                onClick={() => {
+                                  const roleItems = [...(project.role?.items || []), ""];
+                                  const role = { ...(project.role || {}), items: roleItems };
+                                  handleArrayChange("personalProjects", idx, "role", role);
+                                }}
+                                className="text-white hover:underline"
+                              >
+                                + 항목 상세 추가
+                              </button>
+                            </div>
+                            {(project.role?.items || []).map((roleBullet: string, rIdx: number) => (
+                              <div key={rIdx} className="flex items-center gap-2">
+                                <span className="text-zinc-600 text-xs text-neutral-300">•</span>
+                                <input 
+                                  type="text"
+                                  value={roleBullet}
+                                  onChange={e => {
+                                    const roleItems = [...(project.role?.items || [])];
+                                    roleItems[rIdx] = e.target.value;
+                                    const role = { ...(project.role || {}), items: roleItems };
+                                    handleArrayChange("personalProjects", idx, "role", role);
+                                  }}
+                                  className="w-full bg-zinc-900 border border-zinc-800 rounded px-2 py-1 text-xs"
+                                />
+                                <button
+                                  onClick={() => {
+                                    const roleItems = [...(project.role?.items || [])];
+                                    roleItems.splice(rIdx, 1);
+                                    const role = { ...(project.role || {}), items: roleItems };
+                                    handleArrayChange("personalProjects", idx, "role", role);
+                                  }}
+                                  className="text-zinc-600 hover:text-red-400"
+                                >
+                                  ×
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Performance Achievements (수행 성과) */}
+                      <div className="space-y-2 border-t border-zinc-900 pt-4">
+                        <div className="flex justify-between items-center text-[10px] font-mono text-zinc-400">
+                          <span>지표 결과 및 달성 기여 (Results & Achievements)</span>
+                          <button
+                            onClick={() => {
+                              const updated = [...(project.results || []), ""];
+                              handleArrayChange("personalProjects", idx, "results", updated);
+                            }}
+                            className="text-white hover:underline"
+                          >
+                            + 성과 항목 추가
+                          </button>
+                        </div>
+                        <div className="space-y-2">
+                          {(project.results || []).map((resBullet: string, rIdx: number) => (
+                            <div key={rIdx} className="flex items-center gap-2">
+                              <span className="text-zinc-500 font-mono text-xs">✓</span>
+                              <input 
+                                type="text"
+                                value={resBullet}
+                                onChange={e => {
+                                  const updated = [...(project.results || [])];
+                                  updated[rIdx] = e.target.value;
+                                  handleArrayChange("personalProjects", idx, "results", updated);
+                                }}
+                                className="w-full bg-zinc-900 border border-zinc-800 rounded px-2 py-1.5 text-xs text-neutral-200 font-sans"
+                              />
+                              <button
+                                onClick={() => {
+                                  const updated = [...(project.results || [])];
+                                  updated.splice(rIdx, 1);
+                                  handleArrayChange("personalProjects", idx, "results", updated);
+                                }}
+                                className="text-zinc-500 hover:text-red-400"
+                              >
+                                ×
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* TAB 5: MEDIA ASSETS UPLOAD DECK */}
+            {activeTab === "media" && (
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-xl font-bold tracking-tight mb-1">드래그 앤 드롭 미디어 업로더 (Media Uplink Deck)</h2>
+                  <p className="text-xs text-neutral-400">깃허브에 번거롭게 이미지를 올리지 마세요! 로컬 컴퓨터의 사진이나 가이드 자료를 끌어놓는 순간, 즉각적인 라이브 URL이 생성됩니다.</p>
+                </div>
+
+                {/* Dropzone frame */}
+                <div 
+                  onDragOver={onDragOver}
+                  onDrop={onDrop}
+                  onClick={() => fileInputRef.current?.click()}
+                  className="border-2 border-dashed border-zinc-800 hover:border-zinc-500 transition-all bg-zinc-950/40 p-12 rounded-sm text-center cursor-pointer space-y-4 group/drop"
+                >
+                  <input 
+                    type="file" 
+                    ref={fileInputRef} 
+                    onChange={e => e.target.files && handleFileUpload(e.target.files[0])}
+                    className="hidden" 
+                  />
+                  
+                  <div className="w-14 h-14 bg-zinc-900 rounded-full flex items-center justify-center mx-auto group-hover/drop:scale-105 transition-transform border border-zinc-800">
+                    <Upload className="text-zinc-400 group-hover/drop:text-white transition-colors animate-bounce" size={22} />
+                  </div>
+
+                  <div className="space-y-1">
+                    <p className="text-xs font-bold">여기에 파일을 드래그하여 옮겨놓거나 클릭하여 찾아보기</p>
+                    <p className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest">Supports PNG, JPG, JPEG, GIF, PDF</p>
+                  </div>
+
+                  {uploadStatus && (
+                    <div className="text-xs text-zinc-300 font-bold font-mono pl-2 animate-pulse">
+                      STATUS: {uploadStatus}
+                    </div>
+                  )}
+                </div>
+
+                {/* Uplink tables lists */}
+                <div className="space-y-4">
+                  <h3 className="text-xs font-mono uppercase tracking-wider text-neutral-400">업로드 완료된 자산 라이브러리 목록 (Assets List)</h3>
+                  
+                  <div className="space-y-2.5">
+                    {uploadedFiles.map((file, idx) => (
+                      <div key={idx} className="p-4 border border-zinc-900 bg-zinc-950/45 rounded-sm flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                          <ImageIcon className="text-zinc-500 shrink-0" size={18} />
+                          <div>
+                            <p className="text-xs font-bold leading-none mb-1 text-zinc-300 font-mono">{file.name}</p>
+                            <p className="text-[10px] text-zinc-500 font-mono break-all">{file.url}</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-3 shrink-0">
+                          <img src={file.url} alt="thumbnail" className="w-10 h-10 object-cover border border-zinc-800 rounded" />
+                          <button
+                            onClick={() => copyUrl(file.url, idx)}
+                            className="p-2 border border-zinc-800 hover:border-zinc-600 rounded bg-zinc-900/40 text-neutral-300 hover:text-white transition-all outline-none focus:ring-0"
+                            title="이미지 주소 복사"
+                          >
+                            {copiedIndex === idx ? (
+                              <Check className="text-emerald-400 animate-scale" size={14} />
+                            ) : (
+                              <Copy size={13} />
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+
+                    {uploadedFiles.length === 0 && (
+                      <div className="py-20 text-center border border-zinc-900/60 bg-zinc-950/20 rounded-sm">
+                        <p className="text-xs text-zinc-600 font-mono italic">라이브러리가 비어 있습니다. 사진을 올려 주소를 빌드하세요.</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+          </div>
+        </main>
       </div>
     </div>
   );

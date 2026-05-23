@@ -1,5 +1,8 @@
 {
   "name": "LEE GEUN IL",
   "description": "Engineering Logic × Creative Vision - Portfolio of Lee Geun-il, Project Manager and Content Creator.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
