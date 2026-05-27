@@ -160,69 +160,12 @@ const INITIAL_DATA = {
         "대기 시간 최소화를 위한 현장 운영 가이드라인 설계",
         "클라이언트 및 입점 업체 통합 관리"
       ]
-    },
-    {
-      title: "2024 이슬라이브페스티벌",
-      category: "운영",
-      year: "2024",
-      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024cham.jpg",
-      contribution: "25%",
-      description: "본 프로젝트에서 당사는 F&B 운영 전반을 담당하였습니다.",
-      fullDescription: "본 프로젝트에서 당사는 F&B 운영 전반을 담당하였습니다.\n\n본 행사는 하이트진로를 클라이언트로 하여 진행되었으며, 관객 편의와 현장 운영 효율을 고려한 F&B 운영 구조를 설계 및 실행하였습니다. 다수 페스티벌에서의 운영 경험을 바탕으로, 사전 판매와 현장 판매를 병행하는 F&B 운영 방식을 적용하여 단일 일정의 페스티벌 환경에서도 안정적인 운영을 목표로 하였습니다.",
-      role: {
-        title: "운영PM",
-        items: [
-          "F&B 운영 구조 설계 및 실행",
-          "상품 구성 및 판매 방식 운영 관리",
-          "현장 F&B 부스 운영 총괄",
-          "운영 스탭 관리 및 현장 인솔",
-          "현장 이슈 발생 시 즉각적인 판단 및 문제 해결 주도",
-          "클라이언트(하이트진로)와의 운영 관련 커뮤니케이션 지원"
-        ]
-      },
-      process: [
-        {
-          phase: "사전 운영",
-          items: [
-            "F&B 운영 계획 수립",
-            "상품 구성 및 판매 방식 정리",
-            "현장 운영 가이드 및 스탭 배치 계획 수립"
-          ]
-        },
-        {
-          phase: "현장 운영",
-          items: [
-            "F&B 부스 설치 및 운영",
-            "사전 구매 및 현장 구매 고객 대응",
-            "관객 동선 관리 및 혼잡 대응",
-            "스탭 관리 및 현장 운영 총괄"
-          ]
-        },
-        {
-          phase: "이슈 대응",
-          items: [
-            "주문·수령 과정에서 발생하는 현장 이슈 즉각 대응",
-            "운영 방식 조정을 통한 현장 안정화"
-          ]
-        }
-      ],
-      results: [
-        "단일 일정 대형 페스티벌에서 F&B 운영 안정적으로 수행",
-        "관객 대기 시간 최소화를 통한 현장 이용 만족도 확보",
-        "브랜드 행사에 적합한 운영 품질 유지",
-        "이전 페스티벌 운영 경험을 성공적으로 확장 적용"
-      ],
-      details: [
-        "현장 운영 프로세스 최적화",
-        "관객 동선 및 안전 관리 시스템 구축",
-        "F&B 및 편의시설 통합 운영 관리"
-      ]
     }
   ],
   personalProjects: [
     {
       title: "GREENERY : 푸르게 푸르게 푸르러져라",
-      category: "Music",
+      category: "상품기획",
       year: "2023",
       image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img5.png",
       contribution: "70%",
@@ -232,7 +175,7 @@ const INITIAL_DATA = {
       description: "싱어송라이터 이그린 EP <GREENERY> 발매. 발매 작업기를 담은 책 형태의 새로운 앨범.",
       fullDescription: "싱어송라이터 ‘이그린’의 EP [GREENERY] 발매와 함께, 창작 과정과 영감을 기록한 아트북 형태의 피지컬 앨범을 기획·제작했습니다.\n\n효용성이 낮은 기존 플라스틱 CD의 한계를 문제로 정의하고, 이를 대체할 수 있는 새로운 형태의 앨범을 설계했습니다. 텀블벅 크라우드펀딩을 통해 목표 금액의 196%를 달성하며 프로젝트를 성공적으로 런칭했습니다.\n\n전곡 작사, 작곡, 프로듀싱은 물론, 디자인 디렉팅, 유통, 쇼케이스 기획까지 프로젝트 전반을 주도했습니다.",
       role: {
-        title: "담당 업무",
+        title: "기획",
         items: [
           "Planning: 프로젝트 전체 기획\n펀딩 전략 수립",
           "Production: 앨범 제작\n책 디자인 및 출판\n아티스트 굿즈 제작",
@@ -275,7 +218,7 @@ const INITIAL_DATA = {
       description: "부산 아티스트 이그린과 서울 아티스트 우예린의 콜라보레이션 공연.",
       fullDescription: "부산을 기반으로 활동하는 아티스트 '이그린'과 서울의 아티스트 '우예린'이 만나 음악적 교감을 나누는 특별한 콜라보레이션 무대를 기획했습니다.\n\n서로 다른 지역적 배경을 가진 두 아티스트의 조화를 통해 새로운 관객층을 유입시키고, 단순한 공연을 넘어 체험형 콘텐츠를 결합하여 관객들에게 잊지 못할 경험을 선사하는 것을 목표로 했습니다. 기획부터 제작, 홍보, 현장 운영까지 공연의 전 단계에 걸쳐 밀도 높은 작업을 수행했습니다.",
       role: {
-        title: "담당 업무",
+        title: "기획",
         items: [
           "Planning: 기획서 작성\n공연 전체 컨셉 수립",
           "Booking: 아티스트 섭외\n공연장(KT&G 상상마당) 조율",
@@ -312,7 +255,7 @@ const INITIAL_DATA = {
       description: "도시에서 즐기는 한 여름 밤의 꿈. 도심의 건물 옥상에서 각양각색 인디 뮤지션의 음악을 즐긴다.",
       fullDescription: "도심 속 건물 옥상이라는 이색적인 공간에서 펼쳐지는 인디 음악 공연 시리즈입니다. '열대야'라는 테마에 맞춰 한여름 밤의 정취를 느낄 수 있는 아티스트 라인업과 공간 연출을 기획했습니다.\n\n관객들에게 일상 속 특별한 휴식을 선사하며, 지역 문화 공간의 활용도를 높이는 성공적인 사례를 만들었습니다. 기획부터 운영까지 전 과정을 주도하며 프로젝트의 완성도를 높였습니다.",
       role: {
-        title: "담당 업무",
+        title: "기획",
         items: [
           "Planning: 프로젝트 기획서 작성\n콘셉트 수립 및 협업 파트너 대상 제안",
           "Booking: 아티스트 및 공연/행사 장소 섭외\n일정 및 조건 협의",
@@ -335,43 +278,6 @@ const INITIAL_DATA = {
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2036.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2037.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2038.jpg"
-      ]
-    },
-    {
-      title: "오후의 향기",
-      category: "Concert",
-      year: "2021",
-      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img2.jpg",
-      contribution: "70%",
-      location: "파나카 B",
-      support: "부산문화재단",
-      cast: "모멘츠유미, 이공이공, 오느린윤혜린",
-      objectPosition: "top",
-      description: "평화로운 일요일 오후, 차한잔과 함께 관람할 수 있는 힐링 공연. 아티스트가 직접 만든 향과 음악을 통해 공감각적 형태 공연을 향유한다.",
-      fullDescription: "평화로운 일요일 오후, 차 한 잔과 함께 즐기는 힐링 공연 시리즈입니다. 아티스트가 직접 조향한 향기와 음악을 결합하여 관객들에게 공감각적인 경험을 선사하는 것을 목표로 했습니다.\n\n부산 지역의 소규모 편성 아티스트들에게 무대 기회를 제공하고, 아티스트의 정체성이 담긴 굿즈 제작을 통해 공연의 가치를 확장했습니다. 기획부터 제작, 홍보, 현장 운영까지 전 과정을 주도하며 따뜻한 감성의 브랜드 공연을 구축했습니다.",
-      role: {
-        title: "담당 업무",
-        items: [
-          "Planning: 기획서 작성\n프로젝트 전체 콘셉트 수립",
-          "Booking: 출연 아티스트 섭외\n공연 베뉴(공간) 섭외 및 일정 조율",
-          "Promotion: 인스타그램 기반 홍보 기획 및 운영\n라이브 영상 촬영 및 콘텐츠 활용",
-          "Production: 메이킹·라이브 영상 제작 및 유통"
-        ]
-      },
-      results: [
-        "아티스트 섭외 및 공연 전석 매진",
-        "콘텐츠 및 굿즈 제작 -> 티켓, 엽서, 우표 제작\n라이브 클립 영상 5편 제작·배포",
-        "온라인 홍보 활성화 및 오프라인 홍보 -> 인스타그램 홍보\n현수막·포스터 등 오프라인 홍보물 제작 및 배포"
-      ],
-      images: [
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/e7d84bbdc228906326e2645347b5f44ad1a75293/img%2011.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/e7d84bbdc228906326e2645347b5f44ad1a75293/img%2012.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/e7d84bbdc228906326e2645347b5f44ad1a75293/img%2013.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/e7d84bbdc228906326e2645347b5f44ad1a75293/img%2014.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/2337ca8c54dd5f019a4869caceaea3d6036c6e12/img%2015.jpeg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/2337ca8c54dd5f019a4869caceaea3d6036c6e12/img%2016.jpeg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/2337ca8c54dd5f019a4869caceaea3d6036c6e12/img%2017.jpeg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/2337ca8c54dd5f019a4869caceaea3d6036c6e12/img%2018.JPG"
       ]
     }
   ],
@@ -455,19 +361,19 @@ function initializeEnvironment() {
   }
 
   // Seed DB with existing configuration from workspace or fallback to default
-  if (!fs.existsSync(DB_PATH)) {
-    if (fs.existsSync(originalDbPath)) {
-      try {
-        console.log(`Seeding DB from workspace source: ${originalDbPath}`);
-        fs.copyFileSync(originalDbPath, DB_PATH);
-      } catch (e: any) {
-        console.error(`Failed to copy existing database: ${e.message}`);
+  if (fs.existsSync(originalDbPath)) {
+    try {
+      console.log(`Seeding DB from workspace source: ${originalDbPath}`);
+      fs.copyFileSync(originalDbPath, DB_PATH);
+    } catch (e: any) {
+      console.error(`Failed to copy existing database: ${e.message}`);
+      if (!fs.existsSync(DB_PATH)) {
         fs.writeFileSync(DB_PATH, JSON.stringify(INITIAL_DATA, null, 2), "utf-8");
       }
-    } else {
-      console.log("Seeding DB with initial fallback data");
-      fs.writeFileSync(DB_PATH, JSON.stringify(INITIAL_DATA, null, 2), "utf-8");
     }
+  } else if (!fs.existsSync(DB_PATH)) {
+    console.log("Seeding DB with initial fallback data");
+    fs.writeFileSync(DB_PATH, JSON.stringify(INITIAL_DATA, null, 2), "utf-8");
   }
 
   // Ensure uploads directory exists in /tmp

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,900&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;700&family=Zen+Old+Mincho:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,900&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;700&family=Zen+Old+Mincho:wght@400;700;900&family=Nanum+Pen+Script&family=Gamja+Flower&display=swap');
 @import url('https://cdn.jsdelivr.net/gh/sunn-us/sunn-font/SeoulHangang/SeoulHangang.css');
 @import "tailwindcss";
 
@@ -8,6 +8,8 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   --font-cooper: "Fraunces", serif;
   --font-zen: "Zen Old Mincho", serif;
+  --font-hand: "Nanum Pen Script", cursive;
+  --font-flower: "Gamja Flower", cursive;
 }
 
 @layer base {
@@ -39,5 +41,27 @@
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.5);
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  @keyframes draw-pencil {
+    from {
+      stroke-dashoffset: 200;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  .pencil-draw {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    animation: draw-pencil 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 }

@@ -9,6 +9,7 @@ import { DEFAULT_PORTFOLIO_DATA, PortfolioData } from "./default_data";
 import { 
   ArrowUpRight, 
   ChevronRight, 
+  ChevronLeft,
   X,
   Mail,
   Phone,
@@ -21,6 +22,7 @@ import {
   Upload,
   Check,
   ArrowLeft,
+  ArrowRight,
   Copy,
   Save,
   Image as ImageIcon
@@ -53,10 +55,16 @@ export interface Project {
   results?: string[];
 }
 
+const formatCategory = (category: string) => {
+  if (!category) return "";
+  if (category === "Music") return "음악";
+  if (category === "Concert") return "공연";
+  return category;
+};
+
 const SECTIONS = [
   { id: "about", label: "ABOUT ME", color: "bg-white text-black" },
-  { id: "project1", label: "PROJECT I", color: "bg-white text-black" },
-  { id: "project2", label: "PROJECT II", color: "bg-white text-black" },
+  { id: "project1", label: "PROJECT", color: "bg-white text-black" },
   { id: "activities", label: "KEY ACTIVITIES", color: "bg-white text-black" },
 ];
 
@@ -119,34 +127,292 @@ const AutoFitTitle: React.FC<{ children: string; className?: string }> = ({ chil
   );
 };
 
-const ProjectCard: React.FC<{ project: Project; onClick: (p: Project) => void; imageAspect?: string }> = ({ project, onClick, imageAspect }) => (
-  <motion.div 
-    variants={staggerItem}
-    className="group cursor-pointer w-full"
-    onClick={() => onClick(project)}
-  >
-    <div className="flex justify-between items-center mb-4 border-b border-black/5 pb-2 h-10">
-      <h3 className="text-base md:text-lg font-bold tracking-tight truncate flex-1">{project.title}</h3>
-    </div>
-    <div className={`relative overflow-hidden bg-gray-50 mb-3 ${imageAspect || ""}`}>
-      <img 
-        src={project.image} 
-        alt={project.title} 
-        className={`${imageAspect ? "w-full h-full object-cover" : "w-full h-auto"} transition-all duration-1000 group-hover:scale-105`}
-        style={{ objectPosition: project.objectPosition || "center" }}
-        referrerPolicy="no-referrer"
+const OptimizedImage: React.FC<{
+  src: string;
+  alt: string;
+  className?: string;
+  style?: React.CSSProperties;
+  referrerPolicy?: "no-referrer" | "origin" | "unsafe-url" | "no-referrer-when-downgrade";
+}> = ({ src, alt, className, style, referrerPolicy }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(false);
+    const img = new Image();
+    img.src = src;
+    img.onload = () => {
+      setIsLoaded(true);
+    };
+  }, [src]);
+
+  return (
+    <div className="relative w-full h-full overflow-hidden flex items-center justify-center bg-neutral-100 rounded-[8px]">
+      {!isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-neutral-100/80 animate-pulse">
+          <div className="w-4 h-4 border border-neutral-300 border-t-neutral-800 rounded-full animate-spin" />
+        </div>
+      )}
+      <img
+        src={src}
+        alt={alt}
+        className={`${className || ""} transition-opacity duration-300 ${isLoaded ? "opacity-100" : "opacity-0"}`}
+        style={style}
+        referrerPolicy={referrerPolicy}
+        onLoad={() => setIsLoaded(true)}
       />
-      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-      </div>
     </div>
-    <div className="flex justify-between items-center">
-      <span className="text-[9px] font-mono uppercase tracking-widest opacity-40">{project.year}</span>
+  );
+};
+
+const FESTIVAL_POSTERS = [
+  {
+    title: "WATERBOMB",
+    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/9d41580d7739017f4b186f92faf6491a60264fd5/2024waterbomb.png",
+    period: "2024"
+  },
+  {
+    title: "인천펜타포트",
+    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024incheonrock.png",
+    period: "2024"
+  },
+  {
+    title: "부산국제록페스티벌",
+    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024bsrock.png",
+    period: "2024"
+  },
+  {
+    title: "이슬라이브페스티벌",
+    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024cham.jpg",
+    period: "2024"
+  }
+];
+
+const CONCERT_POSTERS = [
+  {
+    title: "Flower Planet",
+    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg",
+    period: "2022"
+  },
+  {
+    title: "열대야",
+    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img3.jpg",
+    period: "2022"
+  },
+  {
+    title: "Flower Planet 쇼케이스",
+    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2041.jpg",
+    period: "2022"
+  },
+  {
+    title: "열대야 라이브",
+    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2031.jpg",
+    period: "2022"
+  }
+];
+
+const ProjectCard: React.FC<{ 
+  project: Project; 
+  onClick: (p: Project) => void; 
+  imageAspect?: string; 
+  isWide?: boolean;
+}> = ({ project, onClick, imageAspect, isWide }) => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, clientWidth } = scrollContainerRef.current;
+      const scrollAmount = clientWidth * 0.7;
+      scrollContainerRef.current.scrollTo({
+        left: direction === "left" ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
+        behavior: "smooth"
+      });
+    }
+  };
+
+  const posters = project.title === "공연 운영" ? CONCERT_POSTERS : FESTIVAL_POSTERS;
+
+  return (
+    <motion.div 
+      variants={staggerItem}
+      className={`group cursor-pointer w-full bg-white border border-neutral-200/50 rounded-[15px] p-5 shadow-3xs hover:shadow-md hover:border-neutral-300 hover:-translate-y-1.5 hover:scale-[1.01] transition-all duration-300 flex flex-col justify-between ${isWide ? "" : ""}`}
+      onClick={() => onClick(project)}
+    >
+      <div>
+        <div className="flex justify-center items-center mb-4 border-b border-black/5 pb-2 h-10">
+          <h3 className="text-base md:text-lg font-bold tracking-tight truncate flex-1 text-center text-neutral-800 group-hover:text-black transition-colors">{project.title}</h3>
+        </div>
+        {isWide ? (
+          <div className="relative w-full mb-4 bg-neutral-50/50 border border-neutral-100/60 rounded-[12px] aspect-[600/390] flex items-center justify-center p-2 group/grid">
+            <div className="grid grid-cols-2 gap-2 h-full w-full">
+              {posters.map((poster, index) => (
+                <div key={index} className="relative overflow-hidden rounded-[8px] flex items-center justify-center bg-neutral-100 h-full w-full">
+                  <OptimizedImage 
+                    src={poster.src} 
+                    alt={poster.title} 
+                    className="w-full h-full object-cover object-top"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className={`relative overflow-hidden bg-gray-50 mb-4 rounded-[12px] ${imageAspect || ""}`}>
+            <OptimizedImage 
+              src={project.image} 
+              alt={project.title} 
+              className={`${imageAspect ? "w-full h-full object-cover" : "w-full h-auto"}`}
+              style={{ objectPosition: project.objectPosition || "center" }}
+              referrerPolicy="no-referrer"
+            />
+          </div>
+        )}
+      </div>
+
+    {/* Clean Information Table */}
+    <div className={`mt-2 border-t border-black/5 pt-3.5 space-y-3.5 opacity-90 group-hover:opacity-100 transition-all duration-300 ${isWide ? 'grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-3 space-y-0' : ''}`}>
+      <div className="flex flex-col gap-1.5 text-xs text-neutral-600">
+        <div className="flex items-center justify-between">
+          <span className="font-sans text-[11px] text-neutral-400 font-semibold tracking-wider shrink-0 uppercase">기여도</span>
+          <span className="font-mono font-bold text-neutral-800 text-[12px]">{project.contribution || "0%"}</span>
+        </div>
+        <div className="w-full bg-neutral-100 h-1 rounded-full overflow-hidden">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: project.contribution || "0%" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="bg-neutral-800 h-full rounded-full"
+          />
+        </div>
+      </div>
+      {(project.title === "페스티벌 운영" || project.title === "공연 운영") ? (
+        <div className="sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5 pt-3 border-t border-neutral-100 text-xs text-neutral-600 w-full">
+          {/* Left: 분야 */}
+          <div className="flex items-center justify-between">
+            <span className="font-sans text-[11px] text-neutral-400 font-semibold tracking-wider shrink-0 uppercase">분야</span>
+            <div className="flex flex-wrap gap-1.5 justify-end">
+              {(project.title === "공연 운영" 
+                ? "하우스, 티켓, 안내, MD 판매, 컴플레인 응대" 
+                : "종합 안내, 티켓, F&B, 물품보관소, 셔틀버스"
+              ).split(", ").map((item, index) => (
+                <span
+                  key={index}
+                  className="font-medium text-neutral-800 bg-neutral-50/75 border border-neutral-200/80 px-2 py-0.5 text-[11px] tracking-wide select-none transition-all duration-300 rounded-[6px] shadow-4xs"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+          
+          {/* Right: 담당 역할 */}
+          {project.role?.title ? (
+            <div className="flex items-start justify-between">
+              <span className="font-sans text-[11px] text-neutral-400 font-semibold tracking-wider shrink-0 uppercase mt-[5px]">담당 역할</span>
+              <div className="flex flex-col items-end gap-1.5 min-w-0 max-w-[70%] text-right">
+                {project.role.title.split(",").map((t, idx) => (
+                  <span 
+                    key={idx}
+                    className="inline-block font-semibold text-rose-600 bg-rose-50/60 border border-rose-500/10 px-2 py-0.5 rounded-[6px] text-[11px] tracking-wide select-none truncate max-w-full" 
+                    title={t.trim()}
+                  >
+                    {t.trim()}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div />
+          )}
+        </div>
+      ) : (
+        <div className={`grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5 pt-3 border-t border-neutral-100 text-xs text-neutral-600 w-full ${isWide ? 'sm:col-span-2' : ''}`}>
+          {/* Left: 분야 */}
+          <div className="flex items-center justify-between">
+            <span className="font-sans text-[11px] text-neutral-400 font-semibold tracking-wider shrink-0 uppercase">분야</span>
+            <div className="flex flex-wrap gap-1.5 justify-end">
+              {(project.category || "").split(",").map((cat, idx) => (
+                <span
+                  key={idx}
+                  className="font-medium text-neutral-800 bg-neutral-50/75 border border-neutral-200/80 px-2 py-0.5 text-[11px] tracking-wide select-none transition-all duration-300 rounded-[6px] shadow-4xs"
+                >
+                  {formatCategory(cat.trim())}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: 담당 역할 */}
+          {project.role?.title && (
+            <div className="flex items-start justify-between">
+              <span className="font-sans text-[11px] text-neutral-400 font-semibold tracking-wider shrink-0 uppercase mt-[5px]">담당 역할</span>
+              <div className="flex flex-col items-end gap-1.5 min-w-0 max-w-[70%] text-right">
+                {project.role.title.split(",").map((t, idx) => (
+                  <span 
+                    key={idx}
+                    className="inline-block font-semibold text-rose-600 bg-rose-50/60 border border-rose-500/10 px-2 py-0.5 rounded-[6px] text-[11px] select-none truncate max-w-full" 
+                    title={t.trim()}
+                  >
+                    {t.trim()}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   </motion.div>
-);
+  );
+};
 
-const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> = ({ project, onClose }) => {
-  const isPersonal = false;
+const ProjectModal: React.FC<{
+  project: Project | null;
+  onClose: () => void;
+}> = ({ project, onClose }) => {
+  const [slidePage, setSlidePage] = useState(1);
+
+  const isFestival = project?.title === "페스티벌 운영";
+  const tabs = isFestival ? [
+    { page: 1, label: "개요" },
+    { page: 2, label: "티켓 운영" },
+    { page: 3, label: "상품 관리" },
+    { page: 4, label: "현장 운영" },
+    { page: 5, label: "사후 관리" },
+    { page: 6, label: "갤러리" }
+  ] : [
+    { page: 1, label: "개요" },
+    { page: 2, label: "티켓 운영" },
+    { page: 3, label: "현장 운영" },
+    { page: 4, label: "사후 관리" },
+    { page: 5, label: "갤러리" }
+  ];
+  const maxPages = tabs.length;
+
+  // Reset page when a new project is opened
+  useEffect(() => {
+    if (project) {
+      setSlidePage(1);
+    }
+  }, [project]);
+
+  // keyboard navigation (Left/Right arrows for PPT experience within the modal)
+  useEffect(() => {
+    if (!project) return;
+    
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        setSlidePage(p => Math.max(1, p - 1));
+      } else if (e.key === "ArrowRight") {
+        setSlidePage(p => Math.min(maxPages, p + 1));
+      } else if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [project, onClose, maxPages]);
 
   return (
     <AnimatePresence>
@@ -156,380 +422,742 @@ const ProjectModal: React.FC<{ project: Project | null; onClose: () => void }> =
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/50 backdrop-blur-md z-[200] cursor-zoom-out"
+            className="fixed inset-0 bg-neutral-950/40 backdrop-blur-xs z-[200]"
           />
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 40 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-4 md:inset-12 bg-white z-[201] overflow-hidden flex flex-col shadow-2xl rounded-xl border border-neutral-100"
+            exit={{ opacity: 0, y: 15 }}
+            transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+            className="fixed inset-2 sm:inset-4 md:inset-6 lg:inset-8 xl:inset-12 xl:max-w-[1450px] xl:mx-auto bg-white z-[201] overflow-hidden flex flex-col font-sans text-neutral-800 border border-transparent shadow-[0_15px_40px_-5px_rgba(0,0,0,0.1)] rounded-[15px] xl:h-[calc(100vh-96px)]"
           >
-            <button 
-              onClick={onClose} 
-              className="absolute top-6 right-6 z-[202] p-2.5 hover:bg-neutral-900 hover:text-white transition-all rounded-full border border-neutral-200 bg-white/90 backdrop-blur-sm shadow-sm"
-            >
-              <X className="w-4 h-4" />
-            </button>
-            
-            <div className="flex-1 overflow-y-auto">
-              {!isPersonal ? (
-                // Standard Layout (Project 1 Style) - Sleek & Ultra-Legible
-                <div className="max-w-6xl mx-auto px-6 md:px-12 py-16 md:py-24">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-                    {/* Left Meta Information Column */}
-                    <div className="lg:col-span-4 space-y-8 bg-neutral-50 p-6 md:p-8 rounded-lg border border-neutral-100">
-                      <div>
-                        <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block mb-6">프로젝트 정보</span>
-                        <div className="space-y-6">
-                          <div>
-                            <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">연도</p>
-                            <p className="text-sm font-semibold text-neutral-850">{project.year}</p>
+            {/* Upper Action Bar / Info Panel */}
+            <div className="h-[75px] border-b border-neutral-100 px-4 sm:px-8 flex items-center justify-between shrink-0 select-none bg-white">
+              <div className="flex items-center gap-3 sm:gap-6 overflow-x-auto no-scrollbar py-1">
+                <span className="text-[14px] font-mono text-neutral-400 font-bold hidden md:inline-block shrink-0">
+                  {project.title}
+                </span>
+                <span className="h-4 w-px bg-neutral-200 hidden md:inline-block shrink-0" />
+                
+                {/* 1개요, 2티켓, 3상품 관리/기타 탭 네비게이션 */}
+                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                  {tabs.map((tab) => (
+                    <button
+                      key={tab.page}
+                      onClick={() => setSlidePage(tab.page)}
+                      className={`px-3 py-1 text-[14px] font-semibold tracking-tight transition-all duration-200 rounded-[15px] cursor-pointer flex items-center justify-center gap-1.5 shrink-0 ${
+                        slidePage === tab.page
+                          ? "bg-neutral-950 text-white font-bold"
+                          : "bg-neutral-50 hover:bg-neutral-100 text-neutral-500 border border-neutral-200/40"
+                      }`}
+                    >
+                      <span className={`text-[11px] font-mono opacity-80 leading-none relative ${slidePage === tab.page ? "text-rose-400" : "text-neutral-400"}`}>0{tab.page}</span>
+                      <span className="leading-none">{tab.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Close Button - Sharp Modern Layout WITH NO BORDER */}
+              <button 
+                onClick={onClose} 
+                className="p-2 hover:bg-neutral-950 hover:text-white transition-all rounded-none cursor-pointer text-neutral-650 outline-none border-none shrink-0"
+                aria-label="닫기"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Floating Left/Right Arrow Buttons (Sharp Rectangles with no borders, shadows, or outlines) */}
+            {slidePage > 1 && (
+              <button
+                onClick={() => setSlidePage(p => Math.max(1, p - 1))}
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-[205] w-12 h-12 bg-white/95 text-neutral-900 hover:bg-neutral-950 hover:text-white transition-all duration-300 rounded-none cursor-pointer flex items-center justify-center outline-none border-none select-none group/prev"
+                title="이전 슬라이드 (←)"
+              >
+                <ChevronLeft className="w-5 h-5 group-hover/prev:-translate-x-0.5 transition-transform" />
+              </button>
+            )}
+            {slidePage < maxPages && (
+              <button
+                onClick={() => setSlidePage(p => Math.min(maxPages, p + 1))}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-[205] w-12 h-12 bg-white/95 text-neutral-900 hover:bg-neutral-950 hover:text-white transition-all duration-300 rounded-none cursor-pointer flex items-center justify-center outline-none border-none select-none group/next"
+                title="다음 슬라이드 (→)"
+              >
+                <ChevronRight className="w-5 h-5 group-hover/next:translate-x-0.5 transition-transform" />
+              </button>
+            )}
+
+            {/* Main Content Area with Page Slide Animations */}
+            <div className="flex-1 overflow-y-auto select-text scrollbar-thin bg-white">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={slidePage}
+                  initial={{ opacity: 0, x: 15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -15 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  className="max-w-6xl xl:max-w-[1300px] mx-auto px-6 sm:px-12 py-12 md:py-16"
+                >
+                  {/* Slide Content rendering depends on slidePage */}
+                  {slidePage === 1 && (
+                    <div className={`grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 ${(project.title === "페스티벌 운영" || project.title === "공연 운영") ? "items-stretch" : "items-center"}`}>
+                      {/* Left: Beautiful Hero photo frame or 2*2 posters */}
+                      <div className={`md:col-span-6 w-full flex justify-center ${(project.title === "페스티벌 운영" || project.title === "공연 운영") ? "self-stretch" : ""}`}>
+                        {(project.title === "페스티벌 운영" || project.title === "공연 운영") ? (
+                          <div className="grid grid-cols-2 gap-4 w-full md:w-[499px] md:h-[660px] h-full min-h-[460px] md:min-h-[660px] mx-auto bg-transparent">
+                            {(project.title === "공연 운영" ? CONCERT_POSTERS : FESTIVAL_POSTERS).map((poster, index) => (
+                              <div key={index} className="relative overflow-hidden transition-all duration-300 w-full h-full group/poster flex items-center justify-center">
+                                <OptimizedImage 
+                                  src={poster.src} 
+                                  alt={poster.title} 
+                                  className="w-full h-full object-contain select-none transition-transform duration-700 group-hover/poster:scale-[1.04]"
+                                  referrerPolicy="no-referrer"
+                                />
+                              </div>
+                            ))}
                           </div>
-                          <div>
-                            <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">카테고리</p>
-                            <p className="text-sm font-semibold text-neutral-850">{project.category}</p>
-                          </div>
-                          {project.location && (
-                            <div>
-                              <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">장소</p>
-                              <p className="text-sm font-semibold text-neutral-850">{project.location}</p>
-                            </div>
-                          )}
-                          {project.support && (
-                            <div>
-                              <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">제작지원</p>
-                              <p className="text-sm font-semibold text-neutral-850">{project.support}</p>
-                            </div>
-                          )}
-                          {project.cast && (
-                            <div>
-                              <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-1">출연진</p>
-                              <p className="text-sm font-semibold text-neutral-850 leading-snug">{project.cast}</p>
-                            </div>
-                          )}
-                          {project.contribution && (
-                            <div>
-                              <p className="text-[10px] font-mono uppercase tracking-wider text-neutral-400 mb-2">기여도</p>
-                              <div className="space-y-2">
-                                <div className="h-[3px] w-full bg-neutral-200 relative overflow-hidden rounded-full">
-                                  <motion.div 
-                                    initial={{ width: 0 }}
-                                    animate={{ width: project.contribution }}
-                                    transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                                    className="absolute inset-y-0 left-0 bg-neutral-900 rounded-full"
-                                  />
-                                </div>
-                                <p className="text-xs font-semibold font-mono text-neutral-800">{project.contribution}</p>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right Deep Content Column */}
-                    <div className="lg:col-span-8 space-y-12">
-                      <div>
-                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-sans font-extrabold tracking-tight text-neutral-900 leading-tight">
-                          {project.title}
-                        </h2>
-                      </div>
-
-                      {project.fullDescription ? (
-                        <div className="space-y-12">
-                          {/* Project Description */}
-                          <section className="border-t border-neutral-100 pt-8">
-                            <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block mb-4">01 / Project Description</span>
-                            <p className="text-sm md:text-base leading-relaxed text-neutral-700 whitespace-pre-line max-w-3xl">
-                              {project.fullDescription}
-                            </p>
-                          </section>
-
-                          {/* Role */}
-                          {project.role && (
-                            <section className="border-t border-neutral-100 pt-8">
-                              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block mb-6">02 / Personal Role</span>
-                              <div className="bg-neutral-950 text-white p-6 md:p-8 rounded-lg shadow-sm">
-                                <h4 className="text-sm md:text-base font-bold mb-4 tracking-tight flex items-center gap-2 text-white">
-                                  <span className="w-1.5 h-1.5 bg-neutral-300 rounded-full shrink-0" />
-                                  {project.role.title}
-                                </h4>
-                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
-                                  {project.role.items.map((item, i) => {
-                                    const hasColon = item.includes(": ");
-                                    const [label, desc] = hasColon ? item.split(": ") : [null, item];
-                                    return (
-                                      <li key={i} className="text-xs md:text-sm text-neutral-300 leading-relaxed flex items-start gap-2.5">
-                                        <span className="mt-2 w-1 h-1 bg-white/40 rounded-full shrink-0" />
-                                        <span>
-                                          {label ? (
-                                            <>
-                                              <strong className="text-white font-semibold">{label}: </strong>
-                                              {desc}
-                                            </>
-                                          ) : (
-                                            desc
-                                          )}
-                                        </span>
-                                      </li>
-                                    );
-                                  })}
-                                </ul>
-                              </div>
-                            </section>
-                          )}
-
-                          {/* Process */}
-                          {project.process && (
-                            <section className="border-t border-neutral-100 pt-8">
-                              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block mb-6">03 / Process</span>
-                              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                {project.process.map((p, i) => (
-                                  <div key={i} className="space-y-4 p-5 rounded-lg border border-neutral-100 bg-neutral-50/50">
-                                    <h4 className="text-xs font-bold uppercase tracking-wider border-b border-neutral-200 pb-2 text-neutral-900 flex justify-between">
-                                      <span>{p.phase}</span>
-                                      <span className="text-[9px] font-mono text-neutral-400 font-normal">0{i+1}</span>
-                                    </h4>
-                                    <ul className="space-y-2">
-                                      {p.items.map((item, j) => (
-                                        <li key={j} className="text-xs text-neutral-600 flex items-start gap-2 leading-relaxed">
-                                          <span className="mt-1.5 w-1 h-1 bg-neutral-300 rounded-full shrink-0" />
-                                          <span>{item}</span>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                ))}
-                              </div>
-                            </section>
-                          )}
-
-                           {/* Results */}
-                          {project.results && (
-                            <section className="border-t border-neutral-100 pt-8">
-                              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block mb-4">04 / Key Results</span>
-                              <div className="space-y-4">
-                                {project.results.map((result, i) => {
-                                  const hasArrow = result.includes(" -> ");
-                                  if (hasArrow) {
-                                    const [goal, outcome] = result.split(" -> ");
-                                    return (
-                                      <div key={i} className="border-b border-neutral-100 pb-4 last:border-none">
-                                        <div className="flex items-center gap-3 mb-2">
-                                          <span className="text-[9px] font-mono text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded">RESULT_0{i+1}</span>
-                                          <p className="text-xs md:text-sm font-semibold text-neutral-900">{goal}</p>
-                                        </div>
-                                        <div className="ml-10 p-4 bg-neutral-50 rounded border-l-2 border-neutral-900">
-                                          <p className="text-xs text-neutral-600 leading-relaxed whitespace-pre-line">{outcome}</p>
-                                        </div>
-                                      </div>
-                                    );
-                                  }
-                                  return (
-                                    <div key={i} className="text-xs md:text-sm font-normal flex items-start gap-4 py-3 border-b border-neutral-100 last:border-none">
-                                      <span className="text-[9px] font-mono text-neutral-400 mt-0.5 bg-neutral-100 px-1.5 py-0.5 rounded">RESULT_0{i+1}</span>
-                                      <span className="flex-1 text-neutral-700 font-medium leading-relaxed">{result}</span>
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            </section>
-                          )}
-
-                          {/* Gallery */}
-                          {project.images && (
-                            <section className="border-t border-neutral-100 pt-8">
-                              <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block mb-6">05 / Gallery</span>
-                              <div className="columns-1 md:columns-2 gap-4 space-y-4">
-                                {project.images.map((img, i) => (
-                                  <div key={i} className="break-inside-avoid bg-neutral-50 overflow-hidden rounded-lg border border-neutral-100 shadow-sm">
-                                    <img 
-                                      src={img} 
-                                      alt={`${project.title} gallery ${i}`} 
-                                      className="w-full h-auto block transition-transform hover:scale-[1.01] duration-500"
-                                      referrerPolicy="no-referrer"
-                                    />
-                                  </div>
-                                ))}
-                              </div>
-                            </section>
-                          )}
-                        </div>
-                      ) : (
-                        <>
-                          <div className="aspect-[16/9] bg-neutral-50 mb-8 overflow-hidden rounded-lg border border-neutral-100">
-                            <img 
-                              src={project.image} 
-                              alt={project.title} 
-                              className="w-full h-full object-cover" 
-                              referrerPolicy="no-referrer" 
+                        ) : (
+                          <div className="max-w-sm mx-auto aspect-[4/5] overflow-hidden border border-neutral-200 shadow-sm bg-neutral-50 rounded-none w-full flex items-center justify-center">
+                            <OptimizedImage
+                              src={project.image}
+                              alt={project.title}
+                              className="w-full h-full object-contain"
+                              style={{ objectPosition: project.objectPosition || "center" }}
+                              referrerPolicy="no-referrer"
                             />
                           </div>
+                        )}
+                      </div>
 
-                          {project.details && (
-                            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 border-t border-neutral-100 pt-8">
-                              <div className="md:col-span-4">
-                                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold block">Key Achievements</span>
+                      {/* Right: Title, spec sheet & description */}
+                      <div className="md:col-span-6 space-y-6 max-w-[530px] w-full md:mx-auto">
+                        <div>
+                          <span className="text-[10px] uppercase tracking-widest font-mono text-rose-500 font-bold bg-rose-50/50 px-2 py-1 border border-rose-100/40">
+                            {formatCategory(project.category)} / {project.year}
+                          </span>
+                          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-neutral-900 font-sans leading-tight mt-3">
+                             {project.title}
+                          </h2>
+                          {project.subtitle && (
+                            <p className="text-sm text-neutral-500 font-normal mt-1.5">
+                              {project.subtitle}
+                            </p>
+                          )}
+                        </div>
+
+                        {(() => {
+                          const desc = project.fullDescription || project.description || "";
+                          const splitIndex = desc.indexOf("[주요 운영 실적]");
+                          if (splitIndex !== -1) {
+                            const part1 = desc.substring(0, splitIndex).trim();
+                            const part2 = desc.substring(splitIndex).trim();
+                            return (
+                              <>
+                                <div className="w-full">
+                                  <p className="text-neutral-700 text-sm md:text-[15px] leading-relaxed tracking-normal whitespace-pre-line text-justify font-sans">
+                                    {part1}
+                                  </p>
+                                </div>
+
+                                {/* Specs Card */}
+                                <div className="bg-[#F8F9FA] p-5 border border-neutral-200/60 rounded-[15px] space-y-3 w-full">
+                                  <h4 className="text-[9px] font-mono font-bold tracking-widest text-neutral-400 uppercase border-b border-neutral-200 pb-1.5">
+                                    PROJECT SPECIFICATION
+                                  </h4>
+                                  <dl className="grid grid-cols-3 gap-y-2.5 text-xs">
+                                    <dt className="text-neutral-500 col-span-1 font-medium self-center">분야</dt>
+                                    <dd className="text-neutral-900 col-span-2 font-bold flex flex-wrap gap-1.5 items-center font-sans">
+                                      {(project.title === "페스티벌 운영" || project.title === "공연 운영") ? (
+                                        (project.title === "공연 운영" 
+                                          ? ["하우스", "티켓", "안내", "MD 판매", "컴플레인 응대"]
+                                          : ["종합 안내", "티켓", "F&B", "물품보관소", "셔틀버스"]
+                                        ).map((item, index) => (
+                                          <span key={index} className="font-medium text-neutral-800 bg-neutral-50/75 border border-neutral-200/80 px-2.5 py-0.5 text-[11px] tracking-wide rounded-[6px] shadow-4xs select-none">
+                                            {item}
+                                          </span>
+                                        ))
+                                      ) : (
+                                        (project.category || "").split(",").map((cat, index) => (
+                                          <span key={index} className="font-medium text-neutral-800 bg-neutral-50/75 border border-neutral-200/80 px-2.5 py-0.5 text-[11px] tracking-wide rounded-none shadow-4xs select-none">
+                                            {formatCategory(cat.trim())}
+                                          </span>
+                                        ))
+                                      )}
+                                    </dd>
+                                    
+                                    <dt className="text-neutral-500 col-span-1 font-medium">연도</dt>
+                                    <dd className="text-neutral-900 col-span-2 font-mono font-bold">{project.year}</dd>
+                                    
+                                    {project.contribution && (
+                                      <>
+                                        <dt className="text-neutral-500 col-span-1 font-medium">기여도</dt>
+                                        <dd className="text-neutral-900 col-span-2 font-medium">{project.contribution}</dd>
+                                      </>
+                                    )}
+                                    
+                                    {project.location && (
+                                      <>
+                                        <dt className="text-neutral-500 col-span-1 font-medium">장소</dt>
+                                        <dd className="text-neutral-900 col-span-2 font-medium">{project.location}</dd>
+                                      </>
+                                    )}
+                                  </dl>
+                                </div>
+
+                                <div className="w-full">
+                                  <p className="text-neutral-700 text-sm md:text-[15px] leading-relaxed tracking-normal whitespace-pre-line text-justify font-sans">
+                                    {part2}
+                                  </p>
+                                </div>
+                              </>
+                            );
+                          } else {
+                            return (
+                              <>
+                                <div className="w-full">
+                                  <p className="text-neutral-700 text-sm md:text-[15px] leading-relaxed tracking-normal whitespace-pre-line text-justify font-sans">
+                                    {desc}
+                                  </p>
+                                </div>
+
+                                {/* Specs Card */}
+                                <div className="bg-[#F8F9FA] p-5 border border-neutral-200/60 rounded-[15px] space-y-3 w-full">
+                                  <h4 className="text-[9px] font-mono font-bold tracking-widest text-neutral-400 uppercase border-b border-neutral-200 pb-1.5">
+                                    PROJECT SPECIFICATION
+                                  </h4>
+                                  <dl className="grid grid-cols-3 gap-y-2.5 text-xs">
+                                    <dt className="text-neutral-500 col-span-1 font-medium self-center">분야</dt>
+                                    <dd className="text-neutral-900 col-span-2 font-bold flex flex-wrap gap-1.5 items-center font-sans">
+                                      {(project.title === "페스티벌 운영" || project.title === "공연 운영") ? (
+                                        (project.title === "공연 운영" 
+                                          ? ["하우스", "티켓", "안내", "MD 판매", "컴플레인 응대"]
+                                          : ["종합 안내", "티켓", "F&B", "물품보관소", "셔틀버스"]
+                                        ).map((item, index) => (
+                                          <span key={index} className="font-medium text-neutral-800 bg-neutral-50/75 border border-neutral-200/80 px-2.5 py-0.5 text-[11px] tracking-wide rounded-[6px] shadow-4xs select-none">
+                                            {item}
+                                          </span>
+                                        ))
+                                      ) : (
+                                        (project.category || "").split(",").map((cat, index) => (
+                                          <span key={index} className="font-medium text-neutral-800 bg-neutral-50/75 border border-neutral-200/80 px-2.5 py-0.5 text-[11px] tracking-wide rounded-none shadow-4xs select-none">
+                                            {formatCategory(cat.trim())}
+                                          </span>
+                                        ))
+                                      )}
+                                    </dd>
+                                    
+                                    <dt className="text-neutral-500 col-span-1 font-medium">연도</dt>
+                                    <dd className="text-neutral-900 col-span-2 font-mono font-bold">{project.year}</dd>
+                                    
+                                    {project.contribution && (
+                                      <>
+                                        <dt className="text-neutral-500 col-span-1 font-medium">기여도</dt>
+                                        <dd className="text-neutral-900 col-span-2 font-medium">{project.contribution}</dd>
+                                      </>
+                                    )}
+                                    
+                                    {project.location && (
+                                      <>
+                                        <dt className="text-neutral-500 col-span-1 font-medium">장소</dt>
+                                        <dd className="text-neutral-900 col-span-2 font-medium">{project.location}</dd>
+                                      </>
+                                    )}
+                                  </dl>
+                                </div>
+                              </>
+                            );
+                          }
+                        })()}
+                      </div>
+                    </div>
+                  )}
+
+                  {slidePage === 2 && (
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start animate-fade-in">
+                      {/* Left: Role Block (담당 역할 / 티켓 운영 총괄 등) */}
+                      <div className="lg:col-span-6 space-y-6">
+                        <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                          <span className="text-[9px] font-mono bg-[#E0115F] text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold">Ticket & Role</span>
+                          <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">담당 역할 및 실행 업무</h3>
+                        </div>
+                        {project.role ? (
+                          <div className="border border-neutral-200/80 p-6 bg-white shadow-3xs rounded-none">
+                            <div className="flex flex-col items-start gap-1.5 mb-4">
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="w-2 h-2 bg-[#E0115F] rounded-full shrink-0" />
+                                <span className="text-[11px] font-mono text-neutral-400 font-bold uppercase tracking-wide">역할 및 분장</span>
                               </div>
-                              <div className="md:col-span-8">
-                                <ul className="space-y-4">
-                                  {project.details.map((detail, idx) => (
-                                    <li key={idx} className="text-xs md:text-sm text-neutral-700 flex items-start gap-3">
-                                      <span className="text-[9px] font-mono bg-neutral-100 text-neutral-400 px-1.5 py-0.5 rounded">0{idx + 1}</span>
-                                      <span className="leading-relaxed">{detail}</span>
-                                    </li>
-                                  ))}
-                                </ul>
+                              <div className="flex flex-col items-start gap-1.5 pl-4">
+                                {project.role.title.split(",").map((t, idx) => (
+                                  <span 
+                                    key={idx}
+                                    className="inline-block font-extrabold text-rose-600 bg-rose-50/60 border border-rose-500/10 px-2.5 py-0.5 text-xs rounded-[6px] text-left select-none"
+                                  >
+                                    {t.trim()}
+                                  </span>
+                                ))}
                               </div>
                             </div>
-                          )}
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                // Editorial Layout (Personal/Concert Style) - Refinement Portfolio Detail
-                <div className="w-full">
-                  {/* Hero Section */}
-                  <div className="relative h-[45vh] md:h-[60vh] w-full overflow-hidden bg-neutral-950">
-                    <motion.img 
-                      initial={{ scale: 1.05, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 0.7 }}
-                      transition={{ duration: 1.2, ease: "easeOut" }}
-                      src={project.image} 
-                      alt={project.title} 
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent">
-                      <motion.div
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.3, duration: 0.6 }}
-                      >
-                        <span className="text-white/60 font-mono text-xs uppercase tracking-[0.2em] mb-3 block">{project.category} — {project.year}</span>
-                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-sans font-extrabold tracking-tight text-white leading-tight mb-4">
-                          {project.title}
-                        </h2>
-                      </motion.div>
-                    </div>
-                  </div>
-
-                  <div className="max-w-6xl mx-auto px-6 md:px-12 py-12 md:py-16">
-                    {/* Horizontal Meta Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 border-b border-neutral-100 pb-10">
-                      <div>
-                        <p className="text-[9px] font-mono uppercase tracking-wider text-neutral-400 mb-1">Location</p>
-                        <p className="text-xs md:text-sm font-bold text-neutral-800">{project.location || "N/A"}</p>
-                      </div>
-                      <div>
-                        <p className="text-[9px] font-mono uppercase tracking-wider text-neutral-400 mb-1">Cast</p>
-                        <p className="text-xs md:text-sm font-bold text-neutral-800 leading-snug">{project.cast || "N/A"}</p>
-                      </div>
-                      <div>
-                        <p className="text-[9px] font-mono uppercase tracking-wider text-neutral-400 mb-1">Support</p>
-                        <p className="text-xs md:text-sm font-bold text-neutral-800">{project.support || "N/A"}</p>
-                      </div>
-                      <div>
-                        <p className="text-[9px] font-mono uppercase tracking-wider text-neutral-400 mb-1">기여도</p>
-                        <div className="flex items-center gap-2">
-                          <div className="h-1 w-24 bg-neutral-200 overflow-hidden rounded-full">
-                            <div className="h-full bg-neutral-900 rounded-full" style={{ width: project.contribution }} />
+                            <ul className="space-y-3.5">
+                              {project.role.items.map((item, i) => {
+                                const anonymity = item.includes(": ");
+                                const [label, desc] = anonymity ? item.split(": ") : [null, item];
+                                return (
+                                  <li key={i} className="text-xs sm:text-[13px] text-neutral-800 leading-relaxed flex items-start gap-2.5">
+                                    <span className="mt-2 w-1.5 h-1.5 bg-neutral-400 rounded-full shrink-0" />
+                                    <span className="text-neutral-900">
+                                      {label ? (
+                                        <>
+                                          <strong className="text-neutral-950 font-bold">{label}: </strong>
+                                          <span className="font-normal text-neutral-800">{desc}</span>
+                                        </>
+                                      ) : (
+                                        <span className="font-normal text-neutral-800">{desc}</span>
+                                      )}
+                                    </span>
+                                  </li>
+                                );
+                              })}
+                            </ul>
                           </div>
-                          <p className="text-xs font-bold font-mono text-neutral-700">{project.contribution}</p>
+                        ) : (
+                          <div className="p-6 border border-dashed border-neutral-200 bg-white/50 text-neutral-400 text-xs text-center font-sans">
+                            담당 역할 정보가 등록되지 않았습니다.
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Right: Prep Process Block (사전 기획 & 준비 프로세스) */}
+                      <div className="lg:col-span-6 space-y-6">
+                        <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                          <span className="text-[9px] font-mono bg-black text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold font-bold">Preparation</span>
+                          <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">사전 기획 및 운영 설계</h3>
                         </div>
+                        {project.process && project.process[0] ? (
+                          <div className="p-6 border border-neutral-200 bg-white shadow-3xs space-y-4 rounded-none">
+                            <h4 className="text-sm font-bold text-neutral-900 flex justify-between items-center border-b border-neutral-100 pb-2">
+                              <span className="flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 bg-black rounded-full" />
+                                {project.process[0].phase}
+                              </span>
+                              <span className="text-[9px] font-mono text-neutral-400 font-bold">STEP 01</span>
+                            </h4>
+                            <ul className="space-y-3">
+                              {project.process[0].items.map((item, j) => (
+                                <li key={j} className="text-xs sm:text-[13px] text-neutral-750 flex items-start gap-2 leading-relaxed">
+                                  <span className="mt-1.5 w-1 h-1 bg-neutral-400 rounded-full shrink-0" />
+                                  <span className="font-normal text-neutral-800">{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ) : (
+                          <div className="p-6 border border-dashed border-neutral-200 bg-white/50 text-neutral-400 text-xs text-center font-sans">
+                            사전 기획 프로세스가 등록되지 않았습니다.
+                          </div>
+                        )}
                       </div>
                     </div>
+                  )}
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                      {/* Main Left Content */}
-                      <div className="lg:col-span-7 space-y-12">
-                        <section>
-                          <h3 className="text-base md:text-lg font-bold mb-4 tracking-tight text-neutral-900">프로젝트 설명</h3>
-                          <p className="text-xs md:text-sm leading-relaxed text-neutral-600 whitespace-pre-line font-normal">
-                            {project.fullDescription}
-                          </p>
-                        </section>
-
-                        {project.results && (
-                          <section className="border-t border-neutral-100 pt-8">
-                            <h3 className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold mb-6">Key Results</h3>
-                            <div className="space-y-6">
-                              {project.results.map((result, i) => {
+                  {slidePage === 3 && (
+                    isFestival ? (
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start animate-fade-in">
+                        {/* Left: Product Results Block (상품 관리 성과) */}
+                        <div className="lg:col-span-6 space-y-6">
+                          <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                            <span className="text-[9px] font-mono bg-[#E0115F] text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold">Product Strategy</span>
+                            <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">상품 관리 핵심 성과</h3>
+                          </div>
+                          <div className="space-y-3.5 bg-white border border-neutral-200 p-6 shadow-3xs rounded-none">
+                            {[
+                              "시간 단위 모바일 선주문 -> 현장 대기 제로에 수렴하는 하이브리드 주문 처리 정합성 확보",
+                              "한정판 MD 및 아티스트 공식 굿즈 사전 예약 분배율 산출 -> 조기 완판 및 정산 자동화 연동",
+                              "메이드온 자사 POS 인프라 연계 -> 오프라인 즉시 판매 정산 소요 시간 단축 및 수작업 혼선 예방"
+                            ].map((result, i) => {
+                              const hasArrow = result.includes(" -> ");
+                              if (hasArrow) {
                                 const [goal, outcome] = result.split(" -> ");
                                 return (
-                                  <div key={i} className="group border-b border-neutral-50 pb-5 last:border-b-0 last:pb-0">
-                                    <div className="flex items-center gap-3 mb-2">
-                                      <span className="text-xs font-mono text-neutral-400 bg-neutral-100 px-1.5 py-0.5 rounded">0{i+1}</span>
-                                      <p className="text-xs md:text-sm font-semibold text-neutral-900">{goal}</p>
+                                  <div key={i} className="border-b border-neutral-100 last:border-none pb-3.5 mb-3.5 last:pb-0 last:mb-0">
+                                    <div className="flex items-center gap-2 mb-1.5">
+                                      <span className="text-[9px] font-mono text-neutral-500 bg-neutral-100 px-1.5 py-0.5 rounded-none border border-neutral-200/50 font-bold">0{i+1}</span>
+                                      <p className="text-xs sm:text-[13px] font-bold text-neutral-900">{goal}</p>
                                     </div>
-                                    {outcome && (
-                                      <div className="ml-10 p-4 bg-neutral-50 rounded border-l-2 border-neutral-900">
-                                        <p className="text-xs text-neutral-600 leading-relaxed whitespace-pre-line">{outcome}</p>
+                                    <div className="ml-7 p-3 bg-neutral-50/70 border-l-2 border-neutral-800 rounded-none">
+                                      <p className="text-xs sm:text-[13px] text-neutral-800 leading-relaxed whitespace-pre-line font-normal">{outcome}</p>
+                                    </div>
+                                  </div>
+                                );
+                              }
+                              return (
+                                <div key={i} className="text-xs sm:text-[13px] font-normal flex items-start gap-3 py-2 border-b border-neutral-100 last:border-none">
+                                  <span className="text-[9px] font-mono text-neutral-500 bg-neutral-100 px-1.5 py-0.5 rounded-none border border-neutral-200/50 font-bold">0{i+1}</span>
+                                  <span className="flex-1 text-neutral-800 font-normal leading-relaxed">{result}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+
+                        {/* Right: Product Setup Block */}
+                        <div className="lg:col-span-6 space-y-6">
+                          <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                            <span className="text-[9px] font-mono bg-black text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold">Product Setup</span>
+                            <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">상품 관리 및 실무 가동</h3>
+                          </div>
+                          <div className="p-6 border border-neutral-200 bg-white shadow-3xs space-y-4 rounded-none">
+                            <h4 className="text-sm font-bold text-neutral-900 flex justify-between items-center border-b border-neutral-100 pb-2">
+                              <span className="flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 bg-black rounded-full" />
+                                상품 기획 및 품목 등록 설정
+                              </span>
+                              <span className="text-[9px] font-mono text-neutral-400 font-bold">STEP 03</span>
+                            </h4>
+                            <ul className="space-y-3">
+                              {[
+                                "F&B 부스 입점 메뉴 단가율 테이블 수집 및 플랫폼 결제 환율 테이블 반영",
+                                "QueensSmile 디지털 어플 가상 입점 스토어 생성 및 시간대별 한정 재고 전산 등록",
+                                "아티스트 머천다이즈 현장 적치 공간 분류 및 고유 식별 바코드 POS 조율 검증"
+                              ].map((item, j) => (
+                                <li key={j} className="text-xs sm:text-[13px] text-neutral-750 flex items-start gap-2 leading-relaxed">
+                                  <span className="mt-1.5 w-1 h-1 bg-neutral-400 rounded-full shrink-0" />
+                                  <span className="font-normal text-neutral-800">{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      // If not festival: Render on-site operation (originally on-site results & process)
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start animate-fade-in">
+                        {/* Left: Onsite Results Block (현장 운영 성과) */}
+                        <div className="lg:col-span-6 space-y-6">
+                          <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                            <span className="text-[9px] font-mono bg-emerald-600 text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold">Performance</span>
+                            <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">현장 운영 핵심 성과</h3>
+                          </div>
+                          {project.results ? (
+                            <div className="space-y-3.5 bg-white border border-neutral-200 p-6 shadow-3xs rounded-none">
+                              {project.results.map((result, i) => {
+                                const hasArrow = result.includes(" -> ");
+                                if (hasArrow) {
+                                  const [goal, outcome] = result.split(" -> ");
+                                  return (
+                                    <div key={i} className="border-b border-neutral-100 last:border-none pb-3.5 mb-3.5 last:pb-0 last:mb-0">
+                                      <div className="flex items-center gap-2 mb-1.5">
+                                        <span className="text-[9px] font-mono text-neutral-500 bg-neutral-100 px-1.5 py-0.5 rounded-none border border-neutral-200/50 font-bold">0{i+1}</span>
+                                        <p className="text-xs sm:text-[13px] font-bold text-neutral-900">{goal}</p>
                                       </div>
-                                    )}
+                                      <div className="ml-7 p-3 bg-neutral-50/70 border-l-2 border-neutral-800 rounded-none">
+                                        <p className="text-xs sm:text-[13px] text-neutral-800 leading-relaxed whitespace-pre-line font-normal">{outcome}</p>
+                                      </div>
+                                    </div>
+                                  );
+                                }
+                                return (
+                                  <div key={i} className="text-xs sm:text-[13px] font-normal flex items-start gap-3 py-2 border-b border-neutral-100 last:border-none">
+                                    <span className="text-[9px] font-mono text-neutral-500 bg-neutral-100 px-1.5 py-0.5 rounded-none border border-neutral-200/50 font-bold">0{i+1}</span>
+                                    <span className="flex-1 text-neutral-800 font-normal leading-relaxed">{result}</span>
                                   </div>
                                 );
                               })}
                             </div>
-                          </section>
-                        )}
-                      </div>
+                          ) : (
+                            <div className="p-6 border border-dashed border-neutral-200 bg-white/50 text-neutral-400 text-xs text-center font-sans">
+                              등록된 운영 성과 데이터가 없습니다.
+                            </div>
+                          )}
+                        </div>
 
-                      {/* Right Sidebar Role */}
-                      <div className="lg:col-span-5">
-                        <div className="sticky top-12">
-                          {project.role && (
-                            <div className="p-6 md:p-8 border border-neutral-200 bg-neutral-50/50 rounded-lg">
-                              <h4 className="text-[10px] font-mono uppercase tracking-[0.2em] font-bold text-neutral-900 mb-6 border-b border-neutral-200 pb-3">{project.role.title}</h4>
-                              <ul className="space-y-5">
-                                {project.role.items.map((item, i) => {
-                                  const [label, desc] = item.split(": ");
-                                  return (
-                                    <li key={i} className="space-y-1">
-                                      <p className="text-xs font-bold text-neutral-900">{label}</p>
-                                      {desc && <p className="text-xs text-neutral-500 leading-relaxed whitespace-pre-line font-normal">{desc}</p>}
-                                    </li>
-                                  );
-                                })}
+                        {/* Right: Onsite Process Block (현장 실무 실행) */}
+                        <div className="lg:col-span-6 space-y-6">
+                          <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                            <span className="text-[9px] font-mono bg-black text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold">On-Site Operation</span>
+                            <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">현장 실행 및 통제</h3>
+                          </div>
+                          {project.process && project.process[1] ? (
+                            <div className="p-6 border border-neutral-200 bg-white shadow-3xs space-y-4 rounded-none">
+                              <h4 className="text-sm font-bold text-neutral-900 flex justify-between items-center border-b border-neutral-100 pb-2">
+                                <span className="flex items-center gap-2">
+                                  <span className="w-1.5 h-1.5 bg-black rounded-full" />
+                                  {project.process[1].phase}
+                                </span>
+                                <span className="text-[9px] font-mono text-neutral-400 font-bold">STEP 03</span>
+                              </h4>
+                              <ul className="space-y-3">
+                                {project.process[1].items.map((item, j) => (
+                                  <li key={j} className="text-xs sm:text-[13px] text-neutral-750 flex items-start gap-2 leading-relaxed">
+                                    <span className="mt-1.5 w-1 h-1 bg-neutral-400 rounded-full shrink-0" />
+                                    <span className="font-normal text-neutral-800">{item}</span>
+                                  </li>
+                                ))}
                               </ul>
+                            </div>
+                          ) : (
+                            <div className="p-6 border border-dashed border-neutral-200 bg-white/50 text-neutral-400 text-xs text-center font-sans">
+                              현장 운영 프로세스가 등록되지 않았습니다.
                             </div>
                           )}
                         </div>
                       </div>
-                    </div>
+                    )
+                  )}
 
-                    {/* Flexible Gallery */}
-                    {project.images && (
-                      <section className="mt-16 border-t border-neutral-100 pt-12">
-                        <h3 className="text-[11px] font-mono uppercase tracking-[0.2em] text-neutral-400 font-bold mb-8">Visual Archive</h3>
-                        <div className="columns-1 md:columns-2 gap-4 space-y-4">
+                  {slidePage === 4 && (
+                    isFestival ? (
+                      // If festival: Render On-site operation (from slidePage === 3 previously) on Page 4
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start animate-fade-in">
+                        {/* Left: Onsite Results Block (현장 운영 성과) */}
+                        <div className="lg:col-span-6 space-y-6">
+                          <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                            <span className="text-[9px] font-mono bg-emerald-600 text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold">Performance</span>
+                            <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">현장 운영 핵심 성과</h3>
+                          </div>
+                          {project.results ? (
+                            <div className="space-y-3.5 bg-white border border-neutral-200 p-6 shadow-3xs rounded-none">
+                              {project.results.map((result, i) => {
+                                const hasArrow = result.includes(" -> ");
+                                if (hasArrow) {
+                                  const [goal, outcome] = result.split(" -> ");
+                                  return (
+                                    <div key={i} className="border-b border-neutral-100 last:border-none pb-3.5 mb-3.5 last:pb-0 last:mb-0">
+                                      <div className="flex items-center gap-2 mb-1.5">
+                                        <span className="text-[9px] font-mono text-neutral-500 bg-neutral-100 px-1.5 py-0.5 rounded-none border border-neutral-200/50 font-bold">0{i+1}</span>
+                                        <p className="text-xs sm:text-[13px] font-bold text-neutral-950">{goal}</p>
+                                      </div>
+                                      <div className="ml-7 p-3 bg-neutral-50/70 border-l-2 border-neutral-800 rounded-none">
+                                        <p className="text-xs sm:text-[13px] text-neutral-800 leading-relaxed whitespace-pre-line font-normal">{outcome}</p>
+                                      </div>
+                                    </div>
+                                  );
+                                }
+                                return (
+                                  <div key={i} className="text-xs sm:text-[13px] font-normal flex items-start gap-3 py-2 border-b border-neutral-100 last:border-none">
+                                    <span className="text-[9px] font-mono text-neutral-500 bg-neutral-100 px-1.5 py-0.5 rounded-none border border-neutral-200/50 font-bold">0{i+1}</span>
+                                    <span className="flex-1 text-neutral-850 font-normal leading-relaxed">{result}</span>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          ) : (
+                            <div className="p-6 border border-dashed border-neutral-200 bg-white/50 text-neutral-400 text-xs text-center font-sans">
+                              등록된 운영 성과 데이터가 없습니다.
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Right: Onsite Process Block (현장 실무 실행) */}
+                        <div className="lg:col-span-6 space-y-6">
+                          <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                            <span className="text-[9px] font-mono bg-black text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold font-bold">On-Site Operation</span>
+                            <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">현장 실행 및 통제</h3>
+                          </div>
+                          {project.process && project.process[1] ? (
+                            <div className="p-6 border border-neutral-200 bg-white shadow-3xs space-y-4 rounded-none">
+                              <h4 className="text-sm font-bold text-neutral-900 flex justify-between items-center border-b border-neutral-100 pb-2">
+                                <span className="flex items-center gap-2">
+                                  <span className="w-1.5 h-1.5 bg-black rounded-full" />
+                                  {project.process[1].phase}
+                                </span>
+                                <span className="text-[9px] font-mono text-neutral-400 font-bold">STEP 04</span>
+                              </h4>
+                              <ul className="space-y-3">
+                                {project.process[1].items.map((item, j) => (
+                                  <li key={j} className="text-xs sm:text-[13px] text-neutral-750 flex items-start gap-2 leading-relaxed">
+                                    <span className="mt-1.5 w-1 h-1 bg-neutral-400 rounded-full shrink-0" />
+                                    <span className="font-normal text-neutral-800">{item}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ) : (
+                            <div className="p-6 border border-dashed border-neutral-200 bg-white/50 text-neutral-400 text-xs text-center font-sans">
+                              현장 운영 프로세스가 등록되지 않았습니다.
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      // If not festival: Render Review (originally slidePage === 4) on Page 4
+                      <div className="space-y-8 animate-fade-in">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
+                          <div className="lg:col-span-6 space-y-6">
+                            <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                              <span className="text-[9px] font-mono bg-blue-600 text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold">Review</span>
+                              <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">사후 관리 및 피드백</h3>
+                            </div>
+                            {project.process && project.process[2] ? (
+                              <div className="p-6 border border-neutral-200 bg-white shadow-3xs space-y-4 rounded-none">
+                                <h4 className="text-sm font-bold text-neutral-950 flex justify-between items-center border-b border-neutral-100 pb-2">
+                                  <span className="flex items-center gap-2 font-bold">
+                                    <span className="w-1.5 h-1.5 bg-neutral-900 rounded-full" />
+                                    {project.process[2].phase}
+                                  </span>
+                                  <span className="text-[9px] font-mono text-neutral-400 font-bold">STEP 04</span>
+                                </h4>
+                                <ul className="space-y-3">
+                                  {project.process[2].items.map((item, j) => (
+                                    <li key={j} className="text-xs sm:text-[13px] text-neutral-750 flex items-start gap-2 leading-relaxed">
+                                      <span className="mt-1.5 w-1 h-1 bg-neutral-400 rounded-full shrink-0" />
+                                      <span className="font-normal text-neutral-850">{item}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ) : (
+                              <div className="p-6 border border-dashed border-neutral-200 bg-white/50 text-neutral-500 text-xs text-left leading-relaxed rounded-none space-y-3">
+                                <h4 className="text-xs font-bold text-neutral-900 uppercase tracking-widest border-b border-neutral-100 pb-1 flex items-center gap-1.5">
+                                  <span className="w-1.5 h-1.5 bg-neutral-950 rounded-full" />
+                                  사후 성과 분석 및 리포팅
+                                </h4>
+                                <p className="font-normal text-neutral-700">
+                                  프로젝트 공식 완수 후 축제 사무국 및 입점 업체들과의 최종 정산 업무를 차질 없이 마무리하였습니다. 현장에서 도출된 피드백 및 정합성 데이터를 체계화하여 차기 페스티벌 기획 및 매뉴얼 강화에 반영하였습니다.
+                                </p>
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="lg:col-span-6 space-y-6">
+                            <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                              <span className="text-[9px] font-mono bg-neutral-950 text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold">Summary</span>
+                              <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">프로젝트 운영 총평</h3>
+                            </div>
+                            <div className="bg-[#FAF9F6] p-6 border border-neutral-200/60 rounded-none space-y-4">
+                              <p className="text-xs sm:text-[13px] text-neutral-700 leading-relaxed text-justify font-sans">
+                                본 프로젝트는 전사적 협업 체계와 철저한 모니터링을 바탕으로 현장 돌발 리스크를 완벽하게 최소화하였습니다. 대기 동선의 효과적인 통합 제어 및 고정밀 데이터 검증 프로세스를 구축하여 관중 및 파트너 모두에게 검증된 신뢰를 선사했습니다.
+                              </p>
+                              <div className="pt-2 border-t border-neutral-200 flex items-center justify-between text-xs text-neutral-500">
+                                <span className="font-medium">준수 여부</span>
+                                <span className="font-bold text-neutral-900 bg-neutral-100 px-2.5 py-0.5 border border-neutral-200">100% 완수 및 이행</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  )}
+
+                  {slidePage === 5 && (
+                    isFestival ? (
+                      // If festival: Render Review (originally slidePage === 4) on Page 5
+                      <div className="space-y-8 animate-fade-in">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
+                          <div className="lg:col-span-6 space-y-6">
+                            <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                              <span className="text-[9px] font-mono bg-blue-600 text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold">Review</span>
+                              <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">사후 관리 및 피드백</h3>
+                            </div>
+                            {project.process && project.process[2] ? (
+                              <div className="p-6 border border-neutral-200 bg-white shadow-3xs space-y-4 rounded-none">
+                                <h4 className="text-sm font-bold text-neutral-950 flex justify-between items-center border-b border-neutral-100 pb-2">
+                                  <span className="flex items-center gap-2 font-bold">
+                                    <span className="w-1.5 h-1.5 bg-neutral-900 rounded-full" />
+                                    {project.process[2].phase}
+                                  </span>
+                                  <span className="text-[9px] font-mono text-neutral-400 font-bold">STEP 05</span>
+                                </h4>
+                                <ul className="space-y-3">
+                                  {project.process[2].items.map((item, j) => (
+                                    <li key={j} className="text-xs sm:text-[13px] text-neutral-750 flex items-start gap-2 leading-relaxed">
+                                      <span className="mt-1.5 w-1 h-1 bg-neutral-400 rounded-full shrink-0" />
+                                      <span className="font-normal text-neutral-850">{item}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ) : (
+                              <div className="p-6 border border-dashed border-neutral-200 bg-white/50 text-neutral-500 text-xs text-left leading-relaxed rounded-none space-y-3">
+                                <h4 className="text-xs font-bold text-neutral-900 uppercase tracking-widest border-b border-neutral-100 pb-1 flex items-center gap-1.5">
+                                  <span className="w-1.5 h-1.5 bg-neutral-950 rounded-full" />
+                                  사후 성과 분석 및 리포팅
+                                </h4>
+                                <p className="font-normal text-neutral-700">
+                                  프로젝트 공식 완수 후 축제 사무국 및 입점 업체들과의 최종 정산 업무를 차질 없이 마무리하였습니다. 현장에서 도출된 피드백 및 정합성 데이터를 체계화하여 차기 페스티벌 기획 및 매뉴얼 강화에 반영하였습니다.
+                                </p>
+                              </div>
+                            )}
+                          </div>
+
+                          <div className="lg:col-span-6 space-y-6">
+                            <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                              <span className="text-[9px] font-mono bg-neutral-950 text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold font-bold">Summary</span>
+                              <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">프로젝트 운영 총평</h3>
+                            </div>
+                            <div className="bg-[#FAF9F6] p-6 border border-neutral-200/60 rounded-none space-y-4">
+                              <p className="text-xs sm:text-[13px] text-neutral-700 leading-relaxed text-justify font-sans">
+                                본 프로젝트는 전사적 협업 체계와 철저한 모니터링을 바탕으로 현장 돌발 리스크를 완벽하게 최소화하였습니다. 대기 동선의 효과적인 통합 제어 및 고정밀 데이터 검증 프로세스를 구축하여 관중 및 파트너 모두에게 검증된 신뢰를 선사했습니다.
+                              </p>
+                              <div className="pt-2 border-t border-neutral-200 flex items-center justify-between text-xs text-neutral-500">
+                                <span className="font-medium">준수 여부</span>
+                                <span className="font-bold text-neutral-900 bg-neutral-100 px-2.5 py-0.5 border border-neutral-200">100% 완수 및 이행</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      // If not festival: Render Gallery (originally slidePage === 5) on Page 5
+                      <div className="space-y-6 animate-fade-in font-sans text-neutral-850">
+                        <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                          <span className="text-[9px] font-mono bg-neutral-950 text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold">Gallery Archive</span>
+                          <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">갤러리 아카이브</h3>
+                        </div>
+                        {project.images && project.images.length > 0 ? (
+                          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            {project.images.map((img, i) => (
+                              <div key={i} className="bg-neutral-50 overflow-hidden border border-neutral-200 shadow-3xs transition-all duration-300 rounded-none aspect-[4/3] flex items-center justify-center group/gallery">
+                                <OptimizedImage 
+                                  src={img} 
+                                  alt={`${project.title} gallery ${i}`} 
+                                  className="w-full h-full object-cover select-none transition-transform duration-500 group-hover/gallery:scale-[1.04]" 
+                                  referrerPolicy="no-referrer" 
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="p-16 border border-dashed border-neutral-200 bg-neutral-50/50 text-neutral-400 text-xs text-center font-mono">
+                            등록된 갤러리 아카이브 이미지가 없습니다.
+                          </div>
+                        )}
+                      </div>
+                    )
+                  )}
+
+                  {slidePage === 6 && isFestival && (
+                    // If festival: Render Gallery on Page 6
+                    <div className="space-y-6 animate-fade-in font-sans text-neutral-800">
+                      <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
+                         <span className="text-[9px] font-mono bg-neutral-950 text-white px-1.5 py-0.5 rounded-none uppercase tracking-wider font-bold">Gallery Archive</span>
+                        <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">갤러리 아카이브</h3>
+                      </div>
+                      {project.images && project.images.length > 0 ? (
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                           {project.images.map((img, i) => (
-                            <motion.div 
-                              key={i}
-                              initial={{ opacity: 0, y: 15 }}
-                              whileInView={{ opacity: 1, y: 0 }}
-                              viewport={{ once: true }}
-                              transition={{ delay: i * 0.08 }}
-                              className="break-inside-avoid bg-neutral-50 overflow-hidden rounded-lg border border-neutral-100 shadow-sm"
-                            >
-                              <img 
+                            <div key={i} className="bg-neutral-50 overflow-hidden border border-neutral-200 shadow-3xs transition-all duration-300 rounded-none aspect-[4/3] flex items-center justify-center group/gallery">
+                              <OptimizedImage 
                                 src={img} 
                                 alt={`${project.title} gallery ${i}`} 
-                                className="w-full h-auto block hover:scale-[1.01] transition-transform duration-500" 
+                                className="w-full h-full object-cover select-none transition-transform duration-500 group-hover/gallery:scale-[1.04]" 
                                 referrerPolicy="no-referrer" 
                               />
-                            </motion.div>
+                            </div>
                           ))}
                         </div>
-                      </section>
-                    )}
-                  </div>
-                </div>
-              )}
+                      ) : (
+                        <div className="p-16 border border-dashed border-neutral-200 bg-neutral-50/50 text-neutral-400 text-xs text-center font-mono">
+                          등록된 갤러리 아카이브 이미지가 없습니다.
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
             </div>
           </motion.div>
         </>
@@ -603,6 +1231,15 @@ export default function App() {
   const [time, setTime] = useState(new Date());
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeSection, setActiveSection] = useState("about");
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    setIsTransitioning(true);
+    const timer = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 450);
+    return () => clearTimeout(timer);
+  }, [activeSection]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [portfolioData, setPortfolioData] = useState<any>(null);
 
@@ -626,6 +1263,26 @@ export default function App() {
     };
     fetchPortfolio();
   }, []);
+
+  useEffect(() => {
+    const featuredList = portfolioData?.featuredProjects || DEFAULT_PORTFOLIO_DATA.featuredProjects || [];
+    const personalList = portfolioData?.personalProjects || DEFAULT_PORTFOLIO_DATA.personalProjects || [];
+    const allImages = [
+      ...FESTIVAL_POSTERS.map(p => p.src),
+      ...CONCERT_POSTERS.map(p => p.src),
+      ...featuredList.map(p => p.image).filter(Boolean),
+      ...personalList.map(p => p.image).filter(Boolean),
+      ...featuredList.flatMap(p => p.images || []).filter(Boolean),
+      ...personalList.flatMap(p => p.images || []).filter(Boolean)
+    ];
+    // Remove duplicates
+    const uniqueImages = Array.from(new Set(allImages));
+    // Asynchronously prefetch so browsers keep them cached
+    uniqueImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, [portfolioData]);
 
   const handleSavePortfolio = async (updatedData: any) => {
     try {
@@ -828,6 +1485,7 @@ export default function App() {
       year: "2024",
       image: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024incheonrock.png",
       contribution: "25%",
+      objectPosition: "top",
       description: "본 프로젝트에서 관객 편의 시설 중심의 운영 영역을 담당하였습니다.",
       fullDescription: "F&B(Food & Beverage) 운영 및 물품보관소 운영을 수행하였으며, 사전 주문부터 현장 수령까지 이어지는 F&B 운영 구조를 구축하여 관객 대기 시간을 최소화하고 현장 혼선을 줄이는 것을 목표로 운영하였습니다.\n\n특히, 자체 플랫폼인 QueensSmile 앱을 활용하여 음식 상품을 시간 단위 사전 예약 방식으로 판매하고, 현장에서는 당사가 보유한 키오스크를 통해 추가 판매를 병행하는 온라인–오프라인 연계 운영을 진행하였습니다.",
       role: {
@@ -927,7 +1585,7 @@ export default function App() {
       description: "싱어송라이터 이그린 EP <GREENERY> 발매. 발매 작업기를 담은 책 형태의 새로운 앨범.",
       fullDescription: "싱어송라이터 ‘이그린’의 EP [GREENERY] 발매와 함께, 창작 과정과 영감을 기록한 아트북 형태의 피지컬 앨범을 기획·제작했습니다.\n\n효용성이 낮은 기존 플라스틱 CD의 한계를 문제로 정의하고, 이를 대체할 수 있는 새로운 형태의 앨범을 설계했습니다. 텀블벅 크라우드펀딩을 통해 목표 금액의 196%를 달성하며 프로젝트를 성공적으로 런칭했습니다.\n\n전곡 작사, 작곡, 프로듀싱은 물론, 디자인 디렉팅, 유통, 쇼케이스 기획까지 프로젝트 전반을 주도했습니다.",
       role: {
-        title: "담당 업무",
+        title: "기획, 운영",
         items: [
           "Planning: 프로젝트 전체 기획\n펀딩 전략 수립",
           "Production: 앨범 제작\n책 디자인 및 출판\n아티스트 굿즈 제작",
@@ -970,7 +1628,7 @@ export default function App() {
       description: "부산 아티스트 이그린과 서울 아티스트 우예린의 콜라보레이션 공연.",
       fullDescription: "부산을 기반으로 활동하는 아티스트 '이그린'과 서울의 아티스트 '우예린'이 만나 음악적 교감을 나누는 특별한 콜라보레이션 무대를 기획했습니다.\n\n서로 다른 지역적 배경을 가진 두 아티스트의 조화를 통해 새로운 관객층을 유입시키고, 단순한 공연을 넘어 체험형 콘텐츠를 결합하여 관객들에게 잊지 못할 경험을 선사하는 것을 목표로 했습니다. 기획부터 제작, 홍보, 현장 운영까지 공연의 전 단계에 걸쳐 밀도 높은 작업을 수행했습니다.",
       role: {
-        title: "담당 업무",
+        title: "기획, 운영",
         items: [
           "Planning: 기획서 작성\n공연 전체 컨셉 수립",
           "Booking: 아티스트 섭외\n공연장(KT&G 상상마당) 조율",
@@ -1007,7 +1665,7 @@ export default function App() {
       description: "도시에서 즐기는 한 여름 밤의 꿈. 도심의 건물 옥상에서 각양각색 인디 뮤지션의 음악을 즐긴다.",
       fullDescription: "도심 속 건물 옥상이라는 이색적인 공간에서 펼쳐지는 인디 음악 공연 시리즈입니다. '열대야'라는 테마에 맞춰 한여름 밤의 정취를 느낄 수 있는 아티스트 라인업과 공간 연출을 기획했습니다.\n\n관객들에게 일상 속 특별한 휴식을 선사하며, 지역 문화 공간의 활용도를 높이는 성공적인 사례를 만들었습니다. 기획부터 운영까지 전 과정을 주도하며 프로젝트의 완성도를 높였습니다.",
       role: {
-        title: "담당 업무",
+        title: "기획, 운영",
         items: [
           "Planning: 프로젝트 기획서 작성\n콘셉트 수립 및 협업 파트너 대상 제안",
           "Booking: 아티스트 및 공연/행사 장소 섭외\n일정 및 조건 협의",
@@ -1045,7 +1703,7 @@ export default function App() {
       description: "평화로운 일요일 오후, 차한잔과 함께 관람할 수 있는 힐링 공연. 아티스트가 직접 만든 향과 음악을 통해 공감각적 형태 공연을 향유한다.",
       fullDescription: "평화로운 일요일 오후, 차 한 잔과 함께 즐기는 힐링 공연 시리즈입니다. 아티스트가 직접 조향한 향기와 음악을 결합하여 관객들에게 공감각적인 경험을 선사하는 것을 목표로 했습니다.\n\n부산 지역의 소규모 편성 아티스트들에게 무대 기회를 제공하고, 아티스트의 정체성이 담긴 굿즈 제작을 통해 공연의 가치를 확장했습니다. 기획부터 제작, 홍보, 현장 운영까지 전 과정을 주도하며 따뜻한 감성의 브랜드 공연을 구축했습니다.",
       role: {
-        title: "담당 업무",
+        title: "기획, 운영",
         items: [
           "Planning: 기획서 작성\n프로젝트 전체 콘셉트 수립",
           "Booking: 출연 아티스트 섭외\n공연 베뉴(공간) 섭외 및 일정 조율",
@@ -1072,11 +1730,40 @@ export default function App() {
   ];
   */
 
+  const featuredList = portfolioData?.featuredProjects || DEFAULT_PORTFOLIO_DATA.featuredProjects || [];
+  const personalList = portfolioData?.personalProjects || DEFAULT_PORTFOLIO_DATA.personalProjects || [];
+  const allProjects = [...featuredList, ...personalList];
+
+  const currentProjectIndex = selectedProject ? allProjects.findIndex(p => p.title === selectedProject.title) : -1;
+  const hasPrev = currentProjectIndex > 0;
+  const hasNext = currentProjectIndex >= 0 && currentProjectIndex < allProjects.length - 1;
+
+  const handlePrevProject = () => {
+    if (hasPrev) {
+      setSelectedProject(allProjects[currentProjectIndex - 1]);
+    }
+  };
+
+  const handleNextProject = () => {
+    if (hasNext) {
+      setSelectedProject(allProjects[currentProjectIndex + 1]);
+    }
+  };
+
   const activeIndex = SECTIONS.findIndex(s => s.id === activeSection);
 
   return (
     <div className="h-screen w-screen overflow-hidden font-sans selection:bg-black selection:text-white relative flex flex-col bg-white">
-      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+      <ProjectModal 
+        project={selectedProject} 
+        onClose={() => setSelectedProject(null)} 
+        onPrev={handlePrevProject}
+        onNext={handleNextProject}
+        hasPrev={hasPrev}
+        hasNext={hasNext}
+        currentIndex={currentProjectIndex}
+        totalCount={allProjects.length}
+      />
 
       {/* Fixed Top Header */}
       <header className="h-[90px] w-full bg-white text-black z-[110] px-8 md:px-12 flex justify-between items-center border-b border-black/5 shrink-0">
@@ -1090,7 +1777,7 @@ export default function App() {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-4 text-[11px] font-medium">
           <div className="flex flex-col gap-1">
             <button onClick={() => scrollTo("about")} className="hover:opacity-40 transition-opacity text-left">About</button>
-            <button onClick={() => scrollTo("project1")} className="hover:opacity-40 transition-opacity text-left">Projects</button>
+            <button onClick={() => scrollTo("project1")} className="hover:opacity-40 transition-opacity text-left">Project</button>
             <button onClick={() => scrollTo("activities")} className="hover:opacity-40 transition-opacity text-left">Contact</button>
           </div>
           <div className="flex flex-col gap-1">
@@ -1149,143 +1836,169 @@ export default function App() {
                     {activeSection === "about" && (
                       <motion.section
                         key="about"
-                        variants={staggerContainer}
-                        initial="hidden"
-                        animate="show"
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
-                        className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-24 pb-80 ${SECTIONS[0].color}`}
+                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                        className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-[46px] pb-80 ${SECTIONS[0].color}`}
                       >
-                        <div className="max-w-7xl w-full mx-auto">
+                        <div className="max-w-[1200px] w-full mx-auto">
+                          {isTransitioning ? (
+                            <div className="flex items-center justify-center min-h-[400px]">
+                              <div className="w-5 h-5 border-2 border-neutral-300 border-t-neutral-800 rounded-full animate-spin" />
+                            </div>
+                          ) : (
+                            <>
                               {/* Introduction Headline */}
                               <motion.div 
                                 variants={staggerItem}
-                                className="mb-16 flex flex-col md:flex-row gap-8 md:gap-12 items-center md:items-start"
+                                className="mb-16 flex flex-col md:flex-row gap-8 md:gap-12 items-center md:items-center"
                               >
-                                {profileImage && (
-                                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden bg-neutral-100 border border-neutral-200 shadow-sm shrink-0">
-                                    <img 
-                                      src={profileImage} 
-                                      alt="Profile" 
-                                      className="w-full h-full object-cover"
-                                      referrerPolicy="no-referrer"
-                                    />
+                                <div className="flex-1 flex flex-col justify-center items-center md:items-start w-full">
+                                  <div className="relative inline-block pb-1.5 max-w-full overflow-visible">
+                                    <h2 className="font-sans font-light text-[6vw] xs:text-[5.2vw] sm:text-[4.2vw] md:text-[3.2vw] lg:text-[38px] xl:text-[44px] text-neutral-900 leading-relaxed tracking-tight pl-2 pr-2 relative z-10 select-text">
+                                      {introductionText}
+                                    </h2>
                                   </div>
-                                )}
-                                <div className="flex-1">
-                                  <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-light tracking-tight text-neutral-800 leading-relaxed md:leading-snug">
-                                    "{introductionText}"
-                                  </h2>
                                 </div>
                               </motion.div>
 
-                              {/* Section 1: Education */}
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mb-10">
+                              {/* Section 1: Education & Contact */}
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                                 {/* Left Column: Education */}
                                 <motion.div variants={staggerItem}>
-                                  <div>
-                                    <p className="text-[11px] font-mono uppercase text-neutral-400 mb-3">Education</p>
-                                    <div className="flex justify-between items-baseline">
-                                      <h4 className="text-lg font-bold">{educationData?.school || "부산대학교"}</h4>
-                                      <span className="text-xs font-mono text-neutral-400">{educationData?.period || "2013 - 2021"}</span>
+                                  <div className="bg-white/80 backdrop-blur-sm border border-neutral-200/60 rounded-none p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300">
+                                    <p className="text-xs font-mono font-medium uppercase text-neutral-400 mb-4 tracking-wider">Education</p>
+                                    <div className="flex justify-between items-start gap-4">
+                                      <div>
+                                        <h4 className="text-base md:text-lg font-bold text-neutral-800">{educationData?.name || "부산대학교"}</h4>
+                                        <p className="text-xs font-medium text-neutral-500 mt-1">{educationData?.major || "항공우주공학 & 예술문화영상학"}</p>
+                                      </div>
+                                      <span className="text-xs font-mono text-neutral-400 bg-neutral-100 px-2.5 py-1 rounded-none shrink-0">{educationData?.period || "2013 - 2021"}</span>
                                     </div>
-                                    <p className="text-xs font-medium text-neutral-500 mt-1">{educationData?.major || "항공우주공학 & 예술문화영상학"}</p>
                                   </div>
                                 </motion.div>
-                                <div className="hidden md:block" />
+
+                                {/* Right Column: Contact */}
+                                <motion.div variants={staggerItem}>
+                                  <div className="bg-white/80 backdrop-blur-sm border border-neutral-200/60 rounded-none p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300">
+                                    <p className="text-xs font-mono font-medium uppercase text-neutral-400 mb-4 tracking-wider">Contact</p>
+                                    <div className="space-y-3">
+                                      <div className="flex items-center gap-3 text-sm text-neutral-600">
+                                        <span className="font-medium text-neutral-400 w-16 text-xs font-mono uppercase tracking-wider">전화번호</span>
+                                        <a href="tel:010-9335-9620" className="hover:text-rose-500 hover:underline transition-colors font-sans text-neutral-700 font-medium">010-9335-9620</a>
+                                      </div>
+                                      <div className="flex items-center gap-3 text-sm text-neutral-600">
+                                        <span className="font-medium text-neutral-400 w-16 text-xs font-mono uppercase tracking-wider">이메일</span>
+                                        <a href="mailto:lgi12@naver.com" className="hover:text-rose-500 hover:underline transition-colors font-sans text-neutral-700 font-medium">lgi12@naver.com</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </motion.div>
                               </div>
 
                               {/* Section 2: Certificates & Technical Stack */}
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 items-stretch">
                                 {/* Left Column: Certificates */}
-                                <motion.div variants={staggerItem}>
-                                  <div>
-                                    <p className="text-[11px] font-mono uppercase text-neutral-400 mb-6">Certificates</p>
-                                    <div className="space-y-8">
-                                      {(certificatesData || []).map((cert: any, idx: number) => {
-                                        const hasBar = cert.score && cert.maxScale;
-                                        if (hasBar) {
-                                          return (
-                                            <div key={idx} className="space-y-3">
-                                              <div className="flex justify-between items-end">
-                                                <div>
-                                                  <h5 className="text-[13px] font-bold tracking-tight">{cert.title}</h5>
-                                                  <p className="text-xs font-medium text-neutral-500">{cert.subtitle}</p>
-                                                </div>
-                                                <span className="text-[10px] font-mono opacity-30">{cert.score}/{cert.maxScale}</span>
-                                              </div>
-                                              <div className="h-1 w-full bg-black/5 overflow-hidden">
-                                                <motion.div 
-                                                  initial={{ width: 0 }}
-                                                  whileInView={{ width: `${(cert.score / cert.maxScale) * 100}%` }}
-                                                  transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                                                  className="h-full bg-black"
-                                                />
-                                              </div>
-                                            </div>
-                                          );
-                                        }
-                                        return null;
-                                      })}
-
-                                      <div className="pt-4 border-t border-black/5 space-y-6">
+                                <motion.div variants={staggerItem} className="h-full flex flex-col">
+                                  <div className="bg-white/80 backdrop-blur-sm border border-neutral-200/60 rounded-none p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col justify-between">
+                                    <div>
+                                      <p className="text-xs font-mono font-medium uppercase text-neutral-400 mb-6 tracking-wider">Certificates</p>
+                                      <div className="space-y-4">
                                         {(certificatesData || []).map((cert: any, idx: number) => {
                                           const hasBar = cert.score && cert.maxScale;
-                                          if (!hasBar) {
+                                          if (hasBar) {
                                             return (
-                                              <div key={idx} className="flex justify-between items-center">
-                                                <h5 className="text-[13px] font-bold tracking-tight">{cert.title}</h5>
-                                                <p className="text-xs font-medium text-neutral-500">{cert.subtitle}</p>
+                                              <div 
+                                                key={idx} 
+                                                className="space-y-2.5 p-3.5 rounded-none border border-neutral-100 bg-neutral-50/50 hover:bg-neutral-900 group/cert transition-all duration-300 cursor-default shadow-3xs"
+                                              >
+                                                <div className="flex justify-between items-end">
+                                                  <div>
+                                                    <h5 className="text-[13px] font-bold tracking-tight text-neutral-800 group-hover/cert:text-white transition-colors duration-300">{cert.title}</h5>
+                                                    <p className="text-xs font-medium text-neutral-500 group-hover/cert:text-neutral-300 transition-colors duration-300">{cert.subtitle || cert.score}</p>
+                                                  </div>
+                                                  <span className="text-[10px] font-mono text-neutral-400 group-hover/cert:text-neutral-300 transition-colors duration-300">{cert.score}/{cert.maxScale}</span>
+                                                </div>
+                                                <div className="h-1.5 w-full bg-neutral-200/65 group-hover/cert:bg-neutral-800 rounded-none overflow-hidden transition-colors duration-300">
+                                                  <motion.div 
+                                                    initial={{ width: 0 }}
+                                                    whileInView={{ width: `${(cert.score / cert.maxScale) * 100}%` }}
+                                                    transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                                                    className="h-full bg-neutral-800 group-hover/cert:bg-rose-400 rounded-none transition-colors duration-300"
+                                                  />
+                                                </div>
                                               </div>
                                             );
                                           }
                                           return null;
                                         })}
+
+                                        <div className="pt-4 border-t border-neutral-100 space-y-3">
+                                          {(certificatesData || []).map((cert: any, idx: number) => {
+                                            const hasBar = cert.score && cert.maxScale;
+                                            if (!hasBar) {
+                                              return (
+                                                <div 
+                                                  key={idx} 
+                                                  className="flex justify-between items-center bg-neutral-50/50 p-3.5 rounded-none border border-neutral-100 hover:bg-neutral-900 group/cert transition-all duration-300 cursor-default shadow-3xs"
+                                                >
+                                                  <h5 className="text-[13px] font-bold tracking-tight text-neutral-800 group-hover/cert:text-white transition-colors duration-300">{cert.title}</h5>
+                                                  <p className="text-xs font-medium text-neutral-500 group-hover/cert:text-neutral-300 transition-colors duration-300">{cert.subtitle || cert.score}</p>
+                                                </div>
+                                              );
+                                            }
+                                            return null;
+                                          })}
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
                                 </motion.div>
 
                                 {/* Right Column: Technical Stack */}
-                                <motion.div variants={staggerItem}>
-                                  <div className="space-y-12">
-                                    {(portfolioData?.techStack || DEFAULT_PORTFOLIO_DATA.techStack || []).map((group: any) => (
-                                      <div key={group.label} className="group">
-                                        <p className="text-[11px] font-mono uppercase mb-4 text-neutral-400">{group.label}</p>
-                                        <div className="flex flex-wrap gap-2">
-                                          {group.items.map(item => (
-                                            <span key={item} className="px-3 py-1.5 border border-black/10 text-[10px] font-mono uppercase hover:bg-black hover:text-white transition-all cursor-default">
-                                              {item}
-                                            </span>
-                                          ))}
+                                <motion.div variants={staggerItem} className="h-full flex flex-col">
+                                  <div className="bg-white/80 backdrop-blur-sm border border-neutral-200/60 rounded-none p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-col justify-between">
+                                    <div className="space-y-8 w-full">
+                                      {(portfolioData?.techStack || DEFAULT_PORTFOLIO_DATA.techStack || []).map((group: any) => (
+                                        <div key={group.label} className="group">
+                                          <p className="text-xs font-mono font-medium uppercase mb-6 text-neutral-400 tracking-wider">{group.label}</p>
+                                          <div className="flex flex-wrap gap-2.5">
+                                            {group.items.map(item => (
+                                              <span key={item} className="px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-none border border-neutral-200/70 bg-neutral-50/50 text-xs sm:text-[13px] md:text-[14px] font-sans font-medium hover:bg-neutral-900 hover:text-white hover:border-neutral-900 transition-all cursor-default text-neutral-900 shadow-3xs">
+                                                {item}
+                                              </span>
+                                            ))}
+                                          </div>
                                         </div>
-                                      </div>
-                                    ))}
+                                      ))}
+                                    </div>
                                   </div>
                                 </motion.div>
                               </div>
 
                               {/* Section 3: Work Experience */}
-                              <div className="mt-24 pt-16 border-t border-black/10">
-                                <p className="text-[11px] font-mono uppercase text-neutral-400 mb-8">Work Experience</p>
-                                <div className="divide-y divide-black/5">
+                              <div className="mt-12">
+                                <p className="text-xs font-mono font-medium uppercase text-neutral-400 mb-6 tracking-wider">Work Experience</p>
+                                <div className="space-y-6">
                                   {(workExperienceData || []).map((exp: any, i: number) => (
                                     <motion.div 
                                       key={i} 
                                       variants={staggerItem}
-                                      className="flex flex-col md:flex-row items-start gap-y-4 gap-x-12 md:gap-x-16 py-8 md:py-10 first:pt-0 last:pb-0"
+                                      className="bg-white/80 backdrop-blur-sm border border-neutral-200/60 rounded-none p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row items-start gap-y-4 gap-x-12 md:gap-x-16"
                                     >
                                       {/* Left Column: Timeline */}
                                       <div className="w-full md:w-44 shrink-0">
-                                        <div className="text-sm md:text-base font-normal text-neutral-800 tracking-tight">
+                                        <span className="text-xs font-mono text-neutral-400 bg-neutral-100 px-2.5 py-1.5 rounded-none inline-block">
                                           {exp.period}
-                                        </div>
+                                        </span>
                                       </div>
 
                                       {/* Right Column: Company, Role Tags & Bullets */}
                                       <div className="flex-1 space-y-4">
                                         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                                           <h3 className="text-base md:text-[17px] font-bold text-neutral-900">{exp.company}</h3>
-                                          <span className="text-[11px] md:text-xs text-[#55698b] font-normal opacity-90">
+                                          <span className="text-[11px] md:text-xs text-neutral-500 font-normal">
                                             {exp.tags}
                                           </span>
                                         </div>
@@ -1296,7 +2009,7 @@ export default function App() {
                                               key={idx} 
                                               className="text-[13px] md:text-sm text-neutral-700 leading-relaxed flex items-start"
                                             >
-                                              <span className="mr-2 text-neutral-400 font-serif select-none">•</span>
+                                              <span className="mr-2 text-neutral-400 select-none">•</span>
                                               <span>{bullet}</span>
                                             </li>
                                           ))}
@@ -1306,6 +2019,8 @@ export default function App() {
                                   ))}
                                 </div>
                               </div>
+                            </>
+                          )}
                         </div>
                       </motion.section>
                     )}
@@ -1313,39 +2028,55 @@ export default function App() {
                     {activeSection === "project1" && (
                       <motion.section
                         key="project1"
-                        variants={staggerContainer}
-                        initial="hidden"
-                        animate="show"
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
-                        className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-24 pb-80 ${SECTIONS[1].color}`}
+                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                        className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-[46px] pb-80 ${SECTIONS[1].color}`}
                       >
-                        <div className="max-w-7xl mx-auto">
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-[90px]">
-                            {featuredProjects.map((project, idx) => (
-                              <ProjectCard key={idx} project={project} onClick={setSelectedProject} imageAspect="aspect-[300/220]" />
-                            ))}
+                        <div className="max-w-[1200px] mx-auto space-y-24">
+                          {isTransitioning ? (
+                            <div className="flex items-center justify-center min-h-[400px]">
+                              <div className="w-5 h-5 border-2 border-neutral-300 border-t-neutral-800 rounded-full animate-spin" />
+                            </div>
+                          ) : (
+                            <>
+                              {/* Segment 1: Operation */}
+                          <div className="space-y-12">
+                            <motion.div variants={staggerItem} className="border-b border-black/10 pb-4 flex items-baseline justify-between select-none">
+                              <h3 className="text-xl md:text-2xl font-bold tracking-tight text-neutral-900 flex items-baseline gap-2">
+                                <span>운영</span>
+                                <span className="text-[11px] font-mono font-medium text-neutral-400 uppercase tracking-widest pl-1">Operations</span>
+                              </h3>
+                            </motion.div>
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-[90px]">
+                              {featuredProjects.map((project, idx) => {
+                                const isWide = project.title === "페스티벌 운영" || project.title === "공연 운영";
+                                return (
+                                  <div key={idx} className="col-span-1">
+                                    <ProjectCard project={project} onClick={setSelectedProject} imageAspect="aspect-[300/220]" isWide={isWide} />
+                                  </div>
+                                );
+                              })}
+                            </div>
                           </div>
-                          <div className="h-20" />
-                        </div>
-                      </motion.section>
-                    )}
 
-                    {activeSection === "project2" && (
-                      <motion.section
-                        key="project2"
-                        variants={staggerContainer}
-                        initial="hidden"
-                        animate="show"
-                        exit={{ opacity: 0 }}
-                        className={`h-full w-full overflow-y-auto px-8 md:px-20 pt-24 pb-80 ${SECTIONS[2].color}`}
-                      >
-                        <div className="max-w-7xl mx-auto">
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-[90px]">
-                            {personalProjects.map((project, idx) => (
-                              <ProjectCard key={idx} project={project} onClick={setSelectedProject} imageAspect="aspect-[300/220]" />
-                            ))}
+                          {/* Segment 2: Planning */}
+                          <div className="space-y-12">
+                            <motion.div variants={staggerItem} className="border-b border-black/10 pb-4 flex items-baseline justify-between select-none">
+                              <h3 className="text-xl md:text-2xl font-bold tracking-tight text-neutral-900 flex items-baseline gap-2">
+                                <span>기획</span>
+                                <span className="text-[11px] font-mono font-medium text-neutral-400 uppercase tracking-widest pl-1">Planning</span>
+                              </h3>
+                            </motion.div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-[90px]">
+                              {personalProjects.map((project, idx) => (
+                                <ProjectCard key={idx} project={project} onClick={setSelectedProject} imageAspect="aspect-[300/220]" />
+                              ))}
+                            </div>
                           </div>
-                          <div className="h-20" />
+                            </>
+                          )}
                         </div>
                       </motion.section>
                     )}
@@ -1353,14 +2084,20 @@ export default function App() {
                     {activeSection === "activities" && (
                       <motion.section
                         key="activities"
-                        variants={staggerContainer}
-                        initial="hidden"
-                        animate="show"
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
-                        className={`h-full w-full overflow-hidden px-8 md:px-20 pt-24 pb-80 ${SECTIONS[3].color}`}
+                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                        className={`h-full w-full overflow-hidden px-8 md:px-20 pt-[46px] pb-80 ${SECTIONS[2].color}`}
                       >
-                        <div className="max-w-7xl w-full mx-auto">
-                          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start mb-32">
+                        <div className="max-w-[1200px] w-full mx-auto">
+                          {isTransitioning ? (
+                            <div className="flex items-center justify-center min-h-[400px]">
+                              <div className="w-5 h-5 border-2 border-neutral-300 border-t-neutral-800 rounded-full animate-spin" />
+                            </div>
+                          ) : (
+                            <>
+                              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start mb-32">
                             <div className="lg:col-span-2">
                               <motion.div variants={staggerItem}>
                                 <span className="text-[10px] font-mono uppercase tracking-[0.6em] opacity-40 block mb-2">Activities</span>
@@ -1441,6 +2178,8 @@ export default function App() {
                           </div>
 
                           {/* Background text removed */}
+                            </>
+                          )}
                         </div>
                       </motion.section>
                     )}

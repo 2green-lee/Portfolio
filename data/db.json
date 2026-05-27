@@ -1,64 +1,5 @@
-import { Project } from "./App";
-
-export interface PortfolioData {
-  featuredProjects: Project[];
-  personalProjects: Project[];
-  introduction: string;
-  profileImage?: string;
-  education: {
-    name: string;
-    period: string;
-    major: string;
-  };
-  certificates: {
-    title: string;
-    subtitle?: string;
-    score?: string;
-    rating?: string;
-    ratio?: number;
-    maxScale?: number;
-  }[];
-  workExperience: {
-    company: string;
-    tags: string;
-    period: string;
-    desc: string[];
-  }[];
-  activities: {
-    title: string;
-    period: string;
-    org: string;
-    desc: string[];
-  }[];
-  contact: {
-    email: string;
-    phone: string;
-    instagram: string;
-    instagramUrl: string;
-    location: string;
-  };
-  techStack?: {
-    label: string;
-    items: string[];
-  }[];
-}
-
-export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
-  techStack: [
-    {
-      label: "DESIGN TOOL",
-      items: ["일러스트레이터", "포토샵", "프리미어 프로"]
-    },
-    {
-      label: "OFFICE",
-      items: ["Microsoft office", "Google Workspace"]
-    },
-    {
-      label: "COLLABORATION",
-      items: ["Notion", "Slack", "Flow"]
-    }
-  ],
-  featuredProjects: [
+{
+  "featuredProjects": [
     {
       "title": "페스티벌 운영",
       "category": "운영",
@@ -172,35 +113,35 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       ]
     }
   ],
-  personalProjects: [
+  "personalProjects": [
     {
-      title: "GREENERY : 푸르게 푸르게 푸르러져라",
-      category: "상품기획",
-      year: "2023",
-      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img5.png",
-      contribution: "70%",
-      location: "Online & Offline Distribution",
-      cast: "이그린 (Lee Green)",
-      support: "텀블벅 크라우드 펀딩 프로젝트",
-      description: "싱어송라이터 이그린 EP <GREENERY> 발매. 발매 작업기를 담은 책 형태의 새로운 앨범.",
-      fullDescription: "싱어송라이터 ‘이그린’의 EP [GREENERY] 발매와 함께, 창작 과정과 영감을 기록한 아트북 형태의 피지컬 앨범을 기획·제작했습니다.\n\n효용성이 낮은 기존 플라스틱 CD의 한계를 문제로 정의하고, 이를 대체할 수 있는 새로운 형태의 앨범을 설계했습니다. 텀블벅 크라우드펀딩을 통해 목표 금액의 196%를 달성하며 프로젝트를 성공적으로 런칭했습니다.\n\n전곡 작사, 작곡, 프로듀싱은 물론, 디자인 디렉팅, 유통, 쇼케이스 기획까지 프로젝트 전반을 주도했습니다.",
-      role: {
-        title: "기획",
-        items: [
+      "title": "GREENERY : 푸르게 푸르게 푸르러져라",
+      "category": "상품기획",
+      "year": "2023",
+      "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img5.png",
+      "contribution": "70%",
+      "location": "Online & Offline Distribution",
+      "cast": "이그린 (Lee Green)",
+      "support": "텀블벅 크라우드 펀딩 프로젝트",
+      "description": "싱어송라이터 이그린 EP <GREENERY> 발매. 발매 작업기를 담은 책 형태의 새로운 앨범.",
+      "fullDescription": "싱어송라이터 ‘이그린’의 EP [GREENERY] 발매와 함께, 창작 과정과 영감을 기록한 아트북 형태의 피지컬 앨범을 기획·제작했습니다.\n\n효용성이 낮은 기존 플라스틱 CD의 한계를 문제로 정의하고, 이를 대체할 수 있는 새로운 형태의 앨범을 설계했습니다. 텀블벅 크라우드펀딩을 통해 목표 금액의 196%를 달성하며 프로젝트를 성공적으로 런칭했습니다.\n\n전곡 작사, 작곡, 프로듀싱은 물론, 디자인 디렉팅, 유통, 쇼케이스 기획까지 프로젝트 전반을 주도했습니다.",
+      "role": {
+        "title": "기획",
+        "items": [
           "Planning: 프로젝트 전체 기획\n펀딩 전략 수립",
           "Production: 앨범 제작\n책 디자인 및 출판\n아티스트 굿즈 제작",
           "Promotion: 펀딩 홍보 영상 제작\nSNS 운영\n라이브 영상 제작",
           "Operation: 쇼케이스 기획 및 진행"
         ]
       },
-      results: [
+      "results": [
         "텀블벅 크라우드 펀딩을 통해 프로젝트 자금 확보 및 시장 반응 검증 -> 텀블벅 크라우드 펀딩 196% 초과 달성\n목표 금액 대비 높은 참여율과 지지 확보",
         "책 형태의 아티스트 앨범 제작 및 유통 구조 구축 -> 앨범 제작 및 출판 완료\n온·오프라인 10개 판매처 입점 및 판매 진행",
         "출판 콘텐츠를 확장한 관객 참여형 프로그램 기획 -> '하나의 생각이 노래가 되기까지' 출판 프로모션 워크숍 진행",
         "다채널 홍보를 통한 프로젝트 인지도 확대 -> 펀딩 홍보 영상 제작\n인스타그램, 팟캐스트 등 온라인 채널 중심 홍보 운영",
         "앨범 발매를 알리는 오프라인 이벤트 기획 및 실행 -> 발매 쇼케이스 기획 및 진행"
       ],
-      images: [
+      "images": [
         "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2052.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/013cde7d59ad00b704b19423085d2b9bfc269884/img%2051.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2054.jpg",
@@ -216,20 +157,20 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       ]
     },
     {
-      title: "Flower Planet",
-      category: "Concert",
-      year: "2022",
-      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg",
-      contribution: "70%",
-      location: "KT&G 상상마당 부산 3F 라이브홀",
-      support: "KT&G 상상마당 부산",
-      cast: "우예린, 이그린",
-      objectPosition: "top",
-      description: "부산 아티스트 이그린과 서울 아티스트 우예린의 콜라보레이션 공연.",
-      fullDescription: "부산을 기반으로 활동하는 아티스트 '이그린'과 서울의 아티스트 '우예린'이 만나 음악적 교감을 나누는 특별한 콜라보레이션 무대를 기획했습니다.\n\n서로 다른 지역적 배경을 가진 두 아티스트의 조화를 통해 새로운 관객층을 유입시키고, 단순한 공연을 넘어 체험형 콘텐츠를 결합하여 관객들에게 잊지 못할 경험을 선사하는 것을 목표로 했습니다. 기획부터 제작, 홍보, 현장 운영까지 공연의 전 단계에 걸쳐 밀도 높은 작업을 수행했습니다.",
-      role: {
-        title: "기획",
-        items: [
+      "title": "Flower Planet",
+      "category": "Concert",
+      "year": "2022",
+      "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg",
+      "contribution": "70%",
+      "location": "KT&G 상상마당 부산 3F 라이브홀",
+      "support": "KT&G 상상마당 부산",
+      "cast": "우예린, 이그린",
+      "objectPosition": "top",
+      "description": "부산 아티스트 이그린과 서울 아티스트 우예린의 콜라보레이션 공연.",
+      "fullDescription": "부산을 기반으로 활동하는 아티스트 '이그린'과 서울의 아티스트 '우예린'이 만나 음악적 교감을 나누는 특별한 콜라보레이션 무대를 기획했습니다.\n\n서로 다른 지역적 배경을 가진 두 아티스트의 조화를 통해 새로운 관객층을 유입시키고, 단순한 공연을 넘어 체험형 콘텐츠를 결합하여 관객들에게 잊지 못할 경험을 선사하는 것을 목표로 했습니다. 기획부터 제작, 홍보, 현장 운영까지 공연의 전 단계에 걸쳐 밀도 높은 작업을 수행했습니다.",
+      "role": {
+        "title": "기획",
+        "items": [
           "Planning: 기획서 작성\n공연 전체 컨셉 수립",
           "Booking: 아티스트 섭외\n공연장(KT&G 상상마당) 조율",
           "Promotion: SNS 마케팅 전략 수립\n라이브 홍보 영상 기획",
@@ -237,12 +178,12 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
           "Operation: 공연 당일 현장 운영\n타임테이블 관리"
         ]
       },
-      results: [
+      "results": [
         "관객 유입 확대 및 티켓 판매율 제고 -> 전체 티켓 매진",
         "온오프라인 콘텐츠 제작 -> 컨셉 영상 제작\n헤나 체험 부스 운영",
         "다채널 홍보를 통한 인지도 확산 -> SNS 영상 홍보물 배포\n티켓 2+1 프로모션 진행"
       ],
-      images: [
+      "images": [
         "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2041.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2042.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2043.jpg",
@@ -253,20 +194,20 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       ]
     },
     {
-      title: "열대야",
-      category: "Concert",
-      year: "2022",
-      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img3.jpg",
-      contribution: "70%",
-      location: "KT&G 상상마당 부산 13F 루프탑",
-      support: "KT&G 상상마당 부산",
-      cast: "From2020, Chilinkat, 이그린",
-      objectPosition: "center",
-      description: "도시에서 즐기는 한 여름 밤의 꿈. 도심의 건물 옥상에서 각양각색 인디 뮤지션의 음악을 즐긴다.",
-      fullDescription: "도심 속 건물 옥상이라는 이색적인 공간에서 펼쳐지는 인디 음악 공연 시리즈입니다. '열대야'라는 테마에 맞춰 한여름 밤의 정취를 느낄 수 있는 아티스트 라인업과 공간 연출을 기획했습니다.\n\n관객들에게 일상 속 특별한 휴식을 선사하며, 지역 문화 공간의 활용도를 높이는 성공적인 사례를 만들었습니다. 기획부터 운영까지 전 과정을 주도하며 프로젝트의 완성도를 높였습니다.",
-      role: {
-        title: "기획",
-        items: [
+      "title": "열대야",
+      "category": "Concert",
+      "year": "2022",
+      "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img3.jpg",
+      "contribution": "70%",
+      "location": "KT&G 상상마당 부산 13F 루프탑",
+      "support": "KT&G 상상마당 부산",
+      "cast": "From2020, Chilinkat, 이그린",
+      "objectPosition": "center",
+      "description": "도시에서 즐기는 한 여름 밤의 꿈. 도심의 건물 옥상에서 각양각색 인디 뮤지션의 음악을 즐긴다.",
+      "fullDescription": "도심 속 건물 옥상이라는 이색적인 공간에서 펼쳐지는 인디 음악 공연 시리즈입니다. '열대야'라는 테마에 맞춰 한여름 밤의 정취를 느낄 수 있는 아티스트 라인업과 공간 연출을 기획했습니다.\n\n관객들에게 일상 속 특별한 휴식을 선사하며, 지역 문화 공간의 활용도를 높이는 성공적인 사례를 만들었습니다. 기획부터 운영까지 전 과정을 주도하며 프로젝트의 완성도를 높였습니다.",
+      "role": {
+        "title": "기획",
+        "items": [
           "Planning: 프로젝트 기획서 작성\n콘셉트 수립 및 협업 파트너 대상 제안",
           "Booking: 아티스트 및 공연/행사 장소 섭외\n일정 및 조건 협의",
           "Promotion: 온라인 홍보 전략 수립 및 실행\n오프라인 프로모션 기획 및 운영",
@@ -274,12 +215,12 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
           "Operation: 행사 진행 및 운영 관리"
         ]
       },
-      results: [
+      "results": [
         "시민들이 주말 저녁에 향유할 수 있는 접근성 높은 공연 콘텐츠 기획 및 제공 -> 티켓 판매 전석 매진 달성",
         "공간 및 브랜드 협업을 통한 프로젝트 운영 효율 및 관객 경험 강화 -> KT&G 상상마당 루프탑 공간 대관 \n와인·핑거푸드 등 연계 프로모션 제공",
         "다채널 홍보를 통한 공연 인지도 확산 -> 상상마당 부산 및 HAO 공식 인스타그램을 활용한 온라인 홍보 진행 \n배너 및 공연 홍보 영상 제작·배포"
       ],
-      images: [
+      "images": [
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2031.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2032.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2033.jpg",
@@ -291,25 +232,45 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       ]
     }
   ],
-  introduction: "즐거운 일탈의 경험을 기획하는 기획자 이근일 입니다",
-  profileImage: "https://raw.githubusercontent.com/2green-lee/Portfolio/f66ab41476996ab36cc14a55ab0c5b42aae06158/profile%20img.png",
-  education: {
-    name: "부산대학교",
-    period: "2013 - 2021",
-    major: "항공우주공학 & 예술문화영상학"
+  "introduction": "즐거운 일탈의 경험을 기획하는 기획자 이근일 입니다",
+  "profileImage": "https://raw.githubusercontent.com/2green-lee/Portfolio/f66ab41476996ab36cc14a55ab0c5b42aae06158/profile%20img.png",
+  "education": {
+    "name": "부산대학교",
+    "period": "2013 - 2021",
+    "major": "항공우주공학 & 예술문화영상학"
   },
-  certificates: [
-    { title: "TOEIC SPEAKING", subtitle: "AL (Advanced Low)", rating: "Level 9/11", ratio: 9/11 },
-    { title: "TOEIC", subtitle: "830", rating: "830/990", ratio: 830/990 },
-    { title: "워드프로세서", subtitle: "단일등급", score: "단일등급" },
-    { title: "운전면허증", subtitle: "1종보통", score: "1종보통" }
-  ],
-  workExperience: [
+  "certificates": [
     {
-      company: "퀸즈스마일",
-      tags: "기획/운영 · 인턴/수습 · PM(프로젝트매니저)",
-      period: "2024.05 ~ 2024.10",
-      desc: [
+      "title": "TOEIC SPEAKING",
+      "subtitle": "AL (Advanced Low)",
+      "score": "AL (Advanced Low)",
+      "rating": "Level 9/11",
+      "ratio": 0.8181818181818182
+    },
+    {
+      "title": "TOEIC",
+      "subtitle": "830",
+      "score": "830",
+      "rating": "830/990",
+      "ratio": 0.8383838383838383
+    },
+    {
+      "title": "워드프로세서",
+      "subtitle": "단일등급",
+      "score": "단일등급"
+    },
+    {
+      "title": "운전면허증",
+      "subtitle": "1종보통",
+      "score": "1종보통"
+    }
+  ],
+  "workExperience": [
+    {
+      "company": "퀸즈스마일",
+      "tags": "기획/운영 · 인턴/수습 · PM(프로젝트매니저)",
+      "period": "2024.05 ~ 2024.10",
+      "desc": [
         "국내외 페스티벌 및 공연 기획 및 운영",
         "워터밤, 펜타포트 등 대형 페스티벌 현장 운영 참여 및 실무 지원",
         "자사 플랫폼 UX/UI 개선 프로젝트 참여 (개발팀 협업)",
@@ -318,53 +279,86 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       ]
     },
     {
-      company: "드림씨어터",
-      tags: "고객서비스 · 아르바이트 · 하우스어텐던트",
-      period: "2019.10 ~ 2022.05",
-      desc: [
+      "company": "드림씨어터",
+      "tags": "고객서비스 · 아르바이트 · 하우스어텐던트",
+      "period": "2019.10 ~ 2022.05",
+      "desc": [
         "대형 라이선스 공연 관객 서비스 및 현장 운영 지원",
         "특이사항 및 현장 돌발 이슈 해결 및 대응",
         "공연장 안전 관리 및 운영 프로세스 이행"
       ]
     }
   ],
-  activities: [
-    { 
-      title: "광고·마케팅 동아리 CREATOR", 
-      period: "2019.03 ~ 2021.02", 
-      org: "부산대학교",
-      desc: ["영상 콘텐츠 및 카피라이팅 기획/제작", "마케팅 콘텐츠 기획 및 실행 경험", "공모전 수상"] 
+  "activities": [
+    {
+      "title": "광고·마케팅 동아리 CREATOR",
+      "period": "2019.03 ~ 2021.02",
+      "org": "부산대학교",
+      "desc": [
+        "영상 콘텐츠 및 카피라이팅 기획/제작",
+        "마케팅 콘텐츠 기획 및 실행 경험",
+        "공모전 수상"
+      ]
     },
-    { 
-      title: "청년 UNIVERSITY 기획자 양성 프로그램", 
-      period: "2021.06 ~ 2021.12", 
-      org: "부산문화재단",
-      desc: ["프로젝트 기획–운영–성과 분석 전 과정 수행", "결과 보고서 작성 및 발표"] 
+    {
+      "title": "청년 UNIVERSITY 기획자 양성 프로그램",
+      "period": "2021.06 ~ 2021.12",
+      "org": "부산문화재단",
+      "desc": [
+        "프로젝트 기획–운영–성과 분석 전 과정 수행",
+        "결과 보고서 작성 및 발표"
+      ]
     },
-    { 
-      title: "아트모아 기자단 2기", 
-      period: "2022.09 ~ 2022.12", 
-      org: "예술경영지원센터",
-      desc: ["산업 리서치 및 전문가 인터뷰 기획/진행", "문화산업 관련 콘텐츠 작성 및 인사이트 도출"] 
+    {
+      "title": "아트모아 기자단 2기",
+      "period": "2022.09 ~ 2022.12",
+      "org": "예술경영지원센터",
+      "desc": [
+        "산업 리서치 및 전문가 인터뷰 기획/진행",
+        "문화산업 관련 콘텐츠 작성 및 인사이트 도출"
+      ]
     },
-    { 
-      title: "파나카노트 공연 기획 PD", 
-      period: "2021", 
-      org: "복합문화공간",
-      desc: ["공연 기획 및 음향 총괄"] 
+    {
+      "title": "파나카노트 공연 기획 PD",
+      "period": "2021",
+      "org": "복합문화공간",
+      "desc": [
+        "공연 기획 및 음향 총괄"
+      ]
     },
-    { 
-      title: "한일청년 교류회", 
-      period: "2019.03 ~ 2021.02", 
-      org: "부산 한일문화교류협회",
-      desc: ["한일 대학생 교류 프로그램 기획 및 운영 참여", "해외 프로그램 봉사활동"] 
+    {
+      "title": "한일청년 교류회",
+      "period": "2019.03 ~ 2021.02",
+      "org": "부산 한일문화교류협회",
+      "desc": [
+        "한일 대학생 교류 프로그램 기획 및 운영 참여",
+        "해외 프로그램 봉사활동"
+      ]
     }
   ],
-  contact: {
-    email: "lgi12@naver.com",
-    phone: "010-9335-9620",
-    instagram: "darkreen___n",
-    instagramUrl: "https://www.instagram.com/darkreen___n/",
-    location: "Seoul, South Korea"
-  }
-};
+  "techStack": [
+    {
+      "label": "DESIGN TOOL",
+      "items": [
+        "일러스트레이터",
+        "포토샵",
+        "프리미어 프로"
+      ]
+    },
+    {
+      "label": "OFFICE",
+      "items": [
+        "Microsoft office",
+        "Google Workspace"
+      ]
+    },
+    {
+      "label": "COLLABORATION",
+      "items": [
+        "Notion",
+        "Slack",
+        "Flow"
+      ]
+    }
+  ]
+}
