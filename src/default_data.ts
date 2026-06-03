@@ -66,7 +66,7 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/9d41580d7739017f4b186f92faf6491a60264fd5/2024waterbomb.png",
       "contribution": "25%",
       "description": "워터밤, 인천펜타포트, 부산국제록페스티벌, 이슬라이브페스티벌 등 국내 대형 페스티벌의 현장 F&B, 공식 MD, 티켓 및 관객 관리 운영 총괄.",
-      "fullDescription": "QueensSmile 모바일 플랫폼 및 무인 키오스크 시스템을 통합 적용하여 다수 페스티벌의 중추 부스를 성공적으로 설계·관리하였습니다.\n\n각 대행사 및 주최사의 요구사항을 충족하며, 사전 구매와 실시간 현장 판매를 병행하는 안정적인 온·오프라인 하이브리드 운영 구조를 구축해 다년의 노하우를 바탕으로 관객 병목을 최소화하고 고객사와의 신뢰를 공고히 했습니다.\n\n[주요 운영 실적]\n• 2024 WATERBOMB (티켓 발권 및 입장 총괄)\n• 2024 인천펜타포트록페스티벌 (자체 예약 앱 기반 F&B 및 물품보관소)\n• 2024 부산국제록페스티벌 (공식 복합 MD 및 아티스트 굿즈 상시 매장)\n• 2024 이슬라이브페스티벌 (하이트진로 공식 F&B 운영PM)",
+      "fullDescription": "QueensSmile 모바일 플랫폼 및 무인 키오스크 시스템을 통합 적용하여 다수 페스티벌의 중추 부스를 성공적으로 설계·관리하였습니다.\n\n각 대행사 및 주최사의 요구사항을 충족하며, 사전 구매와 실시간 현장 판매를 병행하는 안정적인 온·오프라인 하이브리드 운영 구조를 구축해 다년의 노하우를 바탕으로 관객 병목을 최소화하고 고객사와의 신뢰를 공고히 했습니다.\n\n[주요 운영 실적]\n2024 WATERBOMB 전국\n2024 인천펜타포트국제록페스티벌\n2024 어썸뮤직페스티벌\n2024 이슬라이브 페스티벌\n2024 여수 썸머 뮤직 페스티벌\n2024 로즈아워 페스티벌\n2024 부산 국제 록 페스티벌\n2024 그린캠프 페스티벌",
       "role": {
         "title": "프로젝트 매니저 (PM)",
         "items": [
@@ -122,7 +122,7 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg",
       "contribution": "60%",
       "description": "드림씨어터 및 주요 극장 라이선스 뮤지컬(위키드, 오페라의 유령 등), 내한 공연, 콘서트 실시간 하우스 운영 및 관객 서비스 설계.",
-      "fullDescription": "드림씨어터 및 대형 공연장의 공연 운영을 담당하였습니다.\n\n각 제작사 및 대형 기획사의 요구사항을 충족하며, 관객의 극장 통제 동량 분석 및 실시간 좌석/안내 가이드를 수립했습니다. VIP 컨시어지 및 다수 하우스 크루를 성실히 지도하여 지연 관객 분산 재입장 및 아티스트 교환 루틴을 원활하게 마쳤습니다.\n\n[주요 공연 실적]\n• 뮤지컬 오페라의 유령 (내한 및 오리지널 프로덕션 하우스 지원)\n• 뮤지컬 위키드 (지연 관객 차단 대기 및 가이드 매뉴얼 보완)\n• 드림씨어터 내 다수 콘서트 및 클래식 리사이틀 하우스 조율\n• 관객 대기 병목 분산 및 CS 커뮤니케이션 프로토콜 표준화",
+      "fullDescription": "드림씨어터 및 대형 공연장의 공연 운영을 담당하였습니다.\n\n각 제작사 및 대형 기획사의 요구사항을 충족하며, 관객의 극장 통제 동량 분석 및 실시간 좌석/안내 가이드를 수립했습니다. VIP 컨시어지 및 다수 하우스 크루를 성실히 지도하여 지연 관객 분산 재입장 및 아티스트 교환 루틴을 원활하게 마쳤습니다.\n\n[주요 공연 실적]\n• GREENERY 단독공연\n• Flower Planet\n• 열대야\n• 오후의 향기\n• 야간비행\n• 뮤지컬 오페라의 유령 내한공연\n• 뮤지컬 위키드\n• 뮤지컬 맘마미아\n• 뮤지컬 싯다르타\n• 뮤지컬 레베카\n• 뮤지컬 라이온킹 내한 공연",
       "role": {
         "title": "하우스 어텐던트, 프로젝트 매니저 (PM)",
         "items": [
@@ -238,9 +238,10 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         ]
       },
       results: [
-        "관객 유입 확대 및 티켓 판매율 제고 -> 전체 티켓 매진",
-        "온오프라인 콘텐츠 제작 -> 컨셉 영상 제작\n헤나 체험 부스 운영",
-        "다채널 홍보를 통한 인지도 확산 -> SNS 영상 홍보물 배포\n티켓 2+1 프로모션 진행"
+        "지속 가능한 지역 음악 씬 활성화 & 아티스트 교류 유치 -> 지역 아티스트 '이그린'과 서울 아티스트 '우예린' 콜라보레이션 유치 및 공동 공연 성사",
+        "관객 모객 규모 달성 (공간 수용 인원 100명 타겟) -> 적극적 사전 예매 촉진을 통해 유효 티켓 판매 총 50명 방문 달성",
+        "체험 중심 콘텐츠 기획 및 영상 미디어 연출 -> 관객 몰입형 '헤나 체험 부스' 현장 운영 및 감성적인 '오프닝 콘셉트 영상' 자체 제작 및 상영",
+        "온라인 홍보 다각화 및 타겟형 프로모션 전략 수립 -> 인스타그램 전용 고감도 루틴 홍보 영상 배포 및 '티켓 2+1 이벤트' 프로모션을 통한 사전 모객 극대화"
       ],
       images: [
         "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2041.jpg",
@@ -289,18 +290,79 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2037.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2038.jpg"
       ]
+    },
+    {
+      title: "오후의 향기",
+      category: "Concert",
+      year: "2021",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img2.jpg",
+      contribution: "70%",
+      location: "파나카 F (Panaca F) 야외 테라스",
+      support: "복합문화공간 파나카",
+      cast: "이그린, 오후의 향기 콜라보 레이블",
+      description: "나른한 오후를 채우는 향기로운 일탈. 감각적인 커피 향과 라이브 재즈/인디 음악의 하모니.",
+      fullDescription: "나른한 오후의 시간대를 따뜻하고 감성적인 인디 음악으로 채워내는 야외 소규모 콘서트 브랜드 '오후의 향기'를 기획했습니다.\n\n바쁜 일상을 벗어나 향긋한 커피와 차, 그리고 아티스트의 생생한 목소리를 가까이에서 감상할 수 있는 감각 집중형 이벤트를 타겟팅했습니다.\n\n컨셉 조율, 현장 동선 및 음향 연출, 아티스트 라인업 구성과 티켓 예약 관리를 총괄했습니다.",
+      role: {
+        title: "기획",
+        items: [
+          "Planning: 공간 기반 힐링 콘셉트 기획 / 시즌 필터링 음료 패키지 기획",
+          "Booking: 인디 싱어송라이터 섭외 / 음향 엔지니어 및 테라스 조율",
+          "Promotion: 한정 관객 대상 타겟 SNS 마케팅 / 입소문 추천 및 오프라인 배너",
+          "Operation: 당일 하우스 가이드 구현 / 커피 브루잉 타임 세션 연계 조화"
+        ]
+      },
+      results: [
+        "소규모 타겟 매니아 관객층 완전 모객 성공 -> 전석 매진 및 만족도 100% 만족 달성",
+        "음료 패키지와 공연 관람 연계 수입 극대화 -> 아티스트 보증 및 파트너 카페 추가 수익 창출",
+        "야외 공간 및 연출 조작 정합 완성 -> 자연광 및 주변 소음을 조화롭게 제어하는 현장 연출 성공"
+      ],
+      images: [
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/013cde7d59ad00b704b19423085d2b9bfc269884/img%2051.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img5.png"
+      ]
+    },
+    {
+      title: "야간비행",
+      category: "Concert",
+      year: "2021",
+      image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img1.jpg",
+      contribution: "70%",
+      location: "파나카노트 지하 라이브 스테이지",
+      support: "파나카노트 (Panaca Note)",
+      cast: "이그린, 로컬 리스너 세션",
+      description: "별이 빛나는 밤, 음악으로 떠나는 가상의 밤하늘 여행. 앰비언트 비주얼과 모던한 시티팝/어쿠스틱 연출.",
+      fullDescription: "생텍쥐페리의 소설 '야간비행'에서 영감을 받아, 모던하고 몽환적인 밤의 사운드 아카이브를 라이브 무대로 재현한 콘서트 시리즈입니다.\n\n어두운 실내 공간에 별빛을 형상화한 프로젝션 맵핑과 조명 디렉팅을 접목하여 시청각을 고루 자극하는 몰입도 높은 연출을 완성했습니다.\n\n총괄 연출, 무대 기획, 영상 이펙트 및 비주얼 라이팅 디렉팅, 공연장 셋업과 관객 입장 가이드를 운영하였습니다.",
+      role: {
+        title: "기획",
+        items: [
+          "Planning: 문학 콘텐츠 기반 옴니버스 콘셉트 / 조명 및 영상 맵핑 시나리오 작수",
+          "Booking: 앰비언트/어쿠스틱 톤 아티스트 섭외 / 기술 엔지니어 파트너십 유치",
+          "Production: 시각 특수 효과 트랙 구성 / 소품 큐레이션 및 포스터 디자인 감수",
+          "Operation: 타임코드 동기화 연출 진행 / 심야 시간대 관객 귀가 동선 안전 가이드"
+        ]
+      },
+      results: [
+        "감각적 라이팅 쇼와 미디어 연출 완성도 호평 -> 인스타 해시태그 확산 및 후속 시리즈 제작 문의 폭주",
+        "실험적 낭독 결합 공연의 대중성 확인 -> 비주얼 아트 티켓 판매율 기회 대비 120% 성과 달성",
+        "무사고 테크니컬 쇼 및 씬 동기화 정밀 작동 -> 암전 상태의 신속 하우스 크루 가이드 안착"
+      ],
+      images: [
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2053.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg"
+      ]
     }
   ],
   introduction: "즐거운 일탈의 경험을 기획하는 기획자 이근일 입니다",
-  profileImage: "https://raw.githubusercontent.com/2green-lee/Portfolio/f66ab41476996ab36cc14a55ab0c5b42aae06158/profile%20img.png",
+  profileImage: "https://raw.githubusercontent.com/2green-lee/Portfolio/7fe5749c4d7157e49816af496d35e3466760aa25/my-notion-face-portrait.png",
   education: {
     name: "부산대학교",
     period: "2013 - 2021",
     major: "항공우주공학 & 예술문화영상학"
   },
   certificates: [
-    { title: "TOEIC SPEAKING", subtitle: "AL (Advanced Low)", rating: "Level 9/11", ratio: 9/11 },
+    { title: "TOEIC SPEAKING", subtitle: "AL", rating: "Level 9/11", ratio: 9/11 },
     { title: "TOEIC", subtitle: "830", rating: "830/990", ratio: 830/990 },
+    { title: "ADsP", subtitle: "데이터 분석 준전문가", score: "데이터 분석 준전문가" },
     { title: "워드프로세서", subtitle: "단일등급", score: "단일등급" },
     { title: "운전면허증", subtitle: "1종보통", score: "1종보통" }
   ],
@@ -368,3 +430,131 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
     location: "Seoul, South Korea"
   }
 };
+
+export const DEFAULT_FESTIVAL_TICKET = [
+  {
+    phase: "사전 온라인 티켓 오픈 및 관리",
+    label: "PRE-EVENT",
+    items: [
+      {
+        title: "예매처 및 플랫폼 제휴 정비",
+        body: "네이버, 인터파크, 멜론티켓 등 멀티 예매 채널 시스템 가동 및 연동 완료."
+      },
+      {
+        title: "오픈 시스템 및 정원 관리",
+        body: "각 지역별 1차, 2차 예매 전용 수량 제한 프로토콜 및 대기열 분산 솔루션 구성."
+      }
+    ]
+  },
+  {
+    phase: "현장 무인 단말기 및 매표 서비스 점검",
+    label: "ON-SITE",
+    items: [
+      {
+        title: "스마트 키오스크 및 QR 스캐너 연동",
+        body: "모바일 QR 입장권 실시간 하이퍼 스캔 적용, 인당 수령 지연 3초 이내 조율."
+      },
+      {
+        title: "예외 부스 운영 및 신분증 실명 확인",
+        body: "미성년자 차단 및 팔찌 변조 검사, 교통/유도 시뮬레이션 및 안내선 펜스 설치."
+      }
+    ]
+  },
+  {
+    phase: "정산 및 티켓 대사 정합성 분석",
+    label: "POST-EVENT",
+    items: [
+      {
+        title: "최종 발권 통계 및 실시간 회수 분석",
+        body: "온라인 정합 비율 99.9% 검수, 미회수 팔찌 가치 정산 리포터 발행."
+      },
+      {
+        title: "파트너 정산 일치",
+        body: "공식 파트너사 및 기획 대행사 최종 정산 데이터 마감 및 최종 승인 완료."
+      }
+    ]
+  }
+];
+
+export const DEFAULT_FESTIVAL_FNB = [
+  {
+    phase: "현장 식음료 입점 제안 및 부스 배치 설계",
+    label: "PRE-EVENT",
+    items: [
+      {
+        title: "F&B 파트너 엄선 및 제휴",
+        body: "전국 인기 푸드트럭 및 브랜드 제너럴 엄선 제안, 메뉴/소비전력 적합성 승인."
+      },
+      {
+        title: "동선 및 화재 조절 가이드",
+        body: "LPG 가스 및 고전력 부스 레이아웃 분리, 대기열이 타 구역을 침해하지 않도록 안전 간격 형성."
+      }
+    ]
+  },
+  {
+    phase: "실시간 모바일 오더 수급 조절",
+    label: "ON-SITE",
+    items: [
+      {
+        title: "QueensSmile 원스톱 스마트 스마트 오더",
+        body: "줄 서지 않는 예약 시간별 픽업 운영, 현장 피크타임 동량 75% 이상 분배 조율."
+      },
+      {
+        title: "위생 정비 및 공급 조율",
+        body: "식자재 당일 급송 보관 차량 냉동탑차 정합 검사, 소화 기구 가깝게 설치 및 위생 점검 순찰."
+      }
+    ]
+  },
+  {
+    phase: "정합성 및 매출 정산 검토",
+    label: "POST-EVENT",
+    items: [
+      {
+        title: "각 사업자별 순매출 자동 배분 정합",
+        body: "PG 결제수수료 및 정산율 매핑, 행사 종료 후 3영업일 內 실시간 대사표 발행."
+      }
+    ]
+  }
+];
+
+export const DEFAULT_FESTIVAL_STORAGE = [
+  {
+    phase: "사전 고용량 물품 및 부스 인프라 셋업",
+    label: "PRE-EVENT",
+    items: [
+      {
+        title: "초고속 보관 백 수급 및 넘버링 시스템",
+        body: "방수 비닐 백 다량 구비, 사양 넘버링 및 보안 인덱스 라벨 발행."
+      },
+      {
+        title: "물리 테이블 및 안전 가드라인",
+        body: "인파 고정 펜스 라인 및 비 안 맞는 천막 동선 설계."
+      }
+    ]
+  },
+  {
+    phase: "현장 고속 입고 및 정전 대응 접수",
+    label: "LIVE-CONTROL",
+    items: [
+      {
+        title: "수령·접수 투 트랙 분리 운영",
+        body: "입고와 출고 부스 전면 고정 분리, 피크타임 접수 병목 최소화 실현."
+      },
+      {
+        title: "바코드 실시간 매핑 및 보관",
+        body: "고유 넘버링 스티커 대조 접수 및 보관, 구획별 수납 완료."
+      }
+    ]
+  },
+  {
+    phase: "유실물 보존 및 행사 정산 마감",
+    label: "POST-EVENT",
+    items: [
+      {
+        title: "미수령 물품 리스트업 및 인계 조율",
+        body: "유실물 유예기간 보관, 주최처 이송 및 고객 확인 채널 연결."
+      }
+    ]
+  }
+];
+

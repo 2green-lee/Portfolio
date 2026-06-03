@@ -288,7 +288,7 @@ const INITIAL_DATA = {
     major: "항공우주공학 & 예술문화영상학"
   },
   certificates: [
-    { title: "TOEIC SPEAKING", subtitle: "AL (Advanced Low)", score: "AL (Advanced Low)", rating: "Level 9/11", ratio: 9/11 },
+    { title: "TOEIC SPEAKING", subtitle: "AL", score: "AL", rating: "Level 9/11", ratio: 9/11 },
     { title: "TOEIC", subtitle: "830", score: "830", rating: "830/990", ratio: 830/990 },
     { title: "워드프로세서", score: "단일 등급" },
     { title: "운전면허증", score: "1종보통" }
@@ -360,20 +360,20 @@ function initializeEnvironment() {
     fs.mkdirSync(DB_DIR_TMP, { recursive: true });
   }
 
-  // Seed DB with existing configuration from workspace or fallback to default
-  if (fs.existsSync(originalDbPath)) {
-    try {
-      console.log(`Seeding DB from workspace source: ${originalDbPath}`);
-      fs.copyFileSync(originalDbPath, DB_PATH);
-    } catch (e: any) {
-      console.error(`Failed to copy existing database: ${e.message}`);
-      if (!fs.existsSync(DB_PATH)) {
+  // Seed DB with existing configuration from workspace or fallback to default if DB_PATH does not exist
+  if (!fs.existsSync(DB_PATH)) {
+    if (fs.existsSync(originalDbPath)) {
+      try {
+        console.log(`Seeding DB from workspace source: ${originalDbPath}`);
+        fs.copyFileSync(originalDbPath, DB_PATH);
+      } catch (e: any) {
+        console.error(`Failed to copy existing database: ${e.message}`);
         fs.writeFileSync(DB_PATH, JSON.stringify(INITIAL_DATA, null, 2), "utf-8");
       }
+    } else {
+      console.log("Seeding DB with initial fallback data");
+      fs.writeFileSync(DB_PATH, JSON.stringify(INITIAL_DATA, null, 2), "utf-8");
     }
-  } else if (!fs.existsSync(DB_PATH)) {
-    console.log("Seeding DB with initial fallback data");
-    fs.writeFileSync(DB_PATH, JSON.stringify(INITIAL_DATA, null, 2), "utf-8");
   }
 
   // Ensure uploads directory exists in /tmp
@@ -399,6 +399,9 @@ async function startServer() {
   // Get portfolio database
   app.get("/api/portfolio", (req, res) => {
     try {
+      res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+      res.setHeader("Pragma", "no-cache");
+      res.setHeader("Expires", "0");
       if (fs.existsSync(DB_PATH)) {
         const data = fs.readFileSync(DB_PATH, "utf-8");
         return res.json(JSON.parse(data));
