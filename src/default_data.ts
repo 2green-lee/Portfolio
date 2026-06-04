@@ -29,6 +29,12 @@ export interface PortfolioData {
     period: string;
     org: string;
     desc: string[];
+    articles?: {
+      title: string;
+      thumbnail: string;
+      url: string;
+      date: string;
+    }[];
   }[];
   contact: {
     email: string;
@@ -407,7 +413,39 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       title: "아트모아 기자단 2기", 
       period: "2022.09 ~ 2022.12", 
       org: "예술경영지원센터",
-      desc: ["산업 리서치 및 전문가 인터뷰 기획/진행", "문화산업 관련 콘텐츠 작성 및 인사이트 도출"] 
+      desc: ["산업 리서치 및 전문가 인터뷰 기획/진행", "문화산업 관련 콘텐츠 작성 및 인사이트 도출"],
+      articles: [
+        {
+          title: "[기류] 복합문화공간의 진화, 공연 예술과 음료 패키지의 독창적 만남",
+          thumbnail: "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?auto=format&fit=crop&w=400&q=80",
+          url: "https://www.gokams.or.kr/visual-art/main.aspx",
+          date: "2022.09.15"
+        },
+        {
+          title: "[트렌드] 어둠 전시장 속 빛을 비추다 - 프로젝션 맵핑과 조명 미디어 아트 연출",
+          thumbnail: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=400&q=80",
+          url: "https://www.gokams.or.kr/visual-art/main.aspx",
+          date: "2022.10.02"
+        },
+        {
+          title: "[공간 리뷰] 파나카노트 지하에서 울려 퍼지는 인디 아티스트들의 라이브 토크",
+          thumbnail: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=400&q=80",
+          url: "https://www.gokams.or.kr/visual-art/main.aspx",
+          date: "2022.10.28"
+        },
+        {
+          title: "[인터뷰] 문학과 음악의 이색 결합: '야간비행' 콘서트 제작 현장 이야기",
+          thumbnail: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=400&q=80",
+          url: "https://www.gokams.or.kr/visual-art/main.aspx",
+          date: "2022.11.14"
+        },
+        {
+          title: "[스페셜 레포트] 친환경 야외 뮤직 페스티벌 가이드라인 구축을 위한 인터뷰 및 조사",
+          thumbnail: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=400&q=80",
+          url: "https://www.gokams.or.kr/visual-art/main.aspx",
+          date: "2022.12.05"
+        }
+      ]
     },
     { 
       title: "파나카노트 공연 기획 PD", 

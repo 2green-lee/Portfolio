@@ -231,6 +231,66 @@
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2037.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2038.jpg"
       ]
+    },
+    {
+      "title": "오후의 향기",
+      "category": "Concert",
+      "year": "2021",
+      "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img2.jpg",
+      "contribution": "70%",
+      "location": "파나카 F (Panaca F) 야외 테라스",
+      "support": "복합문화공간 파나카",
+      "cast": "이그린, 오후의 향기 콜라보 레이블",
+      "description": "나른한 오후를 채우는 향기로운 일탈. 감각적인 커피 향과 라이브 재즈/인디 음악의 하모니.",
+      "fullDescription": "나른한 오후의 시간대를 따뜻하고 감성적인 인디 음악으로 채워내는 야외 소규모 콘서트 브랜드 '오후의 향기'를 기획했습니다.\n\n바쁜 일상을 벗어나 향긋한 커피와 차, 그리고 아티스트의 생생한 목소리를 가까이에서 감상할 수 있는 감각 집중형 이벤트를 타겟팅했습니다.\n\n컨셉 조율, 현장 동선 및 음향 연출, 아티스트 라인업 구성과 티켓 예약 관리를 총괄했습니다.",
+      "role": {
+        "title": "기획",
+        "items": [
+          "Planning: 공간 기반 힐링 콘셉트 기획 / 시즌 필터링 음료 패키지 기획",
+          "Booking: 인디 싱어송라이터 섭외 / 음향 엔지니어 및 테라스 조율",
+          "Promotion: 한정 관객 대상 타겟 SNS 마케팅 / 입소문 추천 및 오프라인 배너",
+          "Operation: 당일 하우스 가이드 구현 / 커피 브루잉 타임 세션 연계 조화"
+        ]
+      },
+      "results": [
+        "소규모 타겟 매니아 관객층 완전 모객 성공 -> 전석 매진 및 만족도 100% 만족 달성",
+        "음료 패키지와 공연 관람 연계 수입 극대화 -> 아티스트 보증 및 파트너 카페 추가 수익 창출",
+        "야외 공간 및 연출 조작 정합 완성 -> 자연광 및 주변 소음을 조화롭게 제어하는 현장 연출 성공"
+      ],
+      "images": [
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/013cde7d59ad00b704b19423085d2b9bfc269884/img%2051.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img5.png"
+      ]
+    },
+    {
+      "title": "야간비행",
+      "category": "Concert",
+      "year": "2021",
+      "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img1.jpg",
+      "contribution": "70%",
+      "location": "파나카노트 지하 라이브 스테이지",
+      "support": "파나카노트 (Panaca Note)",
+      "cast": "이그린, 로컬 리스너 세션",
+      "description": "별이 빛나는 밤, 음악으로 떠나는 가상의 밤하늘 여행. 앰비언트 비주얼과 모던한 시티팝/어쿠스틱 연출.",
+      "fullDescription": "생텍쥐페리의 소설 '야간비행'에서 영감을 받아, 모던하고 몽환적인 밤의 사운드 아카이브를 라이브 무대로 재현한 콘서트 시리즈입니다.\n\n어두운 실내 공간에 별빛을 형상화한 프로젝션 맵핑과 조명 디렉팅을 접목하여 시청각을 고루 자극하는 몰입도 높은 연ำ출을 완성했습니다.\n\n총괄 연출, 무대 기획, 영상 이펙트 및 비주얼 라이팅 디렉팅, 공연장 셋업과 관객 입장 가이드를 운영하였습니다.",
+      "role": {
+        "title": "기획",
+        "items": [
+          "Planning: 문학 콘텐츠 기반 옴니버스 콘셉트 / 조명 및 영상 맵핑 시나리오 작수",
+          "Booking: 앰비언트/어쿠스틱 톤 아티스트 섭외 / 기술 엔지니어 파트너십 유치",
+          "Production: 시각 특수 효과 트랙 구성 / 소품 큐레이션 및 포스터 디자인 감수",
+          "Operation: 타임코드 동기화 연출 진행 / 심야 시간대 관객 귀가 동선 안전 가이드"
+        ]
+      },
+      "results": [
+        "감각적 라이팅 쇼와 미디어 연출 완성도 호평 -> 인스타 해시태그 확산 및 후속 시리즈 제작 문의 폭주",
+        "실험적 낭독 결합 공연의 대중성 확인 -> 비주얼 아트 티켓 판매율 기회 대비 120% 성과 달성",
+        "무사고 테크니컬 쇼와 씬 동기화 정밀 작동 -> 암전 상태의 신속 하우스 크루 가이드 안착"
+      ],
+      "images": [
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2053.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg"
+      ]
     }
   ],
   "introduction": "즐거운 일탈의 경험을 기획하는 기획자 이근일 입니다",
@@ -322,6 +382,38 @@
       "desc": [
         "산업 리서치 및 전문가 인터뷰 기획/진행",
         "문화산업 관련 콘텐츠 작성 및 인사이트 도출"
+      ],
+      "articles": [
+        {
+          "title": "[기류] 복합문화공간의 진화, 공연 예술과 음료 패키지의 독창적 만남",
+          "thumbnail": "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?auto=format&fit=crop&w=400&q=80",
+          "url": "https://www.gokams.or.kr/visual-art/main.aspx",
+          "date": "2022.09.15"
+        },
+        {
+          "title": "[트렌드] 어둠 전시장 속 빛을 비추다 - 프로젝션 맵핑과 조명 미디어 아트 연출",
+          "thumbnail": "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=400&q=80",
+          "url": "https://www.gokams.or.kr/visual-art/main.aspx",
+          "date": "2022.10.02"
+        },
+        {
+          "title": "[공간 리뷰] 파나카노트 지하에서 울려 퍼지는 인디 아티스트들의 라이브 토크",
+          "thumbnail": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=400&q=80",
+          "url": "https://www.gokams.or.kr/visual-art/main.aspx",
+          "date": "2022.10.28"
+        },
+        {
+          "title": "[인터뷰] 문학과 음악의 이색 결합: '야간비행' 콘서트 제작 현장 이야기",
+          "thumbnail": "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?auto=format&fit=crop&w=400&q=80",
+          "url": "https://www.gokams.or.kr/visual-art/main.aspx",
+          "date": "2022.11.14"
+        },
+        {
+          "title": "[스페셜 레포트] 친환경 야외 뮤직 페스티벌 가이드라인 구축을 위한 인터뷰 및 조사",
+          "thumbnail": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=400&q=80",
+          "url": "https://www.gokams.or.kr/visual-art/main.aspx",
+          "date": "2022.12.05"
+        }
       ]
     },
     {
