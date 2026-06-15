@@ -7,6 +7,7 @@ const PORT = 3000;
 const DB_DIR_TMP = "/tmp/data";
 const DB_PATH = path.join(DB_DIR_TMP, "db.json");
 const UPLOADS_DIR = "/tmp/uploads";
+const PERSISTENT_UPLOADS_DIR = path.join(process.cwd(), "data", "uploads");
 
 // Standard portfolio data schema
 const INITIAL_DATA = {
@@ -168,12 +169,16 @@ const INITIAL_DATA = {
       category: "상품기획",
       year: "2023",
       image: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img5.png",
+      representativeImages: [
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img5.png",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2053.jpg"
+      ],
       contribution: "70%",
       location: "Online & Offline Distribution",
       cast: "이그린 (Lee Green)",
       support: "텀블벅 크라우드 펀딩 프로젝트",
       description: "싱어송라이터 이그린 EP <GREENERY> 발매. 발매 작업기를 담은 책 형태의 새로운 앨범.",
-      fullDescription: "싱어송라이터 ‘이그린’의 EP [GREENERY] 발매와 함께, 창작 과정과 영감을 기록한 아트북 형태의 피지컬 앨범을 기획·제작했습니다.\n\n효용성이 낮은 기존 플라스틱 CD의 한계를 문제로 정의하고, 이를 대체할 수 있는 새로운 형태의 앨범을 설계했습니다. 텀블벅 크라우드펀딩을 통해 목표 금액의 196%를 달성하며 프로젝트를 성공적으로 런칭했습니다.\n\n전곡 작사, 작곡, 프로듀싱은 물론, 디자인 디렉팅, 유통, 쇼케이스 기획까지 프로젝트 전반을 주도했습니다.",
+      fullDescription: "싱어송라이터 ‘이그린’의 EP [GREENERY] 발매와 함께, 창작 과정과 영감을 기록한 아트북 형태의 피지컬 앨범을 기획·제작했습니다.\n\n효용성이 낮은 기존 플라스틱 CD의 한계를 문제로 정의하고, 이를 대체할 수 있는 새로운 형태의 앨범을 설계했습니다. 텀블벅 크라우드펀딩을 통해 목표 금액의 196%를 달성하며 프로젝트를 성공적으로 런칭했습니다.\n\n작사, 작곡, 프로듀싱의 음악 제작부터 앨범 디자인 디렉팅, 유통, 쇼케이스 기획까지 프로젝트 전반을 주도했습니다.",
       role: {
         title: "기획",
         items: [
@@ -184,21 +189,21 @@ const INITIAL_DATA = {
         ]
       },
       results: [
-        "텀블벅 크라우드 펀딩을 통해 프로젝트 자금 확보 및 시장 반응 검증 -> 텀블벅 크라우드 펀딩 196% 초과 달성\n목표 금액 대비 높은 참여율과 지지 확보",
-        "책 형태의 아티스트 앨범 제작 및 유통 구조 구축 -> 앨범 제작 및 출판 완료\n온·오프라인 10개 판매처 입점 및 판매 진행",
-        "출판 콘텐츠를 확장한 관객 참여형 프로그램 기획 -> '하나의 생각이 노래가 되기까지' 출판 프로모션 워크숍 진행",
-        "다채널 홍보를 통한 프로젝트 인지도 확대 -> 펀딩 홍보 영상 제작\n인스타그램, 팟캐스트 등 온라인 채널 중심 홍보 운영",
-        "앨범 발매를 알리는 오프라인 이벤트 기획 및 실행 -> 발매 쇼케이스 기획 및 진행"
+        "텀블벅 크라우드 펀딩 프로젝트 기획 -> 196% 모금 성공",
+        "책 형태의 아티스트 앨범 제작 및 유통 앨범 제작/출판 -> 10개 판매처 판매중",
+        "출판 프로모션 워크숍 기획 -> <하나의 생각이 노래가 되기까지> 워크숍 운영",
+        "온/오프라인 홍보 펀딩 홍보 영상 제작 -> 인스타그램, 팟캐스트 등 온라인 홍보 진행",
+        "<GREENERY> 발매 쇼케이스 기획 -> 23년 12월 01일 <GREENERY> 쇼케이스 진행"
       ],
       images: [
         "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2052.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2053.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/013cde7d59ad00b704b19423085d2b9bfc269884/img%2051.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2054.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2055.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2058.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2056.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2057.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2053.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2058.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2059.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2060.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2061.jpg",
@@ -216,7 +221,7 @@ const INITIAL_DATA = {
       cast: "우예린, 이그린",
       objectPosition: "top",
       description: "부산 아티스트 이그린과 서울 아티스트 우예린의 콜라보레이션 공연.",
-      fullDescription: "부산을 기반으로 활동하는 아티스트 '이그린'과 서울의 아티스트 '우예린'이 만나 음악적 교감을 나누는 특별한 콜라보레이션 무대를 기획했습니다.\n\n서로 다른 지역적 배경을 가진 두 아티스트의 조화를 통해 새로운 관객층을 유입시키고, 단순한 공연을 넘어 체험형 콘텐츠를 결합하여 관객들에게 잊지 못할 경험을 선사하는 것을 목표로 했습니다. 기획부터 제작, 홍보, 현장 운영까지 공연의 전 단계에 걸쳐 밀도 높은 작업을 수행했습니다.",
+      fullDescription: "다른 지역을 기반으로 활동하는 두 아티스트의 만남을 통해 새로운 관객층의 유입을 이끌고, 지역 음악 씬의 수요를 확장하고자 했습니다.\n\n공연은 우예린의 음악에 자주 등장하는 소재인 ‘꽃’에서 착안한 ‘꽃 행성’이라는 콘셉트로 구성되었습니다. 관객들은 꽃 행성의 주민인 ‘꽃 행성인’으로 초대되어 입장과 함께 꽃 모양 헤나를 팔목에 새기고, 공연의 세계관에 자연스럽게 참여하게 됩니다.\n\n하나의 행성으로 기획된 공간 속에서 관객들은 아티스트의 음악과 함께 꽃 행성의 이야기를 여행하며 새로운 경험을 즐길 수 있도록 설계했습니다.",
       role: {
         title: "기획",
         items: [
@@ -253,7 +258,7 @@ const INITIAL_DATA = {
       cast: "From2020, Chilinkat, 이그린",
       objectPosition: "center",
       description: "도시에서 즐기는 한 여름 밤의 꿈. 도심의 건물 옥상에서 각양각색 인디 뮤지션의 음악을 즐긴다.",
-      fullDescription: "도심 속 건물 옥상이라는 이색적인 공간에서 펼쳐지는 인디 음악 공연 시리즈입니다. '열대야'라는 테마에 맞춰 한여름 밤의 정취를 느낄 수 있는 아티스트 라인업과 공간 연출을 기획했습니다.\n\n관객들에게 일상 속 특별한 휴식을 선사하며, 지역 문화 공간의 활용도를 높이는 성공적인 사례를 만들었습니다. 기획부터 운영까지 전 과정을 주도하며 프로젝트의 완성도를 높였습니다.",
+      fullDescription: "KT&G 상상마당 부산과 협업하여 기획한 여름 루프탑 공연입니다. 도심 속 건물 옥상이라는 이색적인 공간을 활용해, 바쁜 일상에서 벗어나 한여름 밤의 여유와 낭만을 즐길 수 있는 특별한 공연 경험을 제공하고자 했습니다.\n\n'열대야'를 테마로 와인과 핑거푸드, 그리고 다양한 장르의 음악을 함께 즐길 수 있도록 구성했으며, 공연 관람에 최적화된 8월의 여름 밤과 루프탑 정원의 분위기를 적극 활용해 공간 자체가 하나의 콘텐츠가 되도록 기획했습니다.\n\n관객들에게는 그해 여름을 오래 기억할 수 있는 따뜻한 추억과 작은 일탈의 경험을 선사하고, 지역 문화 공간의 새로운 활용 가능성을 제시하고자 했습니다. 기획부터 섭외, 홍보, 현장 운영까지의 업무를 수행했습니다.",
       role: {
         title: "기획",
         items: [
@@ -273,11 +278,11 @@ const INITIAL_DATA = {
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2031.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2032.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2033.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2034.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2035.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2036.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2037.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/img%2038.jpg"
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2034.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2035.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2036.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2037.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2038.jpg"
       ]
     }
   ],
@@ -410,9 +415,55 @@ function initializeEnvironment() {
     }
   }
 
+  // Ensure workspace persistent directory exists
+  if (!fs.existsSync(PERSISTENT_UPLOADS_DIR)) {
+    fs.mkdirSync(PERSISTENT_UPLOADS_DIR, { recursive: true });
+  }
+
   // Ensure uploads directory exists in /tmp
   if (!fs.existsSync(UPLOADS_DIR)) {
     fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  }
+
+  // Seed /tmp/uploads with files from the persistent storage
+  try {
+    const persistentFiles = fs.readdirSync(PERSISTENT_UPLOADS_DIR);
+    for (const file of persistentFiles) {
+      const srcFile = path.join(PERSISTENT_UPLOADS_DIR, file);
+      const destFile = path.join(UPLOADS_DIR, file);
+      fs.copyFileSync(srcFile, destFile);
+    }
+    console.log(`Successfully restored ${persistentFiles.length} uploaded files from persistent storage.`);
+  } catch (err: any) {
+    console.error("Failed to restore files from persistent storage:", err);
+  }
+
+  updateUploadedFilesList();
+}
+
+function updateUploadedFilesList() {
+  try {
+    const listPath = path.join(process.cwd(), "data", "uploaded_list.json");
+    if (fs.existsSync(UPLOADS_DIR)) {
+      const files = fs.readdirSync(UPLOADS_DIR);
+      const fileInfos = files.map(f => {
+        try {
+          const stat = fs.statSync(path.join(UPLOADS_DIR, f));
+          return {
+            name: f,
+            url: `/uploads/${f}`,
+            mtime: stat.mtimeMs
+          };
+        } catch {
+          return null;
+        }
+      }).filter((x): x is { name: string; url: string; mtime: number } => x !== null)
+        .sort((a, b) => b.mtime - a.mtime); // Newest first
+      fs.writeFileSync(listPath, JSON.stringify(fileInfos, null, 2), "utf-8");
+      console.log(`Wrote ${fileInfos.length} uploaded files list to ${listPath}`);
+    }
+  } catch (err: any) {
+    console.error("Failed to write uploaded files list:", err);
   }
 }
 
@@ -508,16 +559,32 @@ async function startServer() {
       const baseName = path.basename(fileName, ext).replace(/[^a-zA-Z0-9_\-]/g, "");
       const finalFileName = `${Date.now()}_${baseName}${ext}`;
 
-      // Ensure directory exists
+      // Ensure directories exist
       if (!fs.existsSync(UPLOADS_DIR)) {
         fs.mkdirSync(UPLOADS_DIR, { recursive: true });
       }
+      if (!fs.existsSync(PERSISTENT_UPLOADS_DIR)) {
+        fs.mkdirSync(PERSISTENT_UPLOADS_DIR, { recursive: true });
+      }
+      
       const destination = path.join(UPLOADS_DIR, finalFileName);
+      const persistentDestination = path.join(PERSISTENT_UPLOADS_DIR, finalFileName);
       
       fs.writeFileSync(destination, buffer);
+      try {
+        fs.writeFileSync(persistentDestination, buffer);
+      } catch (err: any) {
+        console.error("Failed to write to persistent uploads directory:", err);
+      }
       
       const fileUrl = `/uploads/${finalFileName}`;
       console.log(`Successfully uploaded: ${fileUrl}`);
+      
+      try {
+        updateUploadedFilesList();
+      } catch (err) {
+        console.error("Failed to update catalog after upload:", err);
+      }
       
       return res.json({ success: true, url: fileUrl });
     } catch (err: any) {
