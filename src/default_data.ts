@@ -1,4 +1,4 @@
-import { Project } from "./App";
+import { Project } from "./types_constants";
 
 export interface PortfolioData {
   featuredProjects: Project[];
@@ -401,7 +401,7 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
               "body": "전체 공연 진행 큐시트 작성 및 음향/조명 스태프와의 현장 커뮤니케이션"
             },
             {
-              "title": "참여진 매니지먼트",
+              "title": "출연진 관리",
               "body": "참여 아티스트 및 밴드 세션들과 커뮤니케이션, 무대 동선 및 대기실 관리"
             },
             {
