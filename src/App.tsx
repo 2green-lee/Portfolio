@@ -1604,11 +1604,11 @@ const ProjectModal: React.FC<{
                             {/* Images Grid for Content 1 */}
                             <div className="grid grid-cols-3 gap-4 pt-1">
                               {[
-                                project.images?.[1] ||
+                                project.images?.find((img) => img.includes("img%2051") || img.includes("img 51")) ||
                                   "https://raw.githubusercontent.com/2green-lee/Portfolio/013cde7d59ad00b704b19423085d2b9bfc269884/img%2051.jpg",
-                                project.images?.[0] ||
+                                project.images?.find((img) => img.includes("img%2052") || img.includes("img 52")) ||
                                   "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2052.jpg",
-                                project.images?.[4] ||
+                                project.images?.find((img) => img.includes("img%2056") || img.includes("img 56")) ||
                                   "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2056.jpg",
                               ].map((img, i) => (
                                 <div
@@ -1660,11 +1660,11 @@ const ProjectModal: React.FC<{
                             {/* Images Grid for Content 2 */}
                             <div className="grid grid-cols-3 gap-4 pt-1">
                               {[
-                                project.images?.[2] ||
+                                project.images?.find((img) => img.includes("img%2054") || img.includes("img 54")) ||
                                   "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2054.jpg",
-                                project.images?.[3] ||
+                                project.images?.find((img) => img.includes("img%2055") || img.includes("img 55")) ||
                                   "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2055.jpg",
-                                project.images?.[7] ||
+                                project.images?.find((img) => img.includes("img%2058") || img.includes("img 58")) ||
                                   "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2058.jpg",
                               ].map((img, i) => (
                                 <div
