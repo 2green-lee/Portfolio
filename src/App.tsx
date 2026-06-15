@@ -98,6 +98,9 @@ export interface Project {
   storageImages?: string[];
   processTicket?: any;
   processFnB?: any;
+  processStorage?: any;
+  processHouse?: any;
+  processConcert?: any;
 }
 
 const formatCategory = (category: string) => {
