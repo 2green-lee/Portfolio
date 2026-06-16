@@ -86,6 +86,7 @@ export interface Project {
   support?: string;
   cast?: string;
   images?: string[];
+  galleryImages?: string[];
   process?: {
     phase: string;
     items: string[];
@@ -457,7 +458,7 @@ export const ProjectCard: React.FC<{
   return (
     <motion.div
       variants={staggerItem}
-      className={`group cursor-pointer w-full h-auto sm:h-[340px] md:h-[270px] lg:h-[300px] xl:h-[330px] 2xl:h-[370px] bg-white border border-neutral-200/50 rounded-[15px] p-5 shadow-3xs hover:shadow-md hover:border-neutral-300 hover:-translate-y-1.5 hover:scale-[1.01] transition-all duration-300 flex flex-col justify-between ${isWide ? "" : ""}`}
+      className={`group cursor-pointer w-full h-auto sm:min-h-[340px] md:min-h-[270px] lg:min-h-[300px] xl:min-h-[330px] 2xl:min-h-[370px] bg-white border border-neutral-200/50 rounded-[15px] p-5 shadow-3xs hover:shadow-md hover:border-neutral-300 hover:-translate-y-1.5 hover:scale-[1.01] transition-all duration-300 flex flex-col justify-between ${isWide ? "" : ""}`}
       onClick={() => onClick(project)}
     >
       <div>
@@ -467,12 +468,12 @@ export const ProjectCard: React.FC<{
           </h3>
         </div>
         {isWide ? (
-          <div className="relative w-full mb-3 bg-neutral-50/50 border border-neutral-100/60 rounded-[12px] aspect-[600/160] sm:aspect-[600/190] md:aspect-[600/115] lg:aspect-[600/180] xl:aspect-[600/190] 2xl:aspect-[600/200] flex items-center justify-center p-2 group/grid">
+          <div className="relative w-full mb-3 bg-white border border-neutral-100/60 rounded-[12px] aspect-[600/160] sm:aspect-[600/190] md:aspect-[600/115] lg:aspect-[600/180] xl:aspect-[600/190] 2xl:aspect-[600/200] flex items-center justify-center p-2 group/grid">
             <div className="grid grid-cols-4 gap-2 h-full w-full">
               {posters.map((poster, index) => (
                 <div
                   key={index}
-                  className="relative overflow-hidden rounded-[8px] flex items-center justify-center bg-neutral-100 h-full w-full"
+                  className="relative overflow-hidden rounded-[8px] flex items-center justify-center bg-white h-full w-full"
                 >
                   <OptimizedImage
                     src={poster.src}
@@ -486,7 +487,7 @@ export const ProjectCard: React.FC<{
           </div>
         ) : (
           <div
-            className={`relative overflow-hidden bg-gray-50 mb-3 rounded-[12px] ${imageAspect || ""}`}
+            className={`relative overflow-hidden bg-white mb-3 rounded-[12px] ${imageAspect || ""}`}
           >
             {project.image || repImages[0] ? (
               <OptimizedImage
@@ -539,7 +540,7 @@ export const ProjectCard: React.FC<{
         </div>
 
         {/* 2행: 기여도 및 담당역할 */}
-        <div className="grid grid-cols-2 gap-x-6 items-center border-t border-white text-xs text-neutral-600">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4 items-start sm:items-center lg:items-start xl:items-center border-t border-white text-xs text-neutral-600">
           {/* 기여도 */}
           <div className="flex flex-col gap-1.5 w-full">
             <div className="flex items-center justify-between">

@@ -54,7 +54,7 @@ export const LightboxOverlay: React.FC<LightboxOverlayProps> = ({
           onClick={onClose}
         >
           <div
-            className="relative bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-neutral-200/80 p-5 md:p-6 max-w-3xl w-full max-h-[85vh] flex flex-col items-center justify-center select-none cursor-default"
+            className={`relative bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-neutral-200/80 p-5 md:p-6 w-full max-h-[85vh] flex flex-col items-center justify-center select-none cursor-default ${image?.includes('review') ? 'max-w-[1300px]' : 'max-w-3xl'}`}
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -65,12 +65,12 @@ export const LightboxOverlay: React.FC<LightboxOverlayProps> = ({
             >
               <X size={16} />
             </button>
-            <div className="w-full flex items-center justify-center overflow-hidden rounded-lg mt-4 mb-2">
+            <div className="w-full flex items-start justify-center overflow-y-auto rounded-lg mt-6 mb-2 max-h-[75vh]">
               <img
                 loading="lazy"
                 src={image}
                 alt="Lightbox View"
-                className="max-w-full max-h-[65vh] object-contain rounded-lg border border-neutral-100 shadow-3xs"
+                className="w-full h-auto object-contain rounded-lg border border-neutral-100 shadow-3xs"
                 referrerPolicy="no-referrer"
               />
             </div>

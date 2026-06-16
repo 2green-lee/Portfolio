@@ -3,6 +3,9 @@ import BookMockup1 from "../../img/Greenery_Album Book_Mockup_1.png";
 import BookMockup2 from "../../img/Greenery_Album Book_Mockup_2.png";
 import BookMockup3 from "../../img/Greenery_Album Book_Mockup_3.png";
 import BookMockup4 from "../../img/Greenery_Album Book_Mockup_4.png";
+import Goods1 from "../../img/goods1.png";
+import Goods2 from "../../img/goods2.png";
+import Goods3 from "../../img/goods3.png";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   DEFAULT_PORTFOLIO_DATA,
@@ -174,10 +177,10 @@ export const ProjectModal: React.FC<{
               {/* Close Button - Sharp Modern Layout WITH NO BORDER */}
               <button
                 onClick={onClose}
-                className="p-2 hover:bg-neutral-950 hover:text-white transition-all rounded-none cursor-pointer text-neutral-650 outline-none border-none shrink-0"
+                className="p-2 bg-transparent hover:bg-transparent hover:text-neutral-900 transition-all rounded-none cursor-pointer text-neutral-400 outline-none border-none shrink-0"
                 aria-label="닫기"
               >
-                <X className="w-4 h-4" />
+                <X className="w-6 h-6" />
               </button>
             </div>
 
@@ -185,19 +188,19 @@ export const ProjectModal: React.FC<{
             {slidePage > 1 && (
               <button
                 onClick={() => setSlidePage((p) => Math.max(1, p - 1))}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-[205] w-12 h-12 bg-white/95 text-neutral-900 hover:bg-neutral-950 hover:text-white transition-all duration-300 rounded-none cursor-pointer flex items-center justify-center outline-none border-none select-none group/prev"
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-[205] w-12 h-12 bg-transparent text-neutral-400 hover:text-neutral-900 transition-all duration-300 rounded-none cursor-pointer flex items-center justify-center outline-none border-none select-none group/prev"
                 title="이전 슬라이드 (←)"
               >
-                <ChevronLeft className="w-5 h-5 group-hover/prev:-translate-x-0.5 transition-transform" />
+                <ChevronLeft className="w-8 h-8 group-hover/prev:-translate-x-0.5 transition-transform" />
               </button>
             )}
             {slidePage < maxPages && (
               <button
                 onClick={() => setSlidePage((p) => Math.min(maxPages, p + 1))}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-[205] w-12 h-12 bg-white/95 text-neutral-900 hover:bg-neutral-950 hover:text-white transition-all duration-300 rounded-none cursor-pointer flex items-center justify-center outline-none border-none select-none group/next"
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-[205] w-12 h-12 bg-transparent text-neutral-400 hover:text-neutral-900 transition-all duration-300 rounded-none cursor-pointer flex items-center justify-center outline-none border-none select-none group/next"
                 title="다음 슬라이드 (→)"
               >
-                <ChevronRight className="w-5 h-5 group-hover/next:translate-x-0.5 transition-transform" />
+                <ChevronRight className="w-8 h-8 group-hover/next:translate-x-0.5 transition-transform" />
               </button>
             )}
 
@@ -210,7 +213,7 @@ export const ProjectModal: React.FC<{
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -15 }}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  className="max-w-6xl xl:max-w-[1300px] mx-auto px-6 sm:px-12 py-12 md:py-16"
+                  className="max-w-6xl xl:max-w-[1300px] mx-auto px-6 sm:px-12 py-12 md:py-16 min-h-full flex flex-col w-full"
                 >
                   {/* Slide Content rendering depends on slidePage */}
                   {slidePage === 1 && (
@@ -1065,7 +1068,7 @@ export const ProjectModal: React.FC<{
                                     ]);
                                     setLightboxIndex(i);
                                   }}
-                                  className="group/img bg-neutral-50 border border-neutral-200/80 rounded-[8px] overflow-hidden aspect-[4/3] cursor-zoom-in relative hover:border-emerald-400 hover:shadow-2xs transition-all duration-300"
+                                  className="group/img bg-white border border-neutral-200/80 rounded-[8px] overflow-hidden aspect-[4/3] cursor-zoom-in relative hover:border-emerald-400 hover:shadow-2xs transition-all duration-300"
                                 >
                                   <OptimizedImage
                                     src={img}
@@ -1095,38 +1098,29 @@ export const ProjectModal: React.FC<{
                             </div>
                             <div className="space-y-3.5 text-sm md:text-[15px] text-neutral-600 font-sans leading-relaxed text-justify">
                               <p>
-                                텀블벅 크라우드 펀딩 한정 패키지로 기획·제작된
-                                고유 굿즈입니다. 친환경 패브릭 포스터, 소장용
-                                엽서북 등 실물 창작물을 기획하고 인쇄 질감을
-                                수려하게 제작하여 펀딩 가치를 실물로 가깝게
-                                다가오도록 유도했습니다.
+                                프로젝트의 브랜드 아이덴티티를 확장하기 위해 다양한 굿즈를 기획·제작했습니다. 프로젝트 콘셉트에 맞춰 캐릭터 로고를 개발하고, 이를 활용한 포스트카드, 스티커, 아크릴 키링 등 상품을 디자인했습니다.
                               </p>
                               <p>
-                                실사용성과 장식성을 고루 갖춤으로써 평점 4.9점의
-                                만족스러운 후원평을 이끌었으며 크라우드 펀딩
-                                프로젝트 흥행에 크게 기여했습니다.
+                                책 앨범, 공연 등 오프라인 콘텐츠와 함께 제작된 상품들을 조합하여 후원 단계별 리워드 패키지를 구성하고, 상품 기획부터 제작·발주·패키징까지의 과정에 참여했습니다.
                               </p>
                             </div>
 
                             {/* Images Grid for Content 2 */}
-                            <div className="grid grid-cols-3 gap-4 pt-1">
+                            <div className="flex flex-nowrap overflow-x-auto sm:justify-center gap-4 pt-1 pb-2">
                               {[
-                                project.images?.find((img) => img.includes("img%2054") || img.includes("img 54")) ||
-                                  "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2054.jpg",
-                                project.images?.find((img) => img.includes("img%2055") || img.includes("img 55")) ||
-                                  "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2055.jpg",
-                                project.images?.find((img) => img.includes("img%2058") || img.includes("img 58")) ||
-                                  "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2058.jpg",
+                                Goods1,
+                                Goods2,
+                                Goods3,
                               ].map((img, i, arr) => (
                                 <div
                                   key={i}
                                   onClick={() => { setLightboxImages(arr); setLightboxIndex(i); }}
-                                  className="group/img bg-neutral-50 border border-neutral-200/80 rounded-[8px] overflow-hidden aspect-[4/3] cursor-zoom-in relative hover:border-teal-400 hover:shadow-2xs transition-all duration-300"
+                                  className="group/img shrink-0 bg-white border border-neutral-200/80 rounded-[8px] overflow-hidden cursor-zoom-in relative hover:border-teal-400 hover:shadow-2xs transition-all duration-300 flex justify-center items-center h-[115px] w-auto"
                                 >
                                   <OptimizedImage
                                     src={img}
                                     alt={`텀블벅 굿즈 이미지 ${i + 1}`}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-[1.06]"
+                                    className="h-full w-auto object-contain transition-transform duration-500 group-hover/img:scale-[1.06]"
                                     referrerPolicy="no-referrer"
                                   />
                                   <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/15 transition-colors duration-300 flex items-center justify-center">
@@ -1389,8 +1383,8 @@ export const ProjectModal: React.FC<{
 
                               {/* Images Grid for Content 1 */}
                               {project.images && project.images.length > 0 ? (
-                                <div className="grid grid-cols-2 gap-4">
-                                  {project.images.slice(0, 4).map((img, i, arr) => (
+                                <div className="grid grid-cols-3 gap-4">
+                                  {project.images.slice(0, 3).map((img, i, arr) => (
                                     <div
                                       key={i}
                                       onClick={() => { setLightboxImages(arr); setLightboxIndex(i); }}
@@ -1432,9 +1426,9 @@ export const ProjectModal: React.FC<{
                               </p>
 
                               {/* Images Grid for Content 2 */}
-                              {project.images && project.images.length > 4 ? (
-                                <div className="grid grid-cols-2 gap-4">
-                                  {project.images.slice(4, 8).map((img, i, arr) => (
+                              {project.images && project.images.length > 3 ? (
+                                <div className="grid grid-cols-3 gap-4">
+                                  {project.images.slice(3, 6).map((img, i, arr) => (
                                     <div
                                       key={i}
                                       onClick={() => { setLightboxImages(arr); setLightboxIndex(i); }}
@@ -2111,9 +2105,9 @@ export const ProjectModal: React.FC<{
 
                   {slidePage === 3 &&
                     (isGreenery ? (
-                      <div className="w-full max-w-4xl mx-auto animate-fade-in font-sans flex flex-col items-center justify-center gap-6">
+                      <div className="w-full max-w-4xl mx-auto animate-fade-in font-sans flex flex-col items-center gap-4 h-[660px] max-h-[75vh] my-[-20px]">
                         {/* Book Information Card */}
-                        <div className="w-full max-w-3xl bg-white border border-neutral-200/80 rounded-[16px] p-5 md:p-6 shadow-3xs flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+                        <div className="w-full max-w-4xl shrink-0 bg-white border border-neutral-200/80 rounded-[16px] p-5 md:p-6 shadow-3xs flex flex-col sm:flex-row gap-6 items-start sm:items-center">
                           {/* Book cover thumbnail */}
                           <div className="relative w-24 h-24 bg-white border border-neutral-200/80 rounded-[8px] flex items-center justify-center overflow-hidden shrink-0 shadow-3xs">
                             <OptimizedImage
@@ -2174,7 +2168,7 @@ export const ProjectModal: React.FC<{
                         </div>
 
                         <div
-                          className="w-full max-w-3xl overflow-hidden border border-neutral-200 bg-white hover:border-neutral-300 shadow-sm transition-all duration-300 rounded-[12px] cursor-zoom-in group/review relative"
+                          className="w-full flex-1 overflow-y-auto border border-neutral-200 bg-white hover:border-neutral-300 shadow-sm transition-all duration-300 rounded-[12px] cursor-zoom-in group/review relative custom-scrollbar"
                           onClick={() =>
                             setLightboxImage(
                               "https://raw.githubusercontent.com/2green-lee/Portfolio/45b33670a58a6610d7f27fdb5264d34028edfd28/review.png",
@@ -2185,11 +2179,12 @@ export const ProjectModal: React.FC<{
                             src="https://raw.githubusercontent.com/2green-lee/Portfolio/45b33670a58a6610d7f27fdb5264d34028edfd28/review.png"
                             alt="GREENERY 리뷰 및 후기"
                             className="w-full h-auto select-none transition-transform duration-500 group-hover/review:scale-[1.01]"
+                            wrapperClassName="w-full h-auto bg-white"
                             referrerPolicy="no-referrer"
                           />
-                          <div className="absolute inset-0 bg-black/0 group-hover/review:bg-black/5 transition-colors duration-300 flex items-center justify-center">
-                            <span className="opacity-0 group-hover/review:opacity-100 text-white font-sans text-xs font-bold bg-neutral-950/80 px-3.5 py-1.5 tracking-tight rounded-full transition-opacity duration-300 shadow-md">
-                              원본 크기로 보기
+                          <div className="fixed sm:absolute bottom-4 right-4 sm:bottom-0 sm:right-0 sm:inset-0 bg-transparent sm:bg-black/0 sm:group-hover/review:bg-black/5 pointer-events-none transition-colors duration-300 flex items-center justify-center">
+                            <span className="sm:opacity-0 sm:group-hover/review:opacity-100 text-white font-sans text-xs font-bold bg-neutral-950/80 px-3.5 py-1.5 tracking-tight rounded-full transition-opacity duration-300 shadow-md">
+                              클릭하여 원본 보기
                             </span>
                           </div>
                         </div>
@@ -2198,18 +2193,15 @@ export const ProjectModal: React.FC<{
                       isYeoldaeya ||
                       isAfternoon ||
                       isNightflight ? (
-                      <div className="space-y-6 animate-fade-in font-sans text-neutral-850">
-                        <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
-                          <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">
-                            갤러리 아카이브
-                          </h3>
-                        </div>
-                        {project.images && project.images.length > 0 ? (
+                      <div className="space-y-6 animate-fade-in font-sans text-neutral-850 my-auto w-full">
+
+                        {(project.galleryImages || project.images) && (project.galleryImages || project.images)!.length > 0 ? (
                           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                            {project.images.map((img, i) => (
+                            {(project.galleryImages || project.images)!.map((img, i, arr) => (
                               <div
                                 key={i}
-                                className="bg-neutral-50 overflow-hidden border border-neutral-200/85 shadow-3xs transition-all duration-300 rounded-[12px] aspect-[4/3] flex items-center justify-center group/gallery"
+                                onClick={() => { setLightboxImages(arr); setLightboxIndex(i); }}
+                                className="bg-neutral-50 overflow-hidden border border-neutral-200/85 shadow-3xs transition-all duration-300 rounded-[12px] aspect-[4/3] flex items-center justify-center group/gallery cursor-zoom-in"
                               >
                                 <OptimizedImage
                                   src={img}
@@ -2572,7 +2564,7 @@ export const ProjectModal: React.FC<{
 
                   {slidePage === 4 &&
                     (isGreenery ? (
-                      <div className="space-y-6 animate-fade-in font-sans text-neutral-850">
+                      <div className="space-y-6 animate-fade-in font-sans text-neutral-850 my-auto w-full">
 
                         {project.images && project.images.length > 0 ? (
                           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -2697,18 +2689,15 @@ export const ProjectModal: React.FC<{
                       </div>
                     ) : isConcert ? (
                       // Render Gallery for Concert Management on page 4
-                      <div className="space-y-6 animate-fade-in font-sans text-neutral-850">
-                        <div className="flex items-center gap-2 border-b border-neutral-100 pb-3">
-                          <h3 className="text-sm font-black text-neutral-900 uppercase tracking-wider">
-                            갤러리 아카이브
-                          </h3>
-                        </div>
-                        {project.images && project.images.length > 0 ? (
+                      <div className="space-y-6 animate-fade-in font-sans text-neutral-850 my-auto w-full">
+
+                        {(project.galleryImages || project.images) && (project.galleryImages || project.images)!.length > 0 ? (
                           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                            {project.images.map((img, i) => (
+                            {(project.galleryImages || project.images)!.map((img, i, arr) => (
                               <div
                                 key={i}
-                                className="bg-neutral-50 overflow-hidden border border-neutral-200 shadow-3xs transition-all duration-300 rounded-[12px] aspect-[4/3] flex items-center justify-center group/gallery"
+                                onClick={() => { setLightboxImages(arr); setLightboxIndex(i); }}
+                                className="bg-neutral-50 overflow-hidden border border-neutral-200 shadow-3xs transition-all duration-300 rounded-[12px] aspect-[4/3] flex items-center justify-center group/gallery cursor-zoom-in"
                               >
                                 <OptimizedImage
                                   src={img}
@@ -2877,10 +2866,10 @@ export const ActivityModal: React.FC<{
             <div className="flex justify-end items-center mb-4 shrink-0">
               <button
                 onClick={onClose}
-                className="p-1.5 hover:bg-neutral-950 hover:text-white transition-all rounded-md cursor-pointer text-neutral-400 outline-none border-none flex items-center justify-center"
+                className="p-1.5 bg-transparent hover:bg-transparent hover:text-neutral-900 transition-all rounded-md cursor-pointer text-neutral-400 outline-none border-none flex items-center justify-center"
                 aria-label="Close Modal"
               >
-                <X className="w-5 h-5" />
+                <X className="w-[30px] h-[30px]" />
               </button>
             </div>
 

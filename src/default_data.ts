@@ -451,7 +451,7 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       },
       "results": [
         "텀블벅 크라우드 펀딩 프로젝트 기획 -> 196% 모금 성공",
-        "책 형태의 아티스트 앨범 제작 및 유통 앨범 제작/출판 -> 10개 판매처 판매중",
+        "책 형태의 아티스트 앨범 제작 및 유통 앨범 제작/출판 -> 10개 판매처 판매",
         "출판 프로모션 워크숍 기획 -> <하나의 생각이 노래가 되기까지> 워크숍 운영",
         "온/오프라인 홍보 펀딩 홍보 영상 제작 -> 인스타그램, 팟캐스트 등 온라인 홍보 진행",
         "<GREENERY> 발매 쇼케이스 기획 -> 23년 12월 01일 <GREENERY> 쇼케이스 진행"
@@ -537,14 +537,22 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         "다채널 홍보를 통한 공연 인지도 확산 -> 상상마당 부산 및 HAO 공식 인스타그램을 활용한 온라인 홍보 진행 \n배너 및 공연 홍보 영상 제작·배포"
       ],
       "images": [
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2031.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2032.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2033.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2034.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2035.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2036.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2037.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2038.jpg"
+        "/yeol1.png",
+        "/yeol2.png",
+        "/yeol3.png",
+        "/yeol4.png",
+        "/yeol5.png",
+        "/yeol6.png"
+      ],
+      "galleryImages": [
+        "/img31.jpg",
+        "/img32.jpg",
+        "/img33.jpg",
+        "/img34.jpg",
+        "/img35.jpg",
+        "/img36.jpg",
+        "/img37.jpg",
+        "/img38.jpg"
       ]
     },
     {
