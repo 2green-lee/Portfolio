@@ -1504,100 +1504,90 @@ export const ProjectModal: React.FC<{
 
                           {/* Right Column: Contents Stack */}
                           <div className="flex flex-col gap-6 md:gap-8">
-                            {/* 콘텐츠 1 */}
+                            {/* 콘텐츠 1 영역: 오후의 향기 메이킹 필름 제작 관련 소개 */}
                             <div className="p-5 md:p-6 border border-neutral-200 bg-white shadow-3xs space-y-4 rounded-[15px]">
                               <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
                                 <div className="flex items-center gap-2">
+                                  {/* 보라색 포인트 서클 */}
                                   <span className="w-2 h-2 bg-violet-600 rounded-full" />
                                   <h3 className="text-[18px] font-black text-neutral-900 tracking-tight uppercase">
-                                    콘텐츠 1 : 공간 특화 힐링 콘셉트 및 음료
-                                    패키지 기획
+                                    콘텐츠 1 : 오후의 향기 메이킹 필름 제작
                                   </h3>
                                 </div>
                               </div>
+                              {/* 메이킹 필름 기획 및 제작에 대한 상세 문단 */}
                               <p className="text-sm md:text-[15px] text-neutral-600 font-sans leading-relaxed text-justify">
-                                도심 속 소음을 벗어날 수 있는 복합문화공간
-                                파나카 F의 탁 트인 야외 테라스 지리적 특징을
-                                적극 반영하여, "나른한 오후를 채우는 향기로운
-                                일탈"이라는 힐링 콘셉트를 명확히 기획했습니다.
-                                브랜드 커피와 특색 디저트를 공연 관람 티켓 연계
-                                패키지로 독자 구성해, 단순한 감상을 넘어 미각과
-                                청각을 완벽히 아우르는 프리미엄 가치 제공에
-                                성공했습니다.
+                                공연의 핵심 콘셉트인 '음악을 향으로 기억하는 경험'을 전달하기 위해 메이킹 필름을 기획·제작했습니다. 아티스트들이 자신의 음악을 향으로 표현하는 과정을 기록하고, 음악과 향의 연결성에 대한 인터뷰를 담아 공연의 기획 의도와 아티스트의 스토리를 콘텐츠로 확장했습니다.
                               </p>
 
-                              {/* Image 1 */}
-                              {project.images && project.images.length > 0 ? (
-                                <div className="grid grid-cols-2 gap-4">
-                                  {project.images.slice(0, 1).map((img, i) => (
-                                    <div
-                                      key={i}
-                                      onClick={() => { setLightboxImages(project.images || []); setLightboxIndex(project.images?.indexOf(img) || 0); }}
-                                      className="group/img bg-neutral-50 border border-neutral-200/80 rounded-[8px] overflow-hidden aspect-[4/3] cursor-zoom-in relative hover:border-violet-400 hover:shadow-2xs transition-all duration-300 col-span-2"
-                                    >
-                                      <OptimizedImage
-                                        src={img}
-                                        alt="야외 테라스 현장 이미지"
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-[1.06]"
-                                        referrerPolicy="no-referrer"
-                                      />
-                                      <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/15 transition-colors duration-300 flex items-center justify-center">
-                                        <span className="opacity-0 group-hover/img:opacity-100 text-white font-sans text-[10px] font-bold bg-neutral-950/80 px-2.5 py-1 tracking-tight rounded-full transition-opacity duration-305">
-                                          자세히 보기
-                                        </span>
-                                      </div>
+                              {/* Image 1: 콘텐츠 1 사진 o1, o2, o3 가로 3열 배치 */}
+                              <div className="grid grid-cols-3 gap-3">
+                                {["/o1.png", "/o2.png", "/o3.png"].map((img, i, arr) => (
+                                  <div
+                                    key={i}
+                                    onClick={() => { 
+                                      setLightboxImages(arr); 
+                                      setLightboxIndex(i); 
+                                    }}
+                                    className="group/img bg-neutral-50 border border-neutral-200/80 rounded-[8px] overflow-hidden aspect-[4/3] cursor-zoom-in relative hover:border-violet-400 hover:shadow-2xs transition-all duration-300"
+                                  >
+                                    <OptimizedImage
+                                      src={img}
+                                      alt={`오후의 향기 메이킹 콘텐츠 이미지 ${i + 1}`}
+                                      className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-[1.06]"
+                                      referrerPolicy="no-referrer"
+                                    />
+                                    <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/15 transition-colors duration-300 flex items-center justify-center">
+                                      <span className="opacity-0 group-hover/img:opacity-100 text-white font-sans text-[9px] font-bold bg-neutral-950/80 px-2 py-0.5 tracking-tight rounded-full transition-opacity duration-300">
+                                        자세히
+                                      </span>
                                     </div>
-                                  ))}
-                                </div>
-                              ) : null}
+                                  </div>
+                                ))}
+                              </div>
                             </div>
 
-                            {/* 콘텐츠 2 */}
+                            {/* 콘텐츠 2 영역: 아티스트별 시그니처 향수 제작 관련 소개 */}
                             <div className="p-5 md:p-6 border border-neutral-200 bg-white shadow-3xs space-y-4 rounded-[15px]">
                               <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
                                 <div className="flex items-center gap-2">
+                                  {/* 분홍색/적색 포인트 서클 */}
                                   <span className="w-2 h-2 bg-rose-500 rounded-full" />
                                   <h3 className="text-[18px] font-black text-neutral-900 tracking-tight uppercase">
-                                    콘텐츠 2 : 야외 하우스 동선 수립 및 고강도
-                                    매니아층 모객
+                                    콘텐츠 2 : 아티스트별 시그니처 향수 제작
                                   </h3>
                                 </div>
                               </div>
+                              {/* 시그니처 향수 기획 및 공방 협업 개발에 대한 상세 문단 */}
                               <p className="text-sm md:text-[15px] text-neutral-600 font-sans leading-relaxed text-justify">
-                                야외 테라스 특성상 나타날 수 있는 음향 손실 및
-                                소음 유입 한계를 선제 제어하기 위해 고선명 소형
-                                시스템 셋업을 주도하고, 일관된 무드 연출에
-                                뛰어난 인디 아티스트 이그린 및 감성 재즈
-                                라인업을 매칭했습니다. 소형 규모 타겟에 완전히
-                                집중한 감각적 SNS 모바일 마케팅 및 오프라인 배너
-                                홍보를 전개하여 완전 모객 및 매진을
-                                성취했습니다.
+                                공연의 핵심 콘셉트인 '음악을 향으로 기억하는 경험'을 구현하기 위해 아티스트별 시그니처 향수를 제작했습니다. 각 아티스트가 자신의 음악적 분위기와 메시지를 향으로 표현할 수 있도록 향수 공방과 협업하여 향을 개발했으며, 제작된 향을 굿즈에 적용해 관객들이 무대의 기억을 향과 함께 간직할 수 있도록 기획했습니다.
                               </p>
 
-                              {/* Image 2 */}
-                              {project.images && project.images.length > 1 ? (
-                                <div className="grid grid-cols-2 gap-4">
-                                  {project.images.slice(1, 2).map((img, i) => (
-                                    <div
-                                      key={i}
-                                      onClick={() => { setLightboxImages(project.images || []); setLightboxIndex(project.images?.indexOf(img) || 0); }}
-                                      className="group/img bg-neutral-50 border border-neutral-200/80 rounded-[8px] overflow-hidden aspect-[4/3] cursor-zoom-in relative hover:border-rose-400 hover:shadow-2xs transition-all duration-300 col-span-2"
-                                    >
-                                      <OptimizedImage
-                                        src={img}
-                                        alt="공연 포스터 및 홍보 이미지"
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-[1.06]"
-                                        referrerPolicy="no-referrer"
-                                      />
-                                      <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/15 transition-colors duration-300 flex items-center justify-center">
-                                        <span className="opacity-0 group-hover/img:opacity-100 text-white font-sans text-[10px] font-bold bg-neutral-950/80 px-2.5 py-1 tracking-tight rounded-full transition-opacity duration-305">
-                                          자세히 보기
-                                        </span>
-                                      </div>
+                              {/* Image 2: 콘텐츠 2 사진 o4, o5, o6 가로 3열 배치 */}
+                              <div className="grid grid-cols-3 gap-3">
+                                {["/o4.png", "/o5.png", "/o6.png"].map((img, i, arr) => (
+                                  <div
+                                    key={i}
+                                    onClick={() => { 
+                                      setLightboxImages(arr); 
+                                      setLightboxIndex(i); 
+                                    }}
+                                    className="group/img bg-neutral-50 border border-neutral-200/80 rounded-[8px] overflow-hidden aspect-[4/3] cursor-zoom-in relative hover:border-rose-400 hover:shadow-2xs transition-all duration-300"
+                                  >
+                                    <OptimizedImage
+                                      src={img}
+                                      alt={`오후의 향기 시그니처 향수 이미지 ${i + 1}`}
+                                      className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-[1.06]"
+                                      referrerPolicy="no-referrer"
+                                    />
+                                    <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/15 transition-colors duration-300 flex items-center justify-center">
+                                      <span className="opacity-0 group-hover/img:opacity-100 text-white font-sans text-[9px] font-bold bg-neutral-950/80 px-2 py-0.5 tracking-tight rounded-full transition-opacity duration-300">
+                                        자세히
+                                      </span>
                                     </div>
-                                  ))}
-                                </div>
-                              ) : null}
+                                  </div>
+                                ))}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -1653,101 +1643,91 @@ export const ProjectModal: React.FC<{
 
                           {/* Right Column: Contents Stack */}
                           <div className="flex flex-col gap-6 md:gap-8">
-                            {/* 콘텐츠 1 */}
+                            {/* 콘텐츠 1 영역: 야간비행 현장 필름 제작 관련 소개 */}
                             <div className="p-5 md:p-6 border border-neutral-200 bg-white shadow-3xs space-y-4 rounded-[15px]">
                               <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
                                 <div className="flex items-center gap-2">
+                                  {/* 보라색 포인트 서클 */}
                                   <span className="w-2 h-2 bg-violet-600 rounded-full" />
                                   <h3 className="text-[18px] font-black text-neutral-900 tracking-tight uppercase">
-                                    콘텐츠 1 : 문학 콘셉트 기반 옴니버스 연출 및
-                                    프로젝션 맵핑
+                                    콘텐츠 1 : 야간비행 (A Night Flight) 현장 필름 제작
                                   </h3>
                                 </div>
                               </div>
+                              {/* 현장 필름 제작 기획 및 성과에 대한 상세 문단 */}
                               <p className="text-sm md:text-[15px] text-neutral-600 font-sans leading-relaxed text-justify">
-                                '야간비행'은 늦은 밤 비행을 떠나는 여행자의
-                                시선에서 착안하여, 관객이 일상에서 잠시 벗어나
-                                음악과 낭만을 느낄 수 있는 기획 공연으로
-                                연출했습니다. 김해 하라식당 루프탑 특유의 열린
-                                구조와 하늘을 마주할 수 있는 구조적 이점을
-                                반영하여 감성적인 조명 연출과 공간 디자인을
-                                접목했고, 관객들이 완전히 몰입하여 음악과 밤의
-                                평화로움을 경험할 수 있는 도심 속 힐링 공간을
-                                성공적으로 완수했습니다.
+                                공연의 콘셉트인 '늦은 밤 비행을 떠나는 여행'의 경험을 기록하기 위해 현장 필름을 제작했습니다. 공연의 분위기와 공간 연출, 아티스트들의 무대 모습을 영상으로 담아 관객들이 공연의 감정과 여운을 다시 경험할 수 있도록 콘텐츠를 기획했습니다.
                               </p>
 
-                              {/* Image 1 */}
-                              {project.images && project.images.length > 0 ? (
-                                <div className="grid grid-cols-2 gap-4">
-                                  {project.images.slice(0, 1).map((img, i) => (
-                                    <div
-                                      key={i}
-                                      onClick={() => { setLightboxImages(project.images || []); setLightboxIndex(project.images?.indexOf(img) || 0); }}
-                                      className="group/img bg-neutral-50 border border-neutral-200/80 rounded-[8px] overflow-hidden aspect-[4/3] cursor-zoom-in relative hover:border-violet-400 hover:shadow-2xs transition-all duration-300 col-span-2"
-                                    >
-                                      <OptimizedImage
-                                        src={img}
-                                        alt="야간비행 무대 연출 이미지"
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-[1.06]"
-                                        referrerPolicy="no-referrer"
-                                      />
-                                      <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/15 transition-colors duration-300 flex items-center justify-center">
-                                        <span className="opacity-0 group-hover/img:opacity-100 text-white font-sans text-[10px] font-bold bg-neutral-950/80 px-2.5 py-1 tracking-tight rounded-full transition-opacity duration-305">
-                                          자세히 보기
-                                        </span>
-                                      </div>
+                              {/* Image 1: 콘텐츠 1 사진 n1, n2, n3 가로 3열 배치 */}
+                              <div className="grid grid-cols-3 gap-3">
+                                {["/n1.png", "/n2.png", "/n3.png"].map((img, i, arr) => (
+                                  <div
+                                    key={i}
+                                    onClick={() => { 
+                                      setLightboxImages(arr); 
+                                      setLightboxIndex(i); 
+                                    }}
+                                    className="group/img bg-neutral-50 border border-neutral-200/80 rounded-[8px] overflow-hidden aspect-[4/3] cursor-zoom-in relative hover:border-violet-400 hover:shadow-2xs transition-all duration-300"
+                                  >
+                                    <OptimizedImage
+                                      src={img}
+                                      alt={`야간비행 현장 필름 이미지 ${i + 1}`}
+                                      className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-[1.06]"
+                                      referrerPolicy="no-referrer"
+                                    />
+                                    <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/15 transition-colors duration-300 flex items-center justify-center">
+                                      <span className="opacity-0 group-hover/img:opacity-100 text-white font-sans text-[9px] font-bold bg-neutral-950/80 px-2 py-0.5 tracking-tight rounded-full transition-opacity duration-300">
+                                        자세히
+                                      </span>
                                     </div>
-                                  ))}
-                                </div>
-                              ) : null}
+                                  </div>
+                                ))}
+                              </div>
                             </div>
 
-                            {/* 콘텐츠 2 */}
+                            {/* 콘텐츠 2 영역: 굿즈 제작 (티켓, 포스트카드, 우표) 관련 소개 */}
                             <div className="p-5 md:p-6 border border-neutral-200 bg-white shadow-3xs space-y-4 rounded-[15px]">
                               <div className="flex items-center justify-between border-b border-neutral-100 pb-3">
                                 <div className="flex items-center gap-2">
+                                  {/* 분홍색/적색 포인트 서클 */}
                                   <span className="w-2 h-2 bg-rose-500 rounded-full" />
                                   <h3 className="text-[18px] font-black text-neutral-900 tracking-tight uppercase">
-                                    콘텐츠 2 : 낭독 라이브 기획 및 안전형 심야
-                                    하우스 운영
+                                    콘텐츠 2 : 굿즈 제작 (티켓, 포스트카드, 우표)
                                   </h3>
                                 </div>
                               </div>
+                              {/* 굿즈 제작에 대한 상세 문단 */}
                               <p className="text-sm md:text-[15px] text-neutral-600 font-sans leading-relaxed text-justify">
-                                낭독과 앰비언트 비주얼 사운드가 결합한 실험적
-                                소형 무대를 실현하기 위해 완벽한 연출 큐시트를
-                                수립하고, 고감도의 전용 한정 포스터 디자인을
-                                기획/감수하여 SNS 공유를 자연스럽게
-                                유입시켰습니다. 극도로 차분함과 암전이 동반되는
-                                공연의 물리적 한계를 선제 통제하기 위해, 하우스
-                                크루의 신속 비상 통로 가이드라인을 확보해 무사고
-                                운영을 이끌었습니다.
+                                늦은 밤 비행을 떠나는 여행자의 시선에서 기획된 공연 콘셉트를 확장하기 위해 굿즈를 제작했습니다. 탑승권을 연상시키는 티켓과 비행기 창문 우편 콘셉트의 포스트카드, 우표를 통해 공연의 세계관을 시각적으로 전달하고 관객 경험의 몰입도를 높였습니다.
                               </p>
 
-                              {/* Image 2 */}
-                              {project.images && project.images.length > 1 ? (
-                                <div className="grid grid-cols-2 gap-4">
-                                  {project.images.slice(1, 2).map((img, i) => (
-                                    <div
-                                      key={i}
-                                      onClick={() => { setLightboxImages(project.images || []); setLightboxIndex(project.images?.indexOf(img) || 0); }}
-                                      className="group/img bg-neutral-50 border border-neutral-200/80 rounded-[8px] overflow-hidden aspect-[4/3] cursor-zoom-in relative hover:border-rose-400 hover:shadow-2xs transition-all duration-300 col-span-2"
-                                    >
-                                      <OptimizedImage
-                                        src={img}
-                                        alt="포스터 및 하우스 이미지"
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-[1.06]"
-                                        referrerPolicy="no-referrer"
-                                      />
-                                      <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/15 transition-colors duration-300 flex items-center justify-center">
-                                        <span className="opacity-0 group-hover/img:opacity-100 text-white font-sans text-[10px] font-bold bg-neutral-950/80 px-2.5 py-1 tracking-tight rounded-full transition-opacity duration-305">
-                                          자세히 보기
-                                        </span>
-                                      </div>
+                              {/* Image 2: 콘텐츠 2 사진 img 13, img 12, img 11 가로 3열 배치 */}
+                              <div className="grid grid-cols-3 gap-3">
+                                {["/img 13.jpg", "/img 12.jpg", "/img 11.jpg"].map((img, i, arr) => (
+                                  <div
+                                    key={i}
+                                    onClick={() => { 
+                                      // 클릭 시 해당 이미지 배열과 현재 인덱스를 라이트박스 상태에 전달합니다.
+                                      setLightboxImages(arr); 
+                                      setLightboxIndex(i); 
+                                    }}
+                                    className="group/img bg-neutral-50 border border-neutral-200/80 rounded-[8px] overflow-hidden aspect-[4/3] cursor-zoom-in relative hover:border-rose-400 hover:shadow-2xs transition-all duration-300"
+                                  >
+                                    <OptimizedImage
+                                      src={img}
+                                      alt={`야간비행 굿즈 이미지 ${i + 1}`}
+                                      className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-[1.06]"
+                                      referrerPolicy="no-referrer"
+                                    />
+                                    <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/15 transition-colors duration-300 flex items-center justify-center">
+                                      <span className="opacity-0 group-hover/img:opacity-100 text-white font-sans text-[9px] font-bold bg-neutral-950/80 px-2 py-0.5 tracking-tight rounded-full transition-opacity duration-300">
+                                        자세히
+                                      </span>
                                     </div>
-                                  ))}
-                                </div>
-                              ) : null}
+                                  </div>
+                                ))}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -2832,14 +2812,20 @@ export const ActivityModal: React.FC<{
   onClose: () => void;
 }> = ({ activity, onClose }) => {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  // Carousel 이동을 지원하는 멀티 라이트박스용 이미지 리스트 상태와 활성화 인덱스 상태를 추가합니다.
+  const [lightboxImages, setLightboxImages] = useState<string[] | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number>(0);
+
   useEffect(() => {
     if (!activity) return;
     const handleKeyDown = (e: KeyboardEvent) => {
+      // 사진 확대 팝업이 켜져있을 경우 모달 ESC 이벤트를 전파하지 않고 팝업만 닫도록 예외처리합니다.
+      if (lightboxImage || lightboxImages) return;
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activity, onClose]);
+  }, [activity, onClose, lightboxImage, lightboxImages]);
 
   return (
     <AnimatePresence>
@@ -2980,19 +2966,18 @@ export const ActivityModal: React.FC<{
             {/* Gallery Section */}
             {activity.images && activity.images.length > 0 && (
               <div className="pt-2 pb-6 font-sans text-left">
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {activity.images.map((img: string, idx: number) => (
+                {/* 4*2 배열 형태로 이미지가 렌더링되도록 가로 4열(sm:grid-cols-4) 격자로 정렬합니다. */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  {activity.images.map((img: string, idx: number, arr: string[]) => (
                     <div
                       key={idx}
-                      className={`relative aspect-square w-full overflow-hidden border border-slate-200 shadow-3xs cursor-pointer ${
-                        activity.title?.includes("CREATOR") ||
-                        activity.title?.includes("광고") ||
-                        activity.title?.includes("한일청년") ||
-                        activity.title?.includes("파나카노트")
-                          ? "rounded-xl"
-                          : "rounded-none"
-                      }`}
-                      onClick={() => setLightboxImage(convertGithubUrl(img))}
+                      className="relative aspect-square w-full overflow-hidden border border-slate-200 shadow-3xs cursor-pointer rounded-xl"
+                      onClick={() => {
+                        // 전체 8장의 이미지 주소를 깃허브 변환 로직(convertGithubUrl)으로 정제하여 배열로 상태에 주입합니다.
+                        const convertedUrls = arr.map(url => convertGithubUrl(url));
+                        setLightboxImages(convertedUrls);
+                        setLightboxIndex(idx);
+                      }}
                     >
                       <img loading="lazy" src={convertGithubUrl(img)}
                         alt={
@@ -3079,42 +3064,16 @@ export const ActivityModal: React.FC<{
               ©2026 Portfolio · key activities
             </div>
           </motion.div>
-          {/* Lightbox Overlay */}
-          <AnimatePresence>
-            {lightboxImage && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="fixed inset-0 bg-neutral-950/95 backdrop-blur-md z-[300] flex flex-col items-center justify-start overflow-y-auto cursor-zoom-out py-8 px-2 sm:px-6"
-                onClick={() => setLightboxImage(null)}
-              >
-                <button
-                  type="button"
-                  onClick={() => setLightboxImage(null)}
-                  className="fixed top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-2.5 rounded-full backdrop-blur-md transition-all duration-200 cursor-pointer shadow-md z-[310] border border-white/5 flex items-center justify-center"
-                  aria-label="Close Lightbox"
-                >
-                  <X size={20} />
-                </button>
-                <div
-                  className="w-full max-w-5xl my-auto flex flex-col items-center justify-center relative select-none"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <img loading="lazy" src={lightboxImage}
-                    alt="Lightbox View"
-                    className="w-full h-auto max-w-full rounded-md shadow-2xl border border-white/10 cursor-default"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="mt-4 text-white/60 text-xs font-sans tracking-wide">
-                    클릭 또는 우측 상단 X 버튼을 누르면 닫힙니다 (마우스 스크롤
-                    지원)
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {/* Lightbox Overlay: 프로젝트 모달의 팝업 창과 완전히 동일한 다중 슬라이더 라이트박스로 변경합니다. */}
+          <LightboxOverlay
+            image={lightboxImage}
+            images={lightboxImages}
+            initialIndex={lightboxIndex}
+            onClose={() => {
+              setLightboxImage(null);
+              setLightboxImages(null);
+            }}
+          />
         </>
       )}
     </AnimatePresence>
