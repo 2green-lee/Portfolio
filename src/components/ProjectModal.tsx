@@ -2966,8 +2966,8 @@ export const ActivityModal: React.FC<{
             {/* Gallery Section */}
             {activity.images && activity.images.length > 0 && (
               <div className="pt-2 pb-6 font-sans text-left">
-                {/* 4*2 배열 형태로 이미지가 렌더링되도록 가로 4열(sm:grid-cols-4) 격자로 정렬합니다. */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {/* 조건에 따라 4*2 또는 5*2 배열 형태로 이미지가 렌더링되도록 격자로 정렬합니다. */}
+                <div className={`grid grid-cols-2 ${activity.title?.includes("UNIVERSITY") ? "sm:grid-cols-4" : "sm:grid-cols-5"} gap-4`}>
                   {activity.images.map((img: string, idx: number, arr: string[]) => (
                     <div
                       key={idx}
