@@ -1,4 +1,4 @@
-import { Project } from "./types_constants";
+import { Project } from "./App";
 
 export interface PortfolioData {
   featuredProjects: Project[];
@@ -401,7 +401,7 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
               "body": "전체 공연 진행 큐시트 작성 및 음향/조명 스태프와의 현장 커뮤니케이션"
             },
             {
-              "title": "출연진 관리",
+              "title": "참여진 매니지먼트",
               "body": "참여 아티스트 및 밴드 세션들과 커뮤니케이션, 무대 동선 및 대기실 관리"
             },
             {
@@ -451,7 +451,7 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       },
       "results": [
         "텀블벅 크라우드 펀딩 프로젝트 기획 -> 196% 모금 성공",
-        "책 형태의 아티스트 앨범 제작 및 유통 앨범 제작/출판 -> 10개 판매처 판매",
+        "책 형태의 아티스트 앨범 제작 및 유통 앨범 제작/출판 -> 10개 판매처 판매중",
         "출판 프로모션 워크숍 기획 -> <하나의 생각이 노래가 되기까지> 워크숍 운영",
         "온/오프라인 홍보 펀딩 홍보 영상 제작 -> 인스타그램, 팟캐스트 등 온라인 홍보 진행",
         "<GREENERY> 발매 쇼케이스 기획 -> 23년 12월 01일 <GREENERY> 쇼케이스 진행"
@@ -494,10 +494,10 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         ]
       },
       "results": [
-        "지역 음악 씬 활성화 & 아티스트 교류 공연 기획 -> 지역 아티스트 '이그린'과 서울 아티스트 '우예린' 콜라보레이션 공연 기획 및 제작",
-        "관객 모객 규모 달성 (공간 수용 인원 100명 타겟) -> 유효 티켓 판매 총 50명 방문 달성",
-        "체험 중심 콘텐츠 기획 및 미디어 연출 -> 관객 몰입형 '헤나 체험 부스' 현장 운영 및 '오프닝 콘셉트 영상' 자체 제작 및 상영",
-        "온라인 홍보 다각화 및 타겟형 프로모션 전략 수립 -> 인스타그램 홍보 영상 배포 및 '티켓 2+1 이벤트' 프로모션을 통한 사전 모객 극대화"
+        "지속 가능한 지역 음악 씬 활성화 & 아티스트 교류 유치 -> 지역 아티스트 '이그린'과 서울 아티스트 '우예린' 콜라보레이션 유치 및 공동 공연 성사",
+        "관객 모객 규모 달성 (공간 수용 인원 100명 타겟) -> 적극적 사전 예매 촉진을 통해 유효 티켓 판매 총 50명 방문 달성",
+        "체험 중심 콘텐츠 기획 및 영상 미디어 연출 -> 관객 몰입형 '헤나 체험 부스' 현장 운영 및 감성적인 '오프닝 콘셉트 영상' 자체 제작 및 상영",
+        "온라인 홍보 다각화 및 타겟형 프로모션 전략 수립 -> 인스타그램 전용 고감도 루틴 홍보 영상 배포 및 '티켓 2+1 이벤트' 프로모션을 통한 사전 모객 극대화"
       ],
       "images": [
         "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2041.jpg",
@@ -537,22 +537,14 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         "다채널 홍보를 통한 공연 인지도 확산 -> 상상마당 부산 및 HAO 공식 인스타그램을 활용한 온라인 홍보 진행 \n배너 및 공연 홍보 영상 제작·배포"
       ],
       "images": [
-        "/yeol1.png",
-        "/yeol2.png",
-        "/yeol3.png",
-        "/yeol4.png",
-        "/yeol5.png",
-        "/yeol6.png"
-      ],
-      "galleryImages": [
-        "/img31.jpg",
-        "/img32.jpg",
-        "/img33.jpg",
-        "/img34.jpg",
-        "/img35.jpg",
-        "/img36.jpg",
-        "/img37.jpg",
-        "/img38.jpg"
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2031.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2032.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2033.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2034.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2035.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2036.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2037.jpg",
+        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2038.jpg"
       ]
     },
     {
@@ -565,7 +557,7 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       "support": "부산문화재단",
       "cast": "이그린, 오후의 향기 콜라보 레이블",
       "description": "나른한 오후를 채우는 향기로운 일탈. 감각적인 커피 향과 라이브 재즈/인디 음악의 하모니.",
-      "fullDescription": "밴드 음악이 주류인 부산 인디씬 시장에서 어쿠스틱 등 소규모 아티스트를 위한 무대와 공연 기회를 제공합니다. 이를 통해 부산 내에서 아직 두각을 드러내지 못한 숨은 아티스트들이 부산 인디씬의 새로운 N세대로 도약할 수 있도록 기획했습니다.\n\n잔잔한 음악이 어울리는 일요일 오후, 시각과 청각 그리고 후각을 모두 아우르는 다감각적인 공연입니다. 아티스트가 직접 만든 향수를 뿌린 굿즈를 제공하여, 관객들이 음악과 함께 향의 기억을 오래도록 간직할 수 있는 특별한 컨텐츠를 완성했습니다.",
+      "fullDescription": "나른한 오후의 시간대를 따뜻하고 감성적인 인디 음악으로 채워내는 야외 소규모 콘서트 브랜드 '오후의 향기'를 기획했습니다.\n\n바쁜 일상을 벗어나 향긋한 커피와 차, 그리고 아티스트의 생생한 목소리를 가까이에서 감상할 수 있는 감각 집중형 이벤트를 타겟팅했습니다.\n\n컨셉 조율, 현장 동선 및 음향 연출, 아티스트 라인업 구성과 티켓 예약 관리를 총괄했습니다.",
       "role": {
         "title": "기획",
         "items": [
@@ -577,24 +569,13 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         ]
       },
       "results": [
-        "부산에서 밴드가 아닌 소규모로 활동하는 아티스트들에게 무대 제공 -> 오느린윤혜린, from2020, 모멘츠유미 (3팀) 섭외",
-        "공간 최대 수용 인원 100명 티켓 판매 -> 총 60장 판매",
-        "컨셉 굿즈 제작, 굿즈 메이킹 영상 제작 -> 아티스트 향수 및 굿즈 제작, 메이킹 영상 제작",
-        "온라인 홍보 활성화 및 오프라인 홍보 -> 인스타그램 홍보 및 현수막, 포스터 제작"
+        "소규모 타겟 매니아 관객층 완전 모객 성공 -> 전석 매진 및 만족도 100% 만족 달성",
+        "음료 패키지와 공연 관람 연계 수입 극대화 -> 아티스트 보증 및 파트너 카페 추가 수익 창출",
+        "야외 공간 및 연출 조작 정합 완성 -> 자연광 및 주변 소음을 조화롭게 제어하는 현장 연출 성공"
       ],
       "images": [
         "https://raw.githubusercontent.com/2green-lee/Portfolio/013cde7d59ad00b704b19423085d2b9bfc269884/img%2051.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img5.png"
-      ],
-      "galleryImages": [
-        "/oo1.jpg",
-        "/oo2.jpg",
-        "/oo3.jpg",
-        "/oo4.jpg",
-        "/oo5.jpg",
-        "/oo6.jpg",
-        "/oo7.jpg",
-        "/oo8.jpg"
       ]
     },
     {
@@ -619,24 +600,13 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         ]
       },
       "results": [
-        "부산/경남에서 활동하는 인디 아티스트들에게 갖춰진 무대 제공 -> 부산/경남 아티스트 (반다, 밴드기린, 온더그린, 이사흘) 섭외",
-        "공간 최대 수용 가능 인원 70명 티켓 판매 -> 전석 매진",
-        "오프라인 굿즈 제작, 라이브 클립 5매 제작 -> 티켓, 엽서, 우표, 라이브클립 제작",
-        "온라인 홍보 활성화 및 오프라인 홍보 -> 인스타그램 홍보 및 현수막, 포스터 제작"
+        "감각적 라이팅 쇼와 미디어 연출 완성도 호평 -> 인스타 해시태그 확산 및 후속 시리즈 제작 문의 폭주",
+        "실험적 낭독 결합 공연의 대중성 확인 -> 비주얼 아트 티켓 판매율 기회 대비 120% 성과 달성",
+        "무사고 테크니컬 쇼 및 씬 동기화 정밀 작동 -> 암전 상태의 신속 하우스 크루 가이드 안착"
       ],
       "images": [
         "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2053.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg"
-      ],
-      "galleryImages": [
-        "/img 11.jpg",
-        "/img 12.jpg",
-        "/img 13.jpg",
-        "/img 14.jpg",
-        "/img 15.jpg",
-        "/img 16.jpg",
-        "/img 17.jpg",
-        "/img 18.jpg"
       ]
     }
   ],
@@ -645,7 +615,7 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
   "education": {
     "name": "부산대학교",
     "period": "2013 - 2021",
-    "major": "항공우주공학 & 예술문화영상학"
+    "major": "예술문화영상학"
   },
   "certificates": [
     {
@@ -766,16 +736,6 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         "공연 기획 프로젝트 수행 (기획–운영–성과 분석 전 과정 경험)",
         "공연 <오후의 향기> 기획 및 운영",
         "프로젝트 결과 보고서 작성 및 발표"
-      ],
-      "images": [
-        "/oo1.jpg",
-        "/oo2.jpg",
-        "/oo3.jpg",
-        "/oo4.jpg",
-        "/oo5.jpg",
-        "/oo6.jpg",
-        "/oo7.jpg",
-        "/oo8.jpg"
       ]
     },
     {

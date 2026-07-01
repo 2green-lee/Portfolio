@@ -290,7 +290,7 @@ const INITIAL_DATA = {
   education: {
     name: "부산대학교",
     period: "2013 - 2021",
-    major: "항공우주공학 & 예술문화영상학"
+    major: "예술문화영상학"
   },
   certificates: [
     { title: "TOEIC SPEAKING", subtitle: "AL", score: "AL", rating: "Level 9/11", ratio: 9/11 },
