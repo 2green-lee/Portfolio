@@ -55,16 +55,16 @@ export const COUNTRY_LIST = [
 ];
 
 const FLOWER_PLANET_CONTENT_1_IMAGES = [
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/1372229816f6ab9e9217113ebe5e4b5d29cae9dc/intro1.png",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/1372229816f6ab9e9217113ebe5e4b5d29cae9dc/intro2.png",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/1372229816f6ab9e9217113ebe5e4b5d29cae9dc/intro3.png",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842008378_intro1.png",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842009066_intro2.png",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842009462_intro3.png",
 ];
 
 const FLOWER_PLANET_CONTENT_2_IMAGES = [
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/1372229816f6ab9e9217113ebe5e4b5d29cae9dc/img%2046.jpg",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/1372229816f6ab9e9217113ebe5e4b5d29cae9dc/img%2047.jpg",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/1372229816f6ab9e9217113ebe5e4b5d29cae9dc/img%2048.jpg",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/1372229816f6ab9e9217113ebe5e4b5d29cae9dc/img%2049.jpg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842009896_img_46.jpg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842010404_img_47.jpg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842011048_img_48.jpg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842012078_img_49.jpg",
 ];
 
 export interface Project {
@@ -309,36 +309,36 @@ const ModalCarousel: React.FC<{ images: string[]; project: Project }> = ({
 const FESTIVAL_POSTERS = [
   {
     title: "WATERBOMB",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/9d41580d7739017f4b186f92faf6491a60264fd5/2024waterbomb.png",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842012639_2024waterbomb.png",
     period: "2024",
   },
   {
     title: "인천펜타포트",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024incheonrock.png",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842013143_2024incheonrock.png",
     period: "2024",
   },
   {
     title: "부산국제록페스티벌",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024bsrock.png",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842013912_2024bsrock.png",
     period: "2024",
   },
   {
     title: "이슬라이브페스티벌",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024cham.jpg",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842014644_2024cham.jpg",
     period: "2024",
   },
 ];
 
 const MUSICAL_POSTERS = [
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/d839994db20cd3c5be8d5fda0fd0b93a6fb98b4c/m1.jpg",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/d839994db20cd3c5be8d5fda0fd0b93a6fb98b4c/m2.jpg",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/d839994db20cd3c5be8d5fda0fd0b93a6fb98b4c/m3.jpeg",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/d839994db20cd3c5be8d5fda0fd0b93a6fb98b4c/m4.jpg",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/d839994db20cd3c5be8d5fda0fd0b93a6fb98b4c/m5.jpg",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/d839994db20cd3c5be8d5fda0fd0b93a6fb98b4c/m6.jpg",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/d839994db20cd3c5be8d5fda0fd0b93a6fb98b4c/m7.jpg",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/d839994db20cd3c5be8d5fda0fd0b93a6fb98b4c/m8.jpg",
-  "https://raw.githubusercontent.com/2green-lee/Portfolio/d839994db20cd3c5be8d5fda0fd0b93a6fb98b4c/m9.jpg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842015171_m1.jpg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842015871_m2.jpg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842016377_m3.jpeg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842016812_m4.jpg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842017279_m5.jpg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842017711_m6.jpg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842018122_m7.jpg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842018536_m8.jpg",
+  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842018904_m9.jpg",
 ];
 
 const CONCERT_POSTERS = [
@@ -349,17 +349,17 @@ const CONCERT_POSTERS = [
   },
   {
     title: "오페라의 유령 내한공연",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/d839994db20cd3c5be8d5fda0fd0b93a6fb98b4c/m6.jpg",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842017711_m6.jpg",
     period: "2021",
   },
   {
     title: "Flower Planet",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842020225_img4.jpg",
     period: "2022",
   },
   {
     title: "라이온킹 내한 공연",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/d839994db20cd3c5be8d5fda0fd0b93a6fb98b4c/m1.jpg",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842015171_m1.jpg",
     period: "2022",
   },
 ];
@@ -372,17 +372,17 @@ const CREATIVE_CONCERT_POSTERS = [
   },
   {
     title: "Flower Planet",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842020225_img4.jpg",
     period: "2022",
   },
   {
     title: "오후의 향기",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img2.jpg",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842020854_img2.jpg",
     period: "2021",
   },
   {
     title: "야간비행",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img1.jpg",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842021243_img1.jpg",
     period: "2021",
   },
 ];
@@ -390,22 +390,22 @@ const CREATIVE_CONCERT_POSTERS = [
 const MIXED_POSTERS = [
   {
     title: "WATERBOMB",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/9d41580d7739017f4b186f92faf6491a60264fd5/2024waterbomb.png",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842012639_2024waterbomb.png",
     period: "2024",
   },
   {
     title: "인천펜타포트",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/301715e6090e002a7c306c6d76f35d8d78ed92f4/2024incheonrock.png",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842013143_2024incheonrock.png",
     period: "2024",
   },
   {
     title: "Flower Planet",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842020225_img4.jpg",
     period: "2022",
   },
   {
     title: "열대야",
-    src: "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img3.jpg",
+    src: "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842022706_img3.jpg",
     period: "2022",
   },
 ];
@@ -1608,11 +1608,11 @@ const ProjectModal: React.FC<{
                             <div className="grid grid-cols-3 gap-4 pt-1">
                               {[
                                 project.images?.find((img) => img.includes("img%2051") || img.includes("img 51")) ||
-                                  "https://raw.githubusercontent.com/2green-lee/Portfolio/013cde7d59ad00b704b19423085d2b9bfc269884/img%2051.jpg",
+                                  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842024267_img_51.jpg",
                                 project.images?.find((img) => img.includes("img%2052") || img.includes("img 52")) ||
-                                  "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2052.jpg",
+                                  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842025045_img_52.jpg",
                                 project.images?.find((img) => img.includes("img%2056") || img.includes("img 56")) ||
-                                  "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2056.jpg",
+                                  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842026232_img_56.jpg",
                               ].map((img, i) => (
                                 <div
                                   key={i}
@@ -1664,11 +1664,11 @@ const ProjectModal: React.FC<{
                             <div className="grid grid-cols-3 gap-4 pt-1">
                               {[
                                 project.images?.find((img) => img.includes("img%2054") || img.includes("img 54")) ||
-                                  "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2054.jpg",
+                                  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842028236_img_54.jpg",
                                 project.images?.find((img) => img.includes("img%2055") || img.includes("img 55")) ||
-                                  "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2055.jpg",
+                                  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842031514_img_55.jpg",
                                 project.images?.find((img) => img.includes("img%2058") || img.includes("img 58")) ||
-                                  "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2058.jpg",
+                                  "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842033633_img_58.jpg",
                               ].map((img, i) => (
                                 <div
                                   key={i}
@@ -2348,10 +2348,10 @@ const ProjectModal: React.FC<{
                               const currentImages = project.ticketImages && project.ticketImages.length > 0
                                 ? project.ticketImages
                                 : [
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/56c4f5445b717b306b75e71ace91b475a1d6d8cf/ticket%201.jpeg",
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/56c4f5445b717b306b75e71ace91b475a1d6d8cf/ticket%202.jpeg",
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/26d00476109ec84b3d9f253c464088f278d4051b/ticket3.jpg",
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/26d00476109ec84b3d9f253c464088f278d4051b/ticket4.jpg"
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842034581_ticket_1.jpeg",
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842035012_ticket_2.jpeg",
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842035696_ticket3.jpg",
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842036472_ticket4.jpg"
                                   ];
                               return currentImages.map((imgUrl, imgIdx) => (
                                 <div
@@ -2678,7 +2678,7 @@ const ProjectModal: React.FC<{
                           {/* Book cover thumbnail */}
                           <div className="relative w-24 h-24 bg-white border border-neutral-200/80 rounded-[8px] flex items-center justify-center overflow-hidden shrink-0 shadow-3xs">
                             <OptimizedImage
-                              src="https://raw.githubusercontent.com/2green-lee/Portfolio/bcd31e69646986fdc534bc4332df67bef5c6002b/greenery%20%E1%84%8E%E1%85%A2%E1%86%A8%E1%84%91%E1%85%AD%E1%84%8C%E1%85%B5.jpg"
+                              src="https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842037055_greenery________.jpg"
                               alt="GREENERY Book Cover"
                               className="w-full h-full object-cover"
                               referrerPolicy="no-referrer"
@@ -2738,12 +2738,12 @@ const ProjectModal: React.FC<{
                           className="w-full max-w-3xl overflow-hidden border border-neutral-200 bg-white hover:border-neutral-300 shadow-sm transition-all duration-300 rounded-[12px] cursor-zoom-in group/review relative"
                           onClick={() =>
                             setLightboxImage(
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/45b33670a58a6610d7f27fdb5264d34028edfd28/review.png",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842037764_review.png",
                             )
                           }
                         >
                           <OptimizedImage
-                            src="https://raw.githubusercontent.com/2green-lee/Portfolio/45b33670a58a6610d7f27fdb5264d34028edfd28/review.png"
+                            src="https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842037764_review.png"
                             alt="GREENERY 리뷰 및 후기"
                             className="w-full h-auto select-none transition-transform duration-500 group-hover/review:scale-[1.01]"
                             referrerPolicy="no-referrer"
@@ -2823,10 +2823,10 @@ const ProjectModal: React.FC<{
                               const currentImages = project.fnbImages && project.fnbImages.length > 0
                                 ? project.fnbImages
                                 : [
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/bfe56c116e09a1caaea1b2ccf474a1498975af18/kiosk%201.jpg",
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/bfe56c116e09a1caaea1b2ccf474a1498975af18/kiosk%202.jpg",
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/bfe56c116e09a1caaea1b2ccf474a1498975af18/food4.jpeg",
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/1f77a94cdeca5069b8f04f33d81f2b7a323a4c07/food5.jpg"
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842038230_kiosk_1.jpg",
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842038604_kiosk_2.jpg",
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842039065_food4.jpeg",
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842039939_food5.jpg"
                                   ];
                               return currentImages.map((imgUrl, imgIdx) => (
                                 <div
@@ -3205,12 +3205,12 @@ const ProjectModal: React.FC<{
                               const currentImages = project.storageImages && project.storageImages.length > 0
                                 ? project.storageImages
                                 : [
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/lock%202.jpeg",
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/lock%203.jpeg",
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/lock%205.jpg",
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/lcok%206.jpg",
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/MD1.jpg",
-                                    "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/MD2.jpg"
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842040570_lock_2.jpeg",
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842040999_lock_3.jpeg",
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842041418_lock_5.jpg",
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842041792_lcok_6.jpg",
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842042290_MD1.jpg",
+                                    "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842042863_MD2.jpg"
                                   ];
                               return currentImages.map((imgUrl, imgIdx) => (
                                 <div
@@ -6389,10 +6389,10 @@ function AdminPanel({
                               ];
 
                             const ticketImages = project.ticketImages || [
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/56c4f5445b717b306b75e71ace91b475a1d6d8cf/ticket%201.jpeg",
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/56c4f5445b717b306b75e71ace91b475a1d6d8cf/ticket%202.jpeg",
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/26d00476109ec84b3d9f253c464088f278d4051b/ticket3.jpg",
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/26d00476109ec84b3d9f253c464088f278d4051b/ticket4.jpg",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842034581_ticket_1.jpeg",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842035012_ticket_2.jpeg",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842035696_ticket3.jpg",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842036472_ticket4.jpg",
                             ];
 
                             let processTicketObj = project.processTicket;
@@ -6481,10 +6481,10 @@ function AdminPanel({
                             ];
 
                             const fnbImages = project.fnbImages || [
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/bfe56c116e09a1caaea1b2ccf474a1498975af18/kiosk%201.jpg",
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/bfe56c116e09a1caaea1b2ccf474a1498975af18/kiosk%202.jpg",
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/bfe56c116e09a1caaea1b2ccf474a1498975af18/food4.jpeg",
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/1f77a94cdeca5069b8f04f33d81f2b7a323a4c07/food5.jpg"
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842038230_kiosk_1.jpg",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842038604_kiosk_2.jpg",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842039065_food4.jpeg",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842039939_food5.jpg"
                             ];
 
                             let processFnBObj = project.processFnB;
@@ -6503,12 +6503,12 @@ function AdminPanel({
                               ];
 
                             const storageImages = project.storageImages || [
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/lock%202.jpeg",
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/lock%203.jpeg",
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/lock%205.jpg",
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/lcok%206.jpg",
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/MD1.jpg",
-                              "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/MD2.jpg"
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842040570_lock_2.jpeg",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842040999_lock_3.jpeg",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842041418_lock_5.jpg",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842041792_lcok_6.jpg",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842042290_MD1.jpg",
+                              "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842042863_MD2.jpg"
                             ];
 
                             const galleryImages = project.images || [];

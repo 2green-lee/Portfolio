@@ -65,26 +65,26 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       "title": "페스티벌 운영",
       "category": "운영",
       "year": "2024",
-      "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/9d41580d7739017f4b186f92faf6491a60264fd5/2024waterbomb.png",
+      "image": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842012639_2024waterbomb.png",
       "ticketImages": [
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/56c4f5445b717b306b75e71ace91b475a1d6d8cf/ticket%201.jpeg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/56c4f5445b717b306b75e71ace91b475a1d6d8cf/ticket%202.jpeg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/26d00476109ec84b3d9f253c464088f278d4051b/ticket3.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/26d00476109ec84b3d9f253c464088f278d4051b/ticket4.jpg"
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842034581_ticket_1.jpeg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842035012_ticket_2.jpeg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842035696_ticket3.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842036472_ticket4.jpg"
       ],
       "fnbImages": [
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/bfe56c116e09a1caaea1b2ccf474a1498975af18/kiosk%201.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/bfe56c116e09a1caaea1b2ccf474a1498975af18/kiosk%202.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/bfe56c116e09a1caaea1b2ccf474a1498975af18/food4.jpeg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/1f77a94cdeca5069b8f04f33d81f2b7a323a4c07/food5.jpg"
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842038230_kiosk_1.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842038604_kiosk_2.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842039065_food4.jpeg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842039939_food5.jpg"
       ],
       "storageImages": [
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/lock%202.jpeg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/lock%203.jpeg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/lock%205.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/lcok%206.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/MD1.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/4446a5d2c5b32572cad3167985cfa66c83cf632d/MD2.jpg"
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842040570_lock_2.jpeg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842040999_lock_3.jpeg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842041418_lock_5.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842041792_lcok_6.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842042290_MD1.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842042863_MD2.jpg"
       ],
       "contribution": "25%",
       "description": "주최사의 운영 효율을 높이는 안정적인 온·오프라인 하이브리드 운영 구조를 구축했습니다.",
@@ -277,7 +277,7 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       "title": "공연 운영",
       "category": "공연운영",
       "year": "2019 - 2022",
-      "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg",
+      "image": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842020225_img4.jpg",
       "contribution": "40%",
       "description": "드림씨어터 및 주요 극장 라이선스 뮤지컬(위키드, 오페라의 유령 등), 내한 공연, 콘서트 실시간 하우스 운영 및 관객 서비스 설계.",
       "fullDescription": "기획공연 제작과 공연장 하우스 운영 경험을 바탕으로 공연 운영 전반을 수행했습니다.\n\n공연 기획 및 제작 과정에서는 공연 콘셉트 기획, 홍보 콘텐츠 제작, 참여 아티스트 및 스태프 커뮤니케이션, 무대 연출 등을 담당했습니다.\n\n공연 운영 측면에서는 하우스 어텐던트로 다년간 근무하며 객석 운영, 관객 동선 관리, 현장 컴플레인 및 이슈 관리를 수행하며 공연 관람 환경을 조성했습니다.\n\n[주요 공연 실적]\n• GREENERY 단독공연\n• Flower Planet\n• 열대야\n• 오후의 향기\n• 야간비행\n• 오페라의 유령 내한공연\n• 위키드\n• 캣츠 내한 공연\n• 라이온킹 내한 공연\n• 레베카\n• 맘마미아\n• 싯다르타\n• 백조의 호수\n• 시카고",
@@ -429,10 +429,10 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       "title": "GREENERY : 푸르게 푸르게 푸르러져라",
       "category": "상품기획",
       "year": "2023",
-      "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img5.png",
+      "image": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842043645_img5.png",
       "representativeImages": [
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img5.png",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2053.jpg"
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842043645_img5.png",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842044307_img_53.jpg"
       ],
       "contribution": "70%",
       "location": "Online & Offline Distribution",
@@ -457,25 +457,25 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         "<GREENERY> 발매 쇼케이스 기획 -> 23년 12월 01일 <GREENERY> 쇼케이스 진행"
       ],
       "images": [
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2052.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2053.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/013cde7d59ad00b704b19423085d2b9bfc269884/img%2051.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2054.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2055.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2058.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2056.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2057.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2059.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2060.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2061.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2063.jpg"
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842025045_img_52.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842044307_img_53.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842024267_img_51.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842028236_img_54.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842031514_img_55.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842033633_img_58.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842026232_img_56.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842046555_img_57.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842049030_img_59.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842051035_img_60.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842053376_img_61.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842055542_img_63.jpg"
       ]
     },
     {
       "title": "Flower Planet",
       "category": "Concert",
       "year": "2022",
-      "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg",
+      "image": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842020225_img4.jpg",
       "contribution": "70%",
       "location": "KT&G 상상마당 부산 3F 라이브홀",
       "support": "KT&G 상상마당 부산",
@@ -500,20 +500,20 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         "온라인 홍보 다각화 및 타겟형 프로모션 전략 수립 -> 인스타그램 전용 고감도 루틴 홍보 영상 배포 및 '티켓 2+1 이벤트' 프로모션을 통한 사전 모객 극대화"
       ],
       "images": [
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2041.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2042.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2043.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2044.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2045.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2046.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/6aede115c9be14770644c83685839c915a9b2ae6/img%2047.jpg"
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842056601_img_41.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842057148_img_42.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842057958_img_43.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842058620_img_44.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842059318_img_45.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842059919_img_46.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842060793_img_47.jpg"
       ]
     },
     {
       "title": "열대야",
       "category": "Concert",
       "year": "2022",
-      "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img3.jpg",
+      "image": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842022706_img3.jpg",
       "contribution": "70%",
       "location": "KT&G 상상마당 부산 13F 루프탑",
       "support": "KT&G 상상마당 부산",
@@ -537,9 +537,9 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         "다채널 홍보를 통한 공연 인지도 확산 -> 상상마당 부산 및 HAO 공식 인스타그램을 활용한 온라인 홍보 진행 \n배너 및 공연 홍보 영상 제작·배포"
       ],
       "images": [
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2031.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2032.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2033.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842061540_Img_31.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842062614_Img_32.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842063502_Img_33.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2034.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2035.jpg",
         "https://raw.githubusercontent.com/2green-lee/Portfolio/7a0e467437190b36440c7c409f7d07a665b98d8d/Img%2036.jpg",
@@ -551,7 +551,7 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       "title": "오후의 향기",
       "category": "Concert",
       "year": "2021",
-      "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img2.jpg",
+      "image": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842020854_img2.jpg",
       "contribution": "70%",
       "location": "파나카 F (Panaca F)",
       "support": "부산문화재단",
@@ -574,15 +574,15 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         "야외 공간 및 연출 조작 정합 완성 -> 자연광 및 주변 소음을 조화롭게 제어하는 현장 연출 성공"
       ],
       "images": [
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/013cde7d59ad00b704b19423085d2b9bfc269884/img%2051.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img5.png"
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842024267_img_51.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842043645_img5.png"
       ]
     },
     {
       "title": "야간비행",
       "category": "Concert",
       "year": "2021",
-      "image": "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img1.jpg",
+      "image": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842021243_img1.jpg",
       "contribution": "70%",
       "location": "김해 하라식당 루프탑",
       "support": "경남음악창작소",
@@ -605,13 +605,13 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         "무사고 테크니컬 쇼 및 씬 동기화 정밀 작동 -> 암전 상태의 신속 하우스 크루 가이드 안착"
       ],
       "images": [
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/18058546a05717340bdf053b56e6299f30f02c7d/img%2053.jpg",
-        "https://raw.githubusercontent.com/2green-lee/Portfolio/dde4b078950d3eb0fcb261ee4f72cd9f4c0031b2/img4.jpg"
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842044307_img_53.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842020225_img4.jpg"
       ]
     }
   ],
   "introduction": "즐거운 일탈의 경험을 기획하는 기획자 이근일 입니다",
-  "profileImage": "https://raw.githubusercontent.com/2green-lee/Portfolio/7fe5749c4d7157e49816af496d35e3466760aa25/my-notion-face-portrait.png",
+  "profileImage": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842065561_my-notion-face-portrait.png",
   "education": {
     "name": "부산대학교",
     "period": "2013 - 2021",
@@ -694,16 +694,16 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         "공모전 수상"
       ],
       "images": [
-        "https://github.com/2green-lee/Portfolio/blob/853a80abbfea1856ad695b5b66297915fd1bc8d7/c1.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/853a80abbfea1856ad695b5b66297915fd1bc8d7/c2.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/853a80abbfea1856ad695b5b66297915fd1bc8d7/c3.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/853a80abbfea1856ad695b5b66297915fd1bc8d7/c4.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/853a80abbfea1856ad695b5b66297915fd1bc8d7/c5.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/853a80abbfea1856ad695b5b66297915fd1bc8d7/c6.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/853a80abbfea1856ad695b5b66297915fd1bc8d7/c7.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/853a80abbfea1856ad695b5b66297915fd1bc8d7/c8.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/853a80abbfea1856ad695b5b66297915fd1bc8d7/c9.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/853a80abbfea1856ad695b5b66297915fd1bc8d7/c10.jpg"
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842066149_c1.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842066736_c2.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842067325_c3.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842068107_c4.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842068810_c5.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842069475_c6.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842070088_c7.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842070575_c8.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842071176_c9.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842071767_c10.jpg"
       ],
       "awards": [
         {
@@ -750,31 +750,31 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
       "articles": [
         {
           "title": "문화예술콘텐츠의 기획, 제작에서 브랜딩까지\n문화콩 조은아 대표",
-          "thumbnail": "https://raw.githubusercontent.com/2green-lee/Portfolio/21750c9ae31fa09d98dd7ce454cb187bf3b4c214/article%202.png",
+          "thumbnail": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842072335_article_2.png",
           "url": "https://www.artmore.kr/sub/comJob/com_visit_view.do?bbs_detail_idx=564",
           "date": "2023-02-23"
         },
         {
           "title": "서로에게 선을 긋기 전에 함께 춤을 추자!\n피스트레인 뮤직 페스티벌 김미소 상임이사",
-          "thumbnail": "https://raw.githubusercontent.com/2green-lee/Portfolio/21750c9ae31fa09d98dd7ce454cb187bf3b4c214/article%204.png",
+          "thumbnail": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842072962_article_4.png",
           "url": "https://www.artmore.kr/sub/comJob/com_visit_view.do?bbs_detail_idx=541",
           "date": "2023-01-02"
         },
         {
           "title": "젊은 예술의 바람이 머무는 자리\n신촌문화발전소 김안나 프로그램 매니저",
-          "thumbnail": "https://raw.githubusercontent.com/2green-lee/Portfolio/21750c9ae31fa09d98dd7ce454cb187bf3b4c214/article%203.png",
+          "thumbnail": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842073554_article_3.png",
           "url": "https://www.artmore.kr/sub/comJob/com_visit_view.do?bbs_detail_idx=529",
           "date": "2022-12-01"
         },
         {
           "title": "일탈의 맛, 축제의 즐거움\n부산문화관광축제조직위원회 박용헌 사무처장",
-          "thumbnail": "https://raw.githubusercontent.com/2green-lee/Portfolio/21750c9ae31fa09d98dd7ce454cb187bf3b4c214/article%201.png",
+          "thumbnail": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842074139_article_1.png",
           "url": "https://www.artmore.kr/sub/comJob/com_visit_view.do?bbs_detail_idx=527",
           "date": "2022-12-01"
         },
         {
           "title": "지역 문화 예술 생태계의 재생과 실천\n플랜비 문화예술협동조합 송교성 실장",
-          "thumbnail": "https://raw.githubusercontent.com/2green-lee/Portfolio/21750c9ae31fa09d98dd7ce454cb187bf3b4c214/article%205.png",
+          "thumbnail": "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842074632_article_5.png",
           "url": "https://www.artmore.kr/sub/comJob/com_visit_view.do?bbs_detail_idx=499",
           "date": "2022-10-13"
         }
@@ -791,16 +791,16 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         "현장 통제 및 관객 가이드"
       ],
       "images": [
-        "https://github.com/2green-lee/Portfolio/blob/26ffa60c17bb8015df09c37fc171b198dd1ec0e6/1.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/26ffa60c17bb8015df09c37fc171b198dd1ec0e6/2.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/26ffa60c17bb8015df09c37fc171b198dd1ec0e6/3.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/26ffa60c17bb8015df09c37fc171b198dd1ec0e6/4.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/26ffa60c17bb8015df09c37fc171b198dd1ec0e6/5.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/26ffa60c17bb8015df09c37fc171b198dd1ec0e6/6.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/26ffa60c17bb8015df09c37fc171b198dd1ec0e6/7.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/26ffa60c17bb8015df09c37fc171b198dd1ec0e6/8.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/26ffa60c17bb8015df09c37fc171b198dd1ec0e6/9.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/26ffa60c17bb8015df09c37fc171b198dd1ec0e6/10.jpg"
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842075119_1.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842075669_2.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842076068_3.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842076636_4.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842077092_5.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842077618_6.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842078035_7.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842078428_8.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842078833_9.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842079219_10.jpg"
       ]
     },
     {
@@ -813,16 +813,16 @@ export const DEFAULT_PORTFOLIO_DATA: PortfolioData = {
         "아름다운 청년 이수현 모임 10주년 영상 제작 및 상영"
       ],
       "images": [
-        "https://github.com/2green-lee/Portfolio/blob/66da72f0fddabc7e80634c3b3f3917674ac0f72c/1.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/66da72f0fddabc7e80634c3b3f3917674ac0f72c/2.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/66da72f0fddabc7e80634c3b3f3917674ac0f72c/3.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/66da72f0fddabc7e80634c3b3f3917674ac0f72c/4.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/66da72f0fddabc7e80634c3b3f3917674ac0f72c/5.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/66da72f0fddabc7e80634c3b3f3917674ac0f72c/6.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/66da72f0fddabc7e80634c3b3f3917674ac0f72c/7.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/66da72f0fddabc7e80634c3b3f3917674ac0f72c/8.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/66da72f0fddabc7e80634c3b3f3917674ac0f72c/9.jpg",
-        "https://github.com/2green-lee/Portfolio/blob/66da72f0fddabc7e80634c3b3f3917674ac0f72c/10.jpg"
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842079660_1.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842080103_2.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842080505_3.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842080907_4.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842081289_5.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842081672_6.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842082124_7.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842082554_8.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842082936_9.jpg",
+        "https://zzrhregdqhtzccrxzrxb.supabase.co/storage/v1/object/public/portfolio/1783842083332_10.jpg"
       ]
     }
   ],
